@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Heart, MapPin, Send, Star } from 'lucide-react';
 import { useParams, useRouter } from 'next/navigation';
 
+import { ReviewModal } from '@/app/_components/ui/Modal';
 import { useToast } from '@/app/_features/toast';
 import { cn } from '@/app/_lib/cn';
 import { usePlaceLikeMutation } from '@/app/_queries/placeQueries';
@@ -37,6 +38,7 @@ const RestaurantCardContent = ({
 
   const placeLikeMutation = usePlaceLikeMutation();
   const [showHeartAnimation, setShowHeartAnimation] = useState(false);
+  const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
   const ui = CARD_UI[theme]; //ui는 CARD_UI에 정의된 테마 클래스 이름들을 가져옴
 
   const handleLikeClick = () => {
@@ -97,11 +99,27 @@ const RestaurantCardContent = ({
         </div>
       </div>
 
-      <div className={cn('w-full rounded-lg px-3 py-2', ui.reviewBox)}>
+      <button
+        type="button"
+        className={cn(
+          'w-full cursor-pointer rounded-lg px-3 py-2 transition-all duration-150 active:scale-95 active:opacity-80',
+          ui.reviewBox
+        )}
+        onClick={() => place.topReview?.text && setIsReviewModalOpen(true)}
+        disabled={!place.topReview?.text}
+      >
         <span className={cn('center line-clamp-2 label-2 font-medium', ui.reviewText)}>
-          {place.topReview?.text || ''}
+          {place.topReview?.text || '리뷰가 없습니다'}
         </span>
-      </div>
+      </button>
+
+      <ReviewModal
+        isOpen={isReviewModalOpen}
+        onClose={() => setIsReviewModalOpen(false)}
+        reviewText={place.topReview?.text || ''}
+        rating={place.topReview?.rating}
+        theme={theme === 'heroDark' ? 'dark' : 'light'}
+      />
       {theme === 'heroDark' && (
         <RestaurantImageGallery
           images={place.photos || []}
