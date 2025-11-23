@@ -80,10 +80,8 @@ const resolveVariant = (variant?: AvatarIconProps['variant']): AvatarVariantKey 
  * @description - 컴포넌트 크기는 80px을 넘어갈 경우 아이콘 해상도가 낮아집니다.
  */
 const AvatarIcon = ({ variant, className }: AvatarIconProps) => {
-  console.log(variant); // sweet_potato
   const resolvedVariant = resolveVariant(variant);
   const iconSrc = AVATAR_VARIANTS[resolvedVariant];
-  console.log('iconSrc: ', iconSrc); //{bg: "bg-yellow-400", iconSrc: "/images/avatar/default.svg"}
   return (
     <div
       className={cn('flex h-12 w-12 items-center justify-center rounded-xl', iconSrc.bg, className)}
