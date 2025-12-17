@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet } from 'react-native';
@@ -16,15 +16,30 @@ const App = () => {
   }
 
   const webViewRef = useRef<WebView>(null);
+  const [backgroundColor, setBackgroundColor] = useState('transparent');
 
   const { handleShouldStartLoadWithRequest, handleWebViewError } = useWebViewHandlers({
     webViewRef,
     webAppUrl: WEB_APP_URL,
   });
 
+  const handleMessage = (event: any) => {
+    try {
+      const data = JSON.parse(event.nativeEvent.data);
+      if (data.type === 'backgroundColor' && data.color) {
+        setBackgroundColor(data.color);
+      }
+    } catch (error) {
+      console.warn('배경색 변경 실패:', error);
+    }
+  };
+
   return (
     <SafeAreaProvider>
-      <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
+      <SafeAreaView
+        style={[styles.container, { backgroundColor }]}
+        edges={['top', 'left', 'right']}
+      >
         <WebView
           ref={webViewRef}
           source={{ uri: WEB_APP_URL }}
@@ -32,6 +47,7 @@ const App = () => {
           onShouldStartLoadWithRequest={handleShouldStartLoadWithRequest}
           onError={handleWebViewError}
           onHttpError={handleWebViewError}
+          onMessage={handleMessage}
           injectedJavaScript={injectedJavaScript}
           javaScriptEnabled
           domStorageEnabled
