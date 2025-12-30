@@ -5,6 +5,6 @@ const prettierConfig = {
   printWidth: 100,
   tabWidth: 2,
   plugins: ['prettier-plugin-tailwindcss'],
-  tailwindStylesheet: './src/app/globals.css',
+  tailwindStylesheet: './apps/web/src/app/globals.css',
 };
 export default prettierConfig;

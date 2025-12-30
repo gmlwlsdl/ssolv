@@ -1,0 +1,46 @@
+{
+  "name": "web",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@mantine/core": "^8.3.2",
+    "@mantine/dates": "^8.3.2",
+    "@mantine/hooks": "^8.3.2",
+    "@use-funnel/browser": "^0.0.15",
+    "@use-funnel/core": "^0.0.12",
+    "@use-funnel/next": "^0.0.21",
+    "canvas-confetti": "^1.9.3",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "dayjs": "^1.11.18",
+    "framer-motion": "^12.23.16",
+    "lucide-react": "^0.542.0",
+    "next": "15.5.0",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "swiper": "^12.0.2",
+    "tailwind-merge": "^3.3.1",
+    "zustand": "^5.0.8"
+  },
+  "devDependencies": {
+    "@next/eslint-plugin-next": "^15.5.2",
+    "@tailwindcss/postcss": "^4.1.12",
+    "@types/canvas-confetti": "^1.9.0",
+    "@types/node": "^22.18.0",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "autoprefixer": "^10.4.21",
+    "eslint-config-next": "15.5.0",
+    "postcss": "^8.5.6",
+    "prettier-plugin-tailwindcss": "^0.6.14",
+    "tailwindcss": "^4.1.12",
+    "typescript": "^5"
+  }
+}

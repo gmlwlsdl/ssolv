@@ -6,7 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 프로젝트 개요
 
-Next.js 15 + App Router + TypeScript + React 19 + Tailwind CSS + Zustand를 사용하는 프로젝트입니다.
+**Monorepo 구조**로 웹(Next.js)과 모바일 앱을 포함하는 프로젝트입니다.
+주요 스택: Next.js 15, App Router, TypeScript, React 19, Tailwind CSS, Zustand, Turborepo.
 
 ## 개발 명령어
 
@@ -14,7 +15,8 @@ Next.js 15 + App Router + TypeScript + React 19 + Tailwind CSS + Zustand를 사�
 
 - `pnpm dev` - Turbopack으로 개발 서버 실행
 - `pnpm build` - Turbopack으로 프로덕션 빌드
-- `pnpm start` - 프로덕션 서버 실행
+- `pnpm web` - 웹 프로덕션 서버 실행
+- `pnpm mobile` - 모바일 프로덕션 서버 실행
 
 ### 코드 품질 관리
 
@@ -27,7 +29,9 @@ Next.js 15 + App Router + TypeScript + React 19 + Tailwind CSS + Zustand를 사�
 
 - **패키지 매니저**: pnpm 사용 필수 (버전: 10.15.0+)
 - **Git Hook**: Lefthook으로 커밋 시 자동으로 lint/format/typecheck 실행
-- **경로 별칭**: `@/*`는 `./src/*`로 매핑됨
+- **경로 별칭**:
+  - 웹 앱(`apps/web`): `@/*` → `./src/*`
+  - 모바일 앱(`apps/mobile`): 상대 경로 사용 (경로 별칭 미설정)
 
 ## Git 워크플로우
 
@@ -61,7 +65,12 @@ Next.js 15 + App Router + TypeScript + React 19 + Tailwind CSS + Zustand를 사�
 
 ## 아키텍처
 
-### Next.js App Router 구조
+### Monorepo 디렉토리 구조
+
+- `apps/web/` - Next.js 웹 애플리케이션
+- `apps/mobile/` - 모바일 애플리케이션
+
+### Next.js App Router 구조 (apps/web)
 
 - `src/app/` - App Router 페이지와 레이아웃
 - `src/app/layout.tsx` - Geist 폰트가 설정된 루트 레이아웃 (React 19 형식)

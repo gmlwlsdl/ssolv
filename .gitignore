@@ -64,3 +64,6 @@ deploy_key.pub
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# turbo
+.turbo/

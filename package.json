@@ -3,14 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "workspaces": [
+    "apps/*"
+  ],
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
-    "start": "next start",
-    "lint": "eslint .",
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
-    "typecheck": "tsc --noEmit",
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "web": "pnpm --filter web",
+    "mobile": "pnpm --filter mobile",
+    "lint": "turbo run lint",
+    "format": "turbo run format",
+    "format:check": "turbo run format:check",
+    "typecheck": "turbo run typecheck",
+    "clean": "turbo run clean",
     "prepare": "lefthook install"
   },
   "dependencies": {
@@ -40,6 +45,7 @@
     "zustand": "^5.0.8"
   },
   "devDependencies": {
+    "turbo": "^2.3.0",
     "@eslint/eslintrc": "^3",
     "@eslint/js": "^9.34.0",
     "@next/eslint-plugin-next": "^15.5.2",

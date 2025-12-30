@@ -48,7 +48,8 @@ const eslintConfig = [
       parser: tsParser,
       parserOptions: {
         // tsconfig를 인식하도록 (v9+ 권장)
-        project: true,
+        // 모노레포 환경에 맞게 조정
+        project: ['tsconfig.json', 'apps/*/tsconfig.json'],
         tsconfigRootDir: __dirname,
         ecmaFeatures: { jsx: true },
       },
@@ -63,10 +64,16 @@ const eslintConfig = [
       filenames,
     },
     settings: {
+      next: {
+        rootDir: ['apps/web/'],
+      },
       react: {
         version: 'detect',
       },
       'import/resolver': {
+        typescript: {
+          project: ['tsconfig.json', 'apps/*/tsconfig.json'],
+        },
         node: {
           extensions: ['.js', '.jsx', '.ts', '.tsx'],
           paths: ['src', '.'],
@@ -180,9 +187,17 @@ const eslintConfig = [
 
   // Next 라우팅/세그먼트 파일은 파일명 규칙 예외
   {
-    files: ['src/app/**', 'src/pages/**', 'src/app/api/**'],
+    files: ['apps/web/src/app/**', 'apps/web/src/pages/**', 'apps/web/src/app/api/**'],
     rules: {
       'filenames/match-regex': 'off',
+    },
+  },
+
+  // react-native 과의 호환성으로 인해 규칙 예외
+  {
+    files: ['apps/mobile/**/*.{js,jsx,ts,tsx}'],
+    rules: {
+      'import/namespace': 'off',
     },
   },
 ];
