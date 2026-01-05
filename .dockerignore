@@ -1,9 +1,0 @@
-node_modules
-.next/cache
-.pnpm-store
-.git
-.gitignore
-Dockerfile
-.dockerignore
-*.log
-.env*
