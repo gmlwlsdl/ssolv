@@ -70,7 +70,7 @@ const PersonaCardSwiper = ({ overview }: { overview: MeetingOverview }) => {
             onClick={() => scrollTo(index)}
             className={cn(
               'h-1.5 w-1.5 rounded-full',
-              selectedIndex === index ? 'bg-orange-600' : 'bg-orange-300'
+              selectedIndex === index ? 'bg-orange-500' : 'bg-neutral-400'
             )}
           />
         ))}

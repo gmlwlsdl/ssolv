@@ -21,7 +21,7 @@ const SurveyStatusBanner = ({ overview }: SurveyStatusBannerProps) => {
     if (isEveryoneCompleted)
       return { label: '모두 설문을 완료했어요', className: 'text-neutral-1400' };
 
-    return { label: '취향 설문 진행 중이에요', className: 'title-gradient' };
+    return { label: '취향 설문 진행 중이에요', className: 'type-gradient' };
   }, [isSurveyClosed, isEveryoneCompleted]);
 
   return <p className={cn('heading-2 font-bold', label.className)}>{label.label}</p>;
