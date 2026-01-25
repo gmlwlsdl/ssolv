@@ -10,6 +10,8 @@ const middleware = async (req: NextRequest) => {
     return NextResponse.next();
   }
 
+  // 야호
+
   const accessToken = req.cookies.get('accessToken')?.value;
   const refreshToken = req.cookies.get('refreshToken')?.value;
   const { pathname } = req.nextUrl;
