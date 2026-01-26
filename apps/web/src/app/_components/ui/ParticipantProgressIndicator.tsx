@@ -65,32 +65,35 @@ const ParticipantProgressIndicator = ({
               value={surveyCompletedParticipants}
               total={totalParticipants}
               progressColor={isSurveyClosed && !isEveryoneCompleted ? 'bg-neutral-500' : undefined}
-              progressBgColor={
-                isSurveyClosed && !isEveryoneCompleted
-                  ? 'bg-gradient-to-r from-orange-300 to-orange-500'
-                  : undefined
-              }
+              progressBgColor={isSurveyClosed && !isEveryoneCompleted ? 'bg-orange-400' : undefined}
             />
           </div>
         </div>
 
-        <div className="z-1 -ml-6 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-orange-100">
+        <div className="z-1 -ml-6 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 border-neutral-300 bg-neutral-100">
           <Image alt="과녁 아이콘" src="/icons/arrow.svg" width={16} height={16} />
         </div>
       </div>
 
       <div className="flex justify-between">
         <div className="flex items-center gap-1">
-          <Check size={12} strokeWidth={4} className="rounded-full text-orange-500" />
+          {!isSurveyClosed && surveyCompletedParticipants > 0 && (
+            <Check size={12} strokeWidth={4} className="rounded-full text-orange-500" />
+          )}
+          {(isSurveyClosed || surveyCompletedParticipants === 0) && (
+            <Image src="/icons/circle-check.svg" alt="원형 체크 아이콘" width={16} height={16} />
+          )}
           <div className="label-2 font-semibold text-orange-600">모임 만들기</div>
         </div>
         <div
           className={cn(
             'flex items-center gap-1 label-2 font-semibold',
-            isSurveyClosed ? 'text-orange-500' : 'text-neutral-800'
+            isSurveyClosed ? 'text-orange-600' : 'text-neutral-800'
           )}
         >
-          {isSurveyClosed && <Check size={12} strokeWidth={4} className="rounded-full" />}
+          {isSurveyClosed && (
+            <Image src="/icons/circle-check.svg" alt="원형 체크 아이콘" width={16} height={16} />
+          )}
           식당 추천
         </div>
       </div>
