@@ -77,12 +77,7 @@ const ParticipantProgressIndicator = ({
 
       <div className="flex justify-between">
         <div className="flex items-center gap-1">
-          {!isSurveyClosed && surveyCompletedParticipants > 0 && (
-            <Check size={12} strokeWidth={4} className="rounded-full text-orange-500" />
-          )}
-          {(isSurveyClosed || surveyCompletedParticipants === 0) && (
-            <Image src="/icons/circle-check.svg" alt="원형 체크 아이콘" width={16} height={16} />
-          )}
+          <Check size={12} strokeWidth={4} className="rounded-full text-orange-500" />
           <div className="label-2 font-semibold text-orange-600">모임 만들기</div>
         </div>
         <div
@@ -91,9 +86,7 @@ const ParticipantProgressIndicator = ({
             isSurveyClosed ? 'text-orange-600' : 'text-neutral-800'
           )}
         >
-          {isSurveyClosed && (
-            <Image src="/icons/circle-check.svg" alt="원형 체크 아이콘" width={16} height={16} />
-          )}
+          {isSurveyClosed && <Check size={12} strokeWidth={4} className="rounded-full" />}
           식당 추천
         </div>
       </div>
