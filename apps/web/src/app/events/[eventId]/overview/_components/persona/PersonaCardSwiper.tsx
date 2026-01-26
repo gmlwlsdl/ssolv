@@ -37,7 +37,7 @@ const PersonaCardSwiper = ({ overview }: { overview: MeetingOverview }) => {
   return (
     <div className="flex flex-col">
       <div className="overflow-x-hidden" ref={emblaRef}>
-        <div className="flex w-full gap-4 pt-2 pb-3">
+        <div className="mt-6 flex w-full gap-4 pt-2 pb-3">
           {overview.participantList.map((participant, index) => (
             <div
               key={participant.userId}
@@ -63,7 +63,7 @@ const PersonaCardSwiper = ({ overview }: { overview: MeetingOverview }) => {
         </div>
       </div>
 
-      <div className="mb-6 flex flex-row items-center justify-center gap-1">
+      <div className="flex flex-row items-center justify-center gap-1 pt-6">
         {Array.from({ length: totalDots }).map((_, index) => (
           <button
             key={`dot-${index}`}

@@ -63,7 +63,7 @@ const OverviewClient = () => {
             />
           </div>
         </div>
-        <div className="flex flex-1 flex-col">
+        <div className="flex h-full flex-1 flex-col">
           <PersonaCardSwiper overview={overview} />
         </div>
         <SurveyActionButton overview={overview} />

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, Fragment } from 'react';
 
 import { ArrowUpRight } from 'lucide-react';
 import Image from 'next/image';
@@ -22,14 +22,14 @@ const PersonaCard = ({ participant, hasParticipated, isMe }: PersonaCardProps) =
     <>
       <div
         data-id={participant.userId}
-        className="flex w-full flex-col gap-6 overflow-hidden rounded-[1.25rem] bg-white"
+        className={`flex h-94 w-full flex-col ${hasParticipated ? 'gap-6' : 'gap-3'} overflow-hidden rounded-[1.25rem] bg-white`}
       >
         <div className="flex items-center gap-3 px-5 pt-5">
           <div className="relative">
             <AvatarIcon variant={participant.profileColor} />
             {isMe && (
               <span
-                className="absolute rounded-sm bg-orange-600 px-2 py-0.5 label-2 font-medium text-white"
+                className="absolute rounded-sm bg-orange-500 px-2 label-2 font-medium text-white"
                 style={{ top: '-10px', left: '7px' }} //테일윈드 안먹어서 스타일로 처리
               >
                 MY
@@ -40,11 +40,16 @@ const PersonaCard = ({ participant, hasParticipated, isMe }: PersonaCardProps) =
             {participant.nickname}
           </span>
         </div>
-        <div className="relative min-h-48 flex-1">
-          <div className="flex h-full w-full flex-col gap-6 px-5 pb-5">
-            <div className="flex flex-col gap-3 overflow-y-auto">
-              {participant.selectedCategories.map((cuisine) => (
-                <CuisinePreferenceRow key={cuisine.id} cuisine={cuisine} />
+        <div className={`relative h-full flex-1 ${hasParticipated ? '' : 'pt-3'}`}>
+          <div className="flex h-full w-full flex-col px-5 pb-5">
+            <div className="flex flex-col gap-2 overflow-y-auto">
+              {participant.selectedCategories.map((cuisine, index) => (
+                <Fragment key={cuisine.id}>
+                  <CuisinePreferenceRow cuisine={cuisine} />
+                  {index < participant.selectedCategories.length - 1 && (
+                    <div className="h-px bg-neutral-200" />
+                  )}
+                </Fragment>
               ))}
             </div>
             <button
@@ -89,11 +94,11 @@ const CuisinePreferenceRow = ({ cuisine }: CuisinePreferenceRowProps) => {
         />
         <span className="type-gradient label-1 font-semibold">{cuisine.name}</span>
       </div>
-      <div className="flex max-w-[70%] flex-wrap justify-end gap-1">
+      <div className="flex max-w-[70%] flex-col flex-wrap items-end gap-2">
         {cuisine.leafCategoryList.map((menu) => (
           <div
             key={menu.id}
-            className="flex items-center rounded-[2.5rem] bg-neutral-1400/[0.06] px-3 py-1"
+            className="flex w-fit items-center rounded-[2.5rem] bg-neutral-1400/[0.06] px-3 py-1"
           >
             <span className="label-1 font-semibold text-neutral-1400">{menu.name}</span>
           </div>

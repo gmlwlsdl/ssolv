@@ -19,7 +19,7 @@ const PersonaEmptyCard = ({ className }: PersonaEmptyCardProps) => {
     <div
       data-id="empty-card"
       className={cn(
-        'mt-9 flex w-11/12 shrink-0 flex-col items-center rounded-[1.25rem] bg-white px-5 pt-4',
+        'flex w-11/12 shrink-0 flex-col items-center rounded-[1.25rem] bg-white px-5 pt-4',
         className
       )}
     >
