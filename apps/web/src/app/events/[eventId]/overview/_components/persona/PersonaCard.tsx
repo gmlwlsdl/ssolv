@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, Fragment } from 'react';
+import { useState } from 'react';
 
 import { ArrowUpRight } from 'lucide-react';
 import Image from 'next/image';
@@ -42,14 +42,9 @@ const PersonaCard = ({ participant, hasParticipated, isMe }: PersonaCardProps) =
         </div>
         <div className={`relative h-full flex-1 ${hasParticipated ? '' : 'pt-3'}`}>
           <div className="flex h-full w-full flex-col px-5 pb-5">
-            <div className="flex flex-col gap-2 overflow-y-auto">
-              {participant.selectedCategories.map((cuisine, index) => (
-                <Fragment key={cuisine.id}>
-                  <CuisinePreferenceRow cuisine={cuisine} />
-                  {index < participant.selectedCategories.length - 1 && (
-                    <div className="h-px bg-neutral-200" />
-                  )}
-                </Fragment>
+            <div className="flex flex-col gap-4 overflow-y-auto">
+              {participant.selectedCategories.map((cuisine) => (
+                <CuisinePreferenceRow key={cuisine.id} cuisine={cuisine} />
               ))}
             </div>
             <button
