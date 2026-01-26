@@ -12,7 +12,7 @@ const StepIndicator = ({
   value,
   total,
   progressColor = 'bg-gradient-to-r from-orange-300 to-orange-500',
-  progressBgColor = 'bg-orange-100',
+  progressBgColor = 'bg-neutral-300',
 }: StepIndicatorProps) => {
   const percent = getProgressPercent(value, total);
 
