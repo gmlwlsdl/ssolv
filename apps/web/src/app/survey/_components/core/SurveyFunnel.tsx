@@ -59,7 +59,7 @@ const SurveyFunnel = ({ role, meetingId, initial, onComplete: _onComplete }: Sur
           onRightClick={() => setActiveModal('skip')}
         >
           <SurveyCuisineStep
-            title={`좋아하는 음식을\n최대 5개까지 선택해 주세요`}
+            title={`어떤 종류의 음식을\n선호하시나요?`}
             defaultSelectedIds={context.preferCuisineIds}
             onCancel={() => setActiveModal('exit')}
             context={context}
@@ -75,9 +75,9 @@ const SurveyFunnel = ({ role, meetingId, initial, onComplete: _onComplete }: Sur
           <ConfirmModal
             open={activeModal === 'exit'}
             title="설문을 그만둘까요?"
-            description="지금 나가면 입력된 내용이 저장되지 않아요."
+            description="지금 나가면 입력된 내용이 사라져요."
             cancelText="계속하기"
-            confirmText="나가기"
+            confirmText="그만두기"
             onCancel={closeModal}
             onConfirm={() => {
               closeModal();
@@ -87,10 +87,10 @@ const SurveyFunnel = ({ role, meetingId, initial, onComplete: _onComplete }: Sur
 
           <ConfirmModal
             open={activeModal === 'skip'}
-            title="건너뛰고 넘어갈까요?"
-            description="선호 음식이 저장되지 않아요."
+            title="설문을 건너뛸까요?"
+            description="추천에 나의 의견이 반영되지 않아요."
             cancelText="취소"
-            confirmText="건너뛰기"
+            confirmText="그만두기"
             onCancel={closeModal}
             onConfirm={() => {
               closeModal();

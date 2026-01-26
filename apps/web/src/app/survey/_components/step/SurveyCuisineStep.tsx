@@ -124,7 +124,7 @@ const SurveyCuisineStep = ({
             음식 목록을 불러오는 중...
           </div>
         ) : (
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-6 py-4">
             {displayCategories.map((category) => {
               const iconSrc = resolveCategoryIconSrc(category);
 
@@ -138,7 +138,7 @@ const SurveyCuisineStep = ({
                       height={24}
                       className="aspect-square"
                     />
-                    <h3 className="type-gradient text-lg font-semibold">{category.name}</h3>
+                    <h3 className="text-lg font-semibold text-neutral-1600">{category.name}</h3>
                   </div>
 
                   <ChipGroupMultiSelect
@@ -150,6 +150,7 @@ const SurveyCuisineStep = ({
                     selectedIds={selectedIds}
                     onChange={handleSelectChange}
                     exclusiveIds={[ANY_ID]}
+                    unselectedVariant="survey"
                   />
                 </div>
               );
@@ -162,8 +163,8 @@ const SurveyCuisineStep = ({
       {isModalOpen && (
         <FoodConfirmModal
           open={isModalOpen}
-          title="이대로 선택할까요?"
-          subtitle="선호하는 조합이 맞는지 다시 확인해 주세요"
+          title="이대로 제출할까요?"
+          subtitle="제출하면 수정할 수 없어요."
           selectedFoods={selectedIds.map((id) => {
             // 선택된 leaf
             const categoryList = Array.isArray(categories) ? categories : [];
