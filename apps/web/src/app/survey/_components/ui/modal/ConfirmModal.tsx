@@ -43,7 +43,7 @@ const ConfirmModal = ({
             type="button"
             onClick={onCancel}
             className={cn(
-              'flex h-12 flex-1 cursor-pointer items-center justify-center rounded-xl bg-neutral-300 body-3 font-semibold text-neutral-1400 transition-colors hover:bg-neutral-400'
+              'flex h-13 flex-1 cursor-pointer items-center justify-center rounded-xl bg-neutral-300 body-3 font-semibold text-neutral-1400 transition-colors hover:bg-neutral-400'
             )}
           >
             {cancelText}
@@ -53,8 +53,7 @@ const ConfirmModal = ({
             type="button"
             onClick={onConfirm}
             className={cn(
-              'flex h-12 flex-1 cursor-pointer items-center justify-center rounded-xl body-3 font-semibold text-white transition-opacity hover:opacity-90',
-              'cta-gradient'
+              'flex h-13 flex-1 cursor-pointer items-center justify-center rounded-xl bg-orange-500 body-3 font-semibold text-white transition-opacity hover:opacity-90'
             )}
           >
             {confirmText}
