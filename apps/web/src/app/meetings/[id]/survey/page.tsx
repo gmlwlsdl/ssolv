@@ -1,6 +1,6 @@
-import SurveyClientShell from '@/app/survey/_components/core/SurveyClientShell';
+import SurveyClientShell from '@/app/meetings/[id]/survey/_components/core/SurveyClientShell';
 
-import type { RoleLabel } from '@/app/survey/_models/types';
+import type { RoleLabel } from '@/app/meetings/[id]/survey/_models/types';
 
 /** SurveyPage
  * 설문 퍼널 진입 페이지
