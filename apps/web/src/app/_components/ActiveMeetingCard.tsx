@@ -13,15 +13,15 @@ const ActiveMeetingCard = ({ meeting }: ActiveMeetingCardProps) => {
   const { title, stationName, totalParticipantCnt, endAt, participantList } = meeting;
 
   return (
-    <div className="cursor-pointer rounded-3xl p-3 pt-4 select-none gathering-card">
+    <div className="cursor-pointer rounded-3xl bg-white p-3 pt-4 select-none">
       <div className="flex flex-col gap-4 px-2">
         <div className="flex flex-col gap-2">
           <div className="flex justify-between">
-            <div className="flex items-center gap-1 border-b-1 border-b-neutral-300 pr-2">
+            <div className="flex items-center gap-1 pr-2">
               <Clock size={14} strokeWidth={3} className="text-orange-300" />
               <CountdownDisplay endAt={endAt} />
             </div>
-            <ChevronRight size={24} className="text-orange-500" />
+            <ChevronRight size={24} className="text-neutral-700" />
           </div>
 
           <h3 className="heading-4 text-xl leading-8 font-bold text-orange-1000">{title}</h3>

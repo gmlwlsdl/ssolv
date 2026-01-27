@@ -23,7 +23,7 @@ const HomePageClient = ({ meetings }: HomePageClientProps) => {
     <>
       {/* 진행 중인 모임 */}
       <section className="py-2">
-        <SectionHeader title="진행 중인 모임" icon="/images/avatar/orange.svg" />
+        <SectionHeader title="진행 중인 모임" />
         <div
           className={cn(
             'no-scrollbar flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-5',
@@ -51,7 +51,7 @@ const HomePageClient = ({ meetings }: HomePageClientProps) => {
 
       {/* 나의 모임 */}
       <section>
-        <SectionHeader title="나의 모임" icon="/images/avatar/matcha.svg" />
+        <SectionHeader title="나의 모임" />
         <div className="flex flex-col gap-3 px-5 pb-20">
           {endedMeetings.length > 0 ? (
             endedMeetings.map((meeting) => (
