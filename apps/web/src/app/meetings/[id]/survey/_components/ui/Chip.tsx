@@ -4,6 +4,7 @@ import { Text } from '@/components/typography';
 import { cn } from '@/lib/cn';
 
 type ChipVariant = 'any' | 'cuisine';
+type UnselectedVariant = 'default' | 'survey';
 
 export interface ChipProps {
   label: string;
@@ -13,6 +14,7 @@ export interface ChipProps {
   onClick?: () => void;
   variant?: ChipVariant;
   startIcon?: React.ReactNode;
+  unselectedVariant?: UnselectedVariant; // 취향 설문 프로세스와 취향 확인 페이지 스타일 구분용
 }
 
 const Chip = ({
@@ -23,6 +25,7 @@ const Chip = ({
   onClick,
   variant = 'cuisine',
   startIcon: _startIcon,
+  unselectedVariant,
 }: ChipProps) => {
   const padding = variant === 'any' ? 'px-5' : 'px-5';
   const baseH = 'h-12';
@@ -41,10 +44,7 @@ const Chip = ({
   const unselectedCls = cn(common, 'bg-white border-gray-300 text-neutral-1500');
 
   // 선택된 칩 — chip-gradient 배경으로 통일
-  const selectedCls = cn(
-    common,
-    'border-transparent text-white chip-gradient shadow-[0_2px_4px_rgba(255,79,20,0.3)] text-neutral-100'
-  );
+  const selectedCls = cn(common, 'border-transparent text-white bg-orange-500 text-neutral-100');
 
   return (
     <button
@@ -69,7 +69,11 @@ const Chip = ({
         <Text
           className={cn(
             'body-3 leading-6 font-semibold',
-            selected ? 'text-neutral-100' : 'text-neutral-1500'
+            selected
+              ? 'text-neutral-100'
+              : unselectedVariant === 'survey'
+                ? 'text-neutral-1600'
+                : 'text-neutral-800'
           )}
         >
           {label}

@@ -64,7 +64,7 @@ const FoodConfirmModal = ({
         <div className="flex w-full flex-col items-start gap-1 px-4">
           <h2
             id="modal-title"
-            className="bg-gradient-to-r from-orange-900 via-orange-800 to-orange-800 bg-clip-text heading-3 font-bold tracking-tight text-transparent"
+            className="bg-neutral-1600 bg-clip-text heading-3 font-bold tracking-tight text-transparent"
           >
             {title}
           </h2>
@@ -86,7 +86,9 @@ const FoodConfirmModal = ({
                     height={20}
                     className="aspect-square"
                   />
-                  <span className="title-gradient pl-2 label-1 font-semibold">{categoryLabel}</span>
+                  <span className="pl-2 label-1 font-semibold text-neutral-1500">
+                    {categoryLabel}
+                  </span>
                 </div>
 
                 {/* 첫 번째 칩 */}
@@ -126,8 +128,7 @@ const FoodConfirmModal = ({
             type="button"
             onClick={onConfirm}
             className={cn(
-              'flex h-[62px] flex-1 cursor-pointer items-center justify-center rounded-[14px] text-[16px] font-semibold text-white',
-              'bg-gradient-to-r from-orange-400 via-orange-500 to-orange-400'
+              'flex h-[62px] flex-1 cursor-pointer items-center justify-center rounded-[14px] bg-orange-500 text-[16px] font-semibold text-white'
             )}
           >
             제출하기

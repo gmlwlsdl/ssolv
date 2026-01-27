@@ -4,7 +4,7 @@ import { useCallback, useMemo } from 'react';
 
 import Image from 'next/image';
 
-import Chip from '@/app/meetings/[id]/survey/_components/ui/form/Chip';
+import Chip, { type ChipProps } from '@/app/meetings/[id]/survey/_components/ui/Chip';
 import { MAX_SELECT_COUNT } from '@/app/meetings/[id]/survey/_models/constants';
 import { useToast } from '@/features/toast';
 
@@ -21,6 +21,7 @@ export interface ChipGroupMultiSelectProps {
   exclusiveIds?: readonly string[];
   onChange?: (ids: string[]) => void;
   className?: string;
+  unselectedVariant?: ChipProps['unselectedVariant'];
 }
 
 const ChipGroupMultiSelect = ({
@@ -29,6 +30,7 @@ const ChipGroupMultiSelect = ({
   exclusiveIds = [],
   onChange,
   className,
+  unselectedVariant,
 }: ChipGroupMultiSelectProps) => {
   const { toast: customToast } = useToast();
 
@@ -128,6 +130,7 @@ const ChipGroupMultiSelect = ({
             orderBadge={orderOf(o.id)}
             startIcon={o.startIcon}
             onClick={() => toggle(o.id)}
+            unselectedVariant={unselectedVariant}
           />
         ))}
       </div>
