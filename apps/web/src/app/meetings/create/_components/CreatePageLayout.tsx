@@ -2,10 +2,10 @@
 
 import { useRouter } from 'next/navigation';
 
-import TopNavigation from '@/app/_components/layout/TopNavigation';
-import Badge from '@/app/_components/ui/Badge';
-import { ConfirmModal } from '@/app/_components/ui/Modal';
-import { useDisclosure } from '@/app/_hooks/useDisclosure';
+import TopNavigation from '@/components/layout/TopNavigation';
+import Badge from '@/components/ui/Badge';
+import { ConfirmModal } from '@/components/ui/Modal';
+import { useDisclosure } from '@/hooks/useDisclosure';
 
 interface CreatePageLayoutProps {
   children: React.ReactNode;
