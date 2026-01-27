@@ -52,7 +52,7 @@ const OverviewClient = () => {
   return (
     <>
       <div className="flex flex-1 flex-col">
-        <div className="flex w-full flex-col items-center gap-3 px-5">
+        <div className="flex w-full flex-col items-center gap-3 px-5 py-4">
           <SurveyStatusBanner overview={overview} />
           <div className="flex w-full px-4">
             <ParticipantProgressIndicator
@@ -63,7 +63,7 @@ const OverviewClient = () => {
             />
           </div>
         </div>
-        <div className="flex flex-1 flex-col">
+        <div className="flex h-full flex-1 flex-col">
           <PersonaCardSwiper overview={overview} />
         </div>
         <SurveyActionButton overview={overview} />

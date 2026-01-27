@@ -18,6 +18,7 @@ const SurveyActionButton = ({ overview }: { overview: MeetingOverview }) => {
   const { hasParticipated } = useOverviewState(overview);
   const { isClosed: isSurveyClosed, totalParticipantCnt, endAt } = overview.meetingInfo;
   const isEveryoneCompleted = overview.participantList.length === totalParticipantCnt;
+
   const countdown = useCountdownDisplay(new Date(endAt));
 
   const buttonState = useMemo(() => {
@@ -32,10 +33,11 @@ const SurveyActionButton = ({ overview }: { overview: MeetingOverview }) => {
     return {
       label: (
         <>
-          <span className="body-3 font-semibold">설문 마감까지</span> {countdown}
+          <span className="body-3 font-semibold text-white-alpha-5">설문 마감까지 </span>
+          <span className="body-3 font-semibold">{countdown}</span>
         </>
       ),
-      path: null,
+      path: !hasParticipated ? `/meetings/${id}/survey` : null,
     };
   }, [hasParticipated, isSurveyClosed, isEveryoneCompleted, countdown, id]);
 
@@ -62,7 +64,7 @@ const SurveyActionButton = ({ overview }: { overview: MeetingOverview }) => {
       {isPending && <Loading />}
 
       <div className="sticky bottom-0 px-5 py-3">
-        <Button onClick={handleClick} disabled={isPending}>
+        <Button onClick={handleClick} disabled={isPending} theme={'orange'}>
           <span className="body-3 font-semibold text-white">{buttonState.label}</span>
         </Button>
       </div>

@@ -75,7 +75,7 @@ const PersonaCardSurveyContent = ({ participant }: { participant: MeetingPartici
       </div>
 
       {/* 설문 결과 본문 */}
-      <div className="flex max-h-[70vh] flex-col gap-6 overflow-y-auto">
+      <div className="flex flex-col gap-6 overflow-y-auto">
         {displayCategories.map((category) => {
           const iconSrc = getCuisineImageSrc(category.id);
           return (

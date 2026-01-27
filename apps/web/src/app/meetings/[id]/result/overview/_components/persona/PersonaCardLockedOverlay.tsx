@@ -1,6 +1,6 @@
 const PersonaCardLockedOverlay = () => {
   return (
-    <div className="absolute top-0 left-0 flex h-full w-full flex-col items-center justify-center gap-3 bg-white/50 backdrop-blur-sm">
+    <div className="absolute top-0 left-0 flex h-full w-full flex-col items-center gap-3 bg-white/50 pt-16 backdrop-blur-sm">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="32"
@@ -13,7 +13,7 @@ const PersonaCardLockedOverlay = () => {
           fill="#3A3D42"
         />
       </svg>
-      <p className="text-center body-3 font-semibold whitespace-pre-line text-neutral-1400">{`취향 설문에 참여하고\n 모임원의 결과를 확인해보세요`}</p>
+      <p className="text-center body-3 font-semibold whitespace-pre-line text-neutral-1400">{`취향 설문에 참여해야\n 모임원의 결과를 확인할 수 있어요`}</p>
     </div>
   );
 };

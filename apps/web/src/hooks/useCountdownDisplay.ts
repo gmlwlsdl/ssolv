@@ -23,7 +23,9 @@ const calculateTimeLeft = (targetTime: Date): string => {
   const minutes = Math.floor((diff % msPerHour) / msPerMinute);
   const seconds = Math.floor((diff % msPerMinute) / 1000);
 
-  return `${days}일 ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+  return `${days}일 ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(
+    seconds
+  ).padStart(2, '0')}`;
 };
 
 /**
@@ -50,4 +52,28 @@ export const useCountdownDisplay = (targetTime: Date): string => {
   }, [targetTime]);
 
   return displayText;
+};
+
+/**
+ * 설문 마감 1시간 전인지 여부를 실시간으로 확인
+ * @param targetTime - 설문 마감 시간 (endAt)
+ * @returns 1시간 이내이면 true
+ */
+export const useIsSurveyClosingSoon = (targetTime: Date): boolean => {
+  const [isClosingSoon, setIsClosingSoon] = useState(false);
+
+  useEffect(() => {
+    const check = () => {
+      const remainingTime = targetTime.getTime() - new Date().getTime();
+      const lessThanHour = remainingTime < 1000 * 60 * 60;
+      setIsClosingSoon(lessThanHour);
+    };
+
+    check();
+    const interval = setInterval(check, 1000);
+
+    return () => clearInterval(interval);
+  }, [targetTime]);
+
+  return isClosingSoon;
 };
