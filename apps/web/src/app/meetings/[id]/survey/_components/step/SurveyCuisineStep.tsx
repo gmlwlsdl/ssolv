@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo } from 'react';
 
 import Image from 'next/image';
 
-import ChipGroupMultiSelect from '@/app/meetings/[id]/survey/_components/ui/form/ChipGroupMultiSelect';
+import ChipGroupMultiSelect from '@/app/meetings/[id]/survey/_components/ui/ChipGroupMultiSelect';
 import StepFormLayout from '@/app/meetings/[id]/survey/_components/ui/form/StepFormLayout';
 import FoodConfirmModal from '@/app/meetings/[id]/survey/_components/ui/modal/FoodConfirmModal';
 import { useSurveyCategories } from '@/app/meetings/[id]/survey/_hooks/useSurveyCategories';
