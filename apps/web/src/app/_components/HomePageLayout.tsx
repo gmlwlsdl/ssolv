@@ -39,14 +39,8 @@ const HomePageLayout = ({ children, errorCode }: HomePageLayoutProps) => {
       />
       <ComingSoonModal isOpen={showComingSoonMadal} onClose={comingSoonModalHandler.close} />
 
-      <header className="flex items-center justify-between px-5 pt-9 pb-5 select-none">
-        <Image
-          src="/images/momuzzi-wordmark.svg"
-          alt="모무찌 작은 로고"
-          width={72}
-          height={0}
-          style={{ width: 'auto', height: 'auto' }}
-        />
+      <header className="flex items-center justify-between px-5 pt-9 pb-2 select-none">
+        <Image src="/images/ssolv-wordmark.svg" alt="솔브 작은 로고" width={81} height={32} />
         <button onClick={comingSoonModalHandler.open} className="cursor-pointer">
           <Image src="/icons/profile.svg" alt="프로필 아이콘" width={32} height={32} />
         </button>

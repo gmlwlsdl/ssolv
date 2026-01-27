@@ -26,7 +26,7 @@ const ParticipantProgressIndicator = ({
   const isEveryoneCompleted = surveyCompletedParticipants === totalParticipants;
 
   return (
-    <div className={cn('flex flex-col gap-3', className)}>
+    <div className={cn('flex flex-col', className)}>
       <div className="flex items-center">
         <div className="flex-1">
           <div className="relative">
@@ -70,7 +70,7 @@ const ParticipantProgressIndicator = ({
           </div>
         </div>
 
-        <div className="z-1 -ml-6 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 border-neutral-300 bg-neutral-100">
+        <div className="z-1 -ml-6 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 border-neutral-300 bg-white">
           <Image alt="과녁 아이콘" src="/icons/arrow.svg" width={16} height={16} />
         </div>
       </div>
