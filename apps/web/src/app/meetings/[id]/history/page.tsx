@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import MenuPreferenceList from '@/app/history/_components/MenuPreferenceList';
+import MenuPreferenceList from '@/app/meetings/[id]/history/_components/MenuPreferenceList';
 import PieChart from '@/app/meetings/[id]/result/analysis/_components/PieChart';
 import { buildPreferenceSummary } from '@/app/meetings/[id]/result/analysis/_utils';
 import TopNavigation from '@/components/layout/TopNavigation';
@@ -8,7 +8,7 @@ import { Heading } from '@/components/typography';
 import { meetingsApi } from '@/services/meetings';
 import { MeetingOverview } from '@/services/overview';
 
-const MeetingHistroyPage = async ({ params }: { params: Promise<{ id: string }> }) => {
+const MeetingHistoryPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
 
   const history: MeetingOverview = await meetingsApi.getMeetingHistory(Number(id));
@@ -49,4 +49,4 @@ const MeetingHistroyPage = async ({ params }: { params: Promise<{ id: string }> 
   );
 };
 
-export default MeetingHistroyPage;
+export default MeetingHistoryPage;
