@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "모무찌",
-    "slug": "momuzzi-mobile",
-    "scheme": "momuzzi-mobile",
+    "name": "Solv",
+    "slug": "Solv",
+    "scheme": "Solv",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/momuzzi-mobile-icon.png",
@@ -16,7 +16,11 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.momuzzi.app"
+      "bundleIdentifier": "com.solv.app",
+      "usesAppleSignIn": true,
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -25,11 +29,17 @@
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "package": "com.momuzzi.app"
+      "package": "com.solv.app"
     },
     "web": {
       "favicon": "./assets/momuzzi-mobile-icon.png"
     },
-    "plugins": ["expo-web-browser"]
+    "plugins": ["expo-web-browser", "expo-apple-authentication"],
+    "extra": {
+      "eas": {
+        "projectId": "9110c694-2f9f-4c18-9acf-8799988c545a"
+      }
+    },
+    "owner": "gmlwlsdl"
   }
 }
