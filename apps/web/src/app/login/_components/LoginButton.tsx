@@ -8,12 +8,21 @@ const PROVIDER_CONFIG = {
   kakao: {
     text: '카카오톡으로 시작하기',
     icon: '/icons/kakao-icon.svg',
-    className: 'bg-yellow-400',
+    className: 'bg-yellow-400 text-neutral-1600',
+    apiPath: '/api/auth/kakao',
   },
-};
+  apple: {
+    text: 'Apple로 계속하기',
+    icon: '/icons/apple-icon.svg',
+    className: 'bg-black text-white',
+    apiPath: '/api/auth/apple',
+  },
+} as const;
+
+type Provider = keyof typeof PROVIDER_CONFIG;
 
 interface LoginButtonProps {
-  provider?: 'kakao';
+  provider?: Provider;
   redirectTo?: string | null;
 }
 
@@ -27,12 +36,12 @@ const LoginButton = ({ provider = 'kakao', redirectTo }: LoginButtonProps) => {
         params.append('state', redirectTo);
       }
       const queryString = params.toString();
-      const apiUrl = `/api/auth/kakao${queryString ? `?${queryString}` : ''}`;
+      const apiUrl = `${config.apiPath}${queryString ? `?${queryString}` : ''}`;
 
       const response = await fetch(apiUrl);
       if (!response.ok) {
         const error = await response.json();
-        console.error('Failed to get Kakao auth URL:', error);
+        console.error(`Failed to get ${provider} auth URL:`, error);
         return;
       }
 
@@ -49,7 +58,7 @@ const LoginButton = ({ provider = 'kakao', redirectTo }: LoginButtonProps) => {
       aria-label={config.text}
       onClick={handleLogin}
       className={cn(
-        'flex h-[62px] w-full cursor-pointer items-center justify-center gap-2 rounded-[14px] p-[10px] body-3 font-semibold text-neutral-1600 transition-all duration-200',
+        'flex h-[62px] w-full cursor-pointer items-center justify-center gap-2 rounded-[14px] p-[10px] body-3 font-semibold transition-all duration-200',
         config.className
       )}
     >
