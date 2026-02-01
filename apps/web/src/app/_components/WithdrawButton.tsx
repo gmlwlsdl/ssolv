@@ -22,7 +22,7 @@ export const WithdrawButton = () => {
   return (
     <button
       onClick={handleWithdraw}
-      className="rounded bg-red-500 px-3 py-1 text-sm font-bold text-white hover:bg-red-600"
+      className="absolute top-4 right-24 z-50 rounded bg-red-500 px-3 py-1 text-sm font-bold text-white hover:bg-red-600"
     >
       회원탈퇴
     </button>
