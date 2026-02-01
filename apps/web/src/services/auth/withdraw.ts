@@ -5,10 +5,9 @@ export const withdraw = async () => {
 
   try {
     await api.delete('/api/v1/auth/withdraw');
-  } catch (error) {
-    console.error('회원탈퇴 중 에러:', error);
-    throw error;
-  } finally {
     window.location.href = '/login';
+  } catch (error) {
+    console.error('회원탈퇴 실패:', error instanceof Error ? error.message : '알 수 없는 에러');
+    throw error;
   }
 };

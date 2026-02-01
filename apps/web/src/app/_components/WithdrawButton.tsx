@@ -15,7 +15,7 @@ export const WithdrawButton = () => {
       await withdraw();
     } catch (error) {
       alert('탈퇴 처리 중 오류가 발생했습니다.');
-      console.error(error);
+      console.error('탈퇴 실패:', error instanceof Error ? error.message : '알 수 없는 에러');
     }
   };
 
@@ -28,5 +28,3 @@ export const WithdrawButton = () => {
     </button>
   );
 };
-
-export default WithdrawButton;
