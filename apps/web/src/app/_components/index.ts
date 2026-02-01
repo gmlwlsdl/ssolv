@@ -6,6 +6,7 @@ export { default as SectionHeader } from './SectionHeader';
 export { default as Skeleton } from './Skeleton';
 export { default as CountdownDisplay } from './CountdownDisplay';
 export { default as HomeMenu } from './HomeMenu';
+export * from './LogoutButton';
 export { default as WithdrawButton } from './WithdrawButton';
 export { default as HomePageLayout } from './HomePageLayout';
 export { default as HomePageClient } from './HomePageClient';
