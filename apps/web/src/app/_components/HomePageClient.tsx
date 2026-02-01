@@ -55,7 +55,7 @@ const HomePageClient = ({ meetings }: HomePageClientProps) => {
         <div className="flex flex-col gap-3 px-5 pb-20">
           {endedMeetings.length > 0 ? (
             endedMeetings.map((meeting) => (
-              <Link key={meeting.id} href={`/history/${meeting.id}`}>
+              <Link key={meeting.id} href={`/meetings/${meeting.id}/history`}>
                 <EndedMeetingCard meeting={meeting} />
               </Link>
             ))

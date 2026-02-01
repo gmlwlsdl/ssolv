@@ -20,8 +20,9 @@ const LoginPage = async ({ searchParams }: { searchParams: Promise<{ redirectTo?
         </main>
       </div>
 
-      <div className="w-full px-5 pb-14">
-        <LoginButton redirectTo={redirectTo} />
+      <div className="flex w-full flex-col gap-3 px-5 pb-14">
+        <LoginButton provider="kakao" redirectTo={redirectTo} />
+        <LoginButton provider="apple" redirectTo={redirectTo} />
       </div>
     </div>
   );

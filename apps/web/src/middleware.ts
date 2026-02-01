@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 const AUTH_PAGES = ['/login'];
-const PROTECTED_ROUTES = ['/meetings', '/events', '/survey']; // TODO: 일관된 폴더 구조로 변경 필요
+const PROTECTED_ROUTES = ['/meetings'];
 
 const middleware = async (req: NextRequest) => {
   if (req.nextUrl.pathname === '/healthz') {
