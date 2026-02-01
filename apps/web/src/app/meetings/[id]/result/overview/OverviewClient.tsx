@@ -40,7 +40,7 @@ const OverviewClient = () => {
   useEffect(() => {
     if (created) {
       modalHandler.open();
-      router.replace(`/meetings/${id}/overview?token=${token}`);
+      router.replace(`/meetings/${id}/result/overview?token=${token}`);
     }
   }, [created, id, router, token, modalHandler]);
 
