@@ -2,6 +2,9 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+> 💡 **Tip**: 전체 프로젝트 구조와 가용 스킬(`skills/`)에 대한 정보는 [AGENTS.md](./AGENTS.md)를 참고하십시오.
+> `CLAUDE.md`는 코드 컨벤션과 상세 규칙에 집중합니다.
+
 이 파일은 Claude Code가 이 레포지토리에서 작업할 때 참고할 가이드라인입니다.
 
 ## 프로젝트 개요
