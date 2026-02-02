@@ -3,12 +3,6 @@ import type { NextConfig } from 'next';
 const nextConfig: NextConfig = {
   /** Next 빌드 아웃풋 최적화 (standalone) */
   output: 'standalone',
-  /** Apple OAuth form_post 허용 */
-  experimental: {
-    serverActions: {
-      allowedOrigins: ['appleid.apple.com', '*.appleid.apple.com'],
-    },
-  },
   // Unsplash 이미지 사용을 위한 도메인 설정
   images: {
     remotePatterns: [
