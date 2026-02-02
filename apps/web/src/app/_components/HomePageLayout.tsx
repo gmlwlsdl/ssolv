@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 
 import Image from 'next/image';
 
-import { HomeMenu, LogoutButton } from '@/app/_components';
+import { HomeMenu, LogoutButton, WithdrawButton } from '@/app/_components';
 import { ErrorModal } from '@/components/ui/Modal';
 import ComingSoonModal from '@/components/ui/Modal/ComingSoonModal';
 import { getErrorConfig } from '@/data/constants/errorConfig';
@@ -39,14 +39,14 @@ const HomePageLayout = ({ children, errorCode }: HomePageLayoutProps) => {
       />
       <ComingSoonModal isOpen={showComingSoonMadal} onClose={comingSoonModalHandler.close} />
 
+      <LogoutButton />
+      <WithdrawButton />
+
       <header className="flex items-center justify-between px-5 pt-9 pb-2 select-none">
         <Image src="/images/ssolv-wordmark.svg" alt="솔브 작은 로고" width={81} height={32} />
-        <div className="flex items-center gap-2">
-          <LogoutButton />
-          <button onClick={comingSoonModalHandler.open} className="cursor-pointer">
-            <Image src="/icons/profile.svg" alt="프로필 아이콘" width={32} height={32} />
-          </button>
-        </div>
+        <button onClick={comingSoonModalHandler.open} className="cursor-pointer">
+          <Image src="/icons/profile.svg" alt="프로필 아이콘" width={32} height={32} />
+        </button>
       </header>
       <main>{children}</main>
 
