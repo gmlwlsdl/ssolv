@@ -36,13 +36,13 @@ const setAuthCookies = async (accessToken: string, refreshToken: string) => {
 
 // 에러 리다이렉트 헬퍼
 const redirectToLogin = (error: string) => {
-  return NextResponse.redirect(`${BASE_URL}/login?error=${encodeURIComponent(error)}`, 303);
+  return NextResponse.redirect(`${BASE_URL}/login?error=${encodeURIComponent(error)}`);
 };
 
 // 성공 리다이렉트 헬퍼
 const redirectToDestination = (state: string | null) => {
   const redirectUrl = isValidRedirectUrl(state) ? state : '/';
-  return NextResponse.redirect(`${BASE_URL}${redirectUrl}`, 303);
+  return NextResponse.redirect(`${BASE_URL}${redirectUrl}`);
 };
 
 /**
