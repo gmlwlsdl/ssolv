@@ -46,6 +46,7 @@ const LoginButton = ({ provider = 'kakao', redirectTo }: LoginButtonProps) => {
       }
 
       const { url } = await response.json();
+      console.warn(`[${provider}] OAuth URL 수신:`, url);
       window.location.href = url;
     } catch (error) {
       console.error('Login error:', error);
