@@ -67,6 +67,12 @@ export const GET = (
 
     const authUrl = `${config.authUrl}?${searchParams.toString()}`;
 
+    // 디버깅용 로그
+    console.warn(`[${provider}] OAuth URL 생성:`);
+    console.warn(`  CLIENT_ID: ${CLIENT_ID}`);
+    console.warn(`  REDIRECT_URL: ${REDIRECT_URL}`);
+    console.warn(`  authUrl: ${authUrl}`);
+
     return NextResponse.json({ url: authUrl });
   });
 };
