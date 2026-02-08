@@ -120,15 +120,27 @@ export const POST = async (request: NextRequest) => {
       url.searchParams.set('user', user);
     }
 
+    console.error('[Apple Login Debug] 요청 시작');
+    console.error('[Apple Login Debug] URL:', String(url));
+    console.error('[Apple Login Debug] Method: POST');
+    console.error('[Apple Login Debug] Parameters:', {
+      code: code?.substring(0, 20) + '...',
+      redirect_uri: redirectUri,
+      user: user ? 'present' : 'null',
+    });
+
     const response = await fetch(String(url), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
     });
 
+    console.error('[Apple Login Debug] 응답 상태:', response.status, response.statusText);
+
     if (!response.ok) {
       const errorText = await response.json();
-      console.error('백엔드 에러 응답:', errorText);
-      return redirectToLogin('backend_error');
+      console.error('[Apple Login] 백엔드 에러 응답:', errorText);
+      console.error('[Apple Login] 응답 헤더:', Object.fromEntries(response.headers.entries()));
+      return redirectToLogin(`backend_error_${response.status}`);
     }
 
     const { data: { accessToken, refreshToken } = {} } = await response.json();
