@@ -121,7 +121,7 @@ export const POST = async (request: NextRequest) => {
     }
 
     const response = await fetch(String(url), {
-      method: 'GET',
+      method: 'POST',
       headers: { 'Content-Type': 'application/json' },
     });
 
