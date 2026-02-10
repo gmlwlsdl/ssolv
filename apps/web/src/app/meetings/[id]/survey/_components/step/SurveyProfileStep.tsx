@@ -45,8 +45,7 @@ const SurveyProfileStep = ({
 
     try {
       setIsSubmitting(true);
-      const normalizedColor =
-        profileKey === 'sweetPotato' ? 'SWEET_POTATO' : profileKey.toUpperCase();
+      const normalizedColor = profileKey === 'banana' ? 'BANANA' : profileKey.toUpperCase();
       await surveyApi.putAttendeeProfile(meetingId, {
         attendeeNickname: name.trim(),
         color: normalizedColor,

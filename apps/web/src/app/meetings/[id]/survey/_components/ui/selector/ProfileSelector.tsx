@@ -42,10 +42,16 @@ const ProfileSelector = ({
             openModal();
           }
         }}
-        className="relative flex cursor-pointer items-center justify-center rounded-full p-5 transition-all hover:opacity-90"
+        className="relative flex cursor-pointer items-center justify-center rounded-full transition-all hover:opacity-90"
         style={{ backgroundColor: selected.bgColor, width: 100, height: 100 }}
       >
-        <Image src={selected.src} alt={selected.key} width={60} height={60} />
+        <Image
+          src={selected.src}
+          alt={selected.key}
+          width={100}
+          height={100}
+          className="rounded-full"
+        />
 
         {/* 수정 버튼 */}
         <button
