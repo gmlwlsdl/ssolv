@@ -36,13 +36,13 @@ const setAuthCookies = async (accessToken: string, refreshToken: string) => {
 
 // 에러 리다이렉트 헬퍼
 const redirectToLogin = (error: string) => {
-  return NextResponse.redirect(`${BASE_URL}/login?error=${encodeURIComponent(error)}`);
+  return NextResponse.redirect(`${BASE_URL}/login?error=${encodeURIComponent(error)}`, 303);
 };
 
 // 성공 리다이렉트 헬퍼
 const redirectToDestination = (state: string | null) => {
   const redirectUrl = isValidRedirectUrl(state) ? state : '/';
-  return NextResponse.redirect(`${BASE_URL}${redirectUrl}`);
+  return NextResponse.redirect(`${BASE_URL}${redirectUrl}`, 303);
 };
 
 /**
@@ -121,14 +121,15 @@ export const POST = async (request: NextRequest) => {
     }
 
     const response = await fetch(String(url), {
-      method: 'GET',
+      method: 'POST',
       headers: { 'Content-Type': 'application/json' },
     });
 
     if (!response.ok) {
       const errorText = await response.json();
-      console.error('백엔드 에러 응답:', errorText);
-      return redirectToLogin('backend_error');
+      console.error('[Apple Login] 백엔드 에러 응답:', errorText);
+      console.error('[Apple Login] 응답 헤더:', Object.fromEntries(response.headers.entries()));
+      return redirectToLogin(`backend_error_${response.status}`);
     }
 
     const { data: { accessToken, refreshToken } = {} } = await response.json();
