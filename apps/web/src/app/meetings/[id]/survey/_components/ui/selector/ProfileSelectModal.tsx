@@ -58,15 +58,15 @@ const ProfileSelectModal = ({
         <div className="flex justify-center py-5">
           <div
             className={cn(
-              'flex items-center justify-center rounded-full p-4 transition-transform hover:scale-105'
+              'flex items-center justify-center rounded-full transition-transform hover:scale-105'
             )}
             style={{ backgroundColor: selectedAvatar.bgColor }}
           >
             <Image
               src={selectedAvatar.src}
               alt={selectedAvatar.key}
-              width={56}
-              height={56}
+              width={100}
+              height={100}
               className="rounded-full object-cover"
             />
           </div>
@@ -86,7 +86,7 @@ const ProfileSelectModal = ({
                   onClick={() => !isLocked && setTempSelectedKey(a.key)}
                   disabled={isLocked}
                   className={cn(
-                    'relative flex items-center justify-center rounded-full p-2 transition-all duration-150',
+                    'relative flex items-center justify-center rounded-full transition-all duration-150',
                     isLocked ? 'cursor-not-allowed opacity-40' : 'hover:opacity-90 active:scale-95'
                   )}
                   style={{
@@ -98,8 +98,8 @@ const ProfileSelectModal = ({
                   <Image
                     src={a.src}
                     alt={a.key}
-                    width={40}
-                    height={40}
+                    width={100}
+                    height={100}
                     className="rounded-full object-cover"
                   />
                   {tempSelectedKey === a.key && (

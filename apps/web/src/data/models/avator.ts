@@ -1,12 +1,12 @@
 export type AvatarVariantKey =
   | 'none'
   | 'default'
-  | 'strawberry'
-  | 'matcha'
-  | 'orange'
-  | 'grape'
-  | 'chocolate'
-  | 'milk'
-  | 'mint'
-  | 'sweetPotato'
-  | 'pistachio';
+  | 'banana'
+  | 'broccoli'
+  | 'carrot'
+  | 'lemon'
+  | 'mushroom'
+  | 'paprika'
+  | 'pear'
+  | 'tomato'
+  | 'turnip';
