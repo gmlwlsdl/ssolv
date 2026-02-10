@@ -12,17 +12,17 @@ import '@mantine/core/styles.layer.css';
 import '@mantine/dates/styles.css';
 import './globals.css';
 
-const APP_NAME = '모무찌';
-const APP_TITLE = '모두의 취향을 모아 식당 추천 - 모무찌';
-const APP_DESCRIPTION = '오늘의 메뉴 고민, 모무찌가 대신 해드릴게요!';
-const APP_URL = 'https://www.momuzzi.site';
+const APP_NAME = 'solv';
+const APP_TITLE = '식당 추천을 위한 설문이 시작됐어요!';
+const APP_DESCRIPTION = '솔브에서 먹고 싶은 메뉴를 어필해보세요.';
+const APP_URL = 'https://www.ssolv.site';
 const OG_IMAGE_URL = `${APP_URL}/og-image.png`;
 
 export const metadata: Metadata = {
   title: APP_TITLE,
   description: APP_DESCRIPTION,
   keywords: ['식당', '추천', '설문', '맛집', '음식'],
-  authors: [{ name: 'depromeet-momuzzi' }],
+  authors: [{ name: 'ssolv' }],
 
   icons: {
     icon: '/favicon.png',
