@@ -10,7 +10,7 @@ export interface MeetingInfo {
   endAt: string;
   createdAt: string;
   updatedAt: string;
-  inviteToken?: string;
+  token: string;
 }
 
 export interface MeetingResponse {

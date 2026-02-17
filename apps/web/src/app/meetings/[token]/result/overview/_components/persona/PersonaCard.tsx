@@ -26,7 +26,7 @@ const PersonaCard = ({ participant, hasParticipated, isMe }: PersonaCardProps) =
       >
         <div className="flex items-center gap-3 px-5 pt-5">
           <div className="relative">
-            <AvatarIcon variant={participant.profileColor} />
+            <AvatarIcon variant={participant.color} />
             {isMe && (
               <span
                 className="absolute rounded-sm bg-orange-500 px-2 label-2 font-medium text-white"
@@ -37,7 +37,7 @@ const PersonaCard = ({ participant, hasParticipated, isMe }: PersonaCardProps) =
             )}
           </div>
           <span className="line-clamp-1 subheading-1 font-bold text-neutral-1600">
-            {participant.nickname}
+            {participant.attendeeNickname}
           </span>
         </div>
         <div className={`relative h-full flex-1 ${hasParticipated ? '' : 'pt-3'}`}>

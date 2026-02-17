@@ -14,8 +14,8 @@ export interface CuisineCategory {
 
 export interface MeetingParticipant {
   userId: number;
-  nickname: string;
-  profileColor: AvatarVariantKey;
+  attendeeNickname: string;
+  color: AvatarVariantKey;
   selectedCategories: CuisineCategory[];
 }
 
@@ -27,7 +27,7 @@ export interface MeetingInfo {
   isClosed: boolean;
   stationName: string;
   endAt: string;
-  inviteToken?: string;
+  token: string;
 }
 export interface MeetingOverview {
   currentUserId: number;

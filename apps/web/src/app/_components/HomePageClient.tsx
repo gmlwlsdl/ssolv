@@ -34,7 +34,7 @@ const HomePageClient = ({ meetings }: HomePageClientProps) => {
               return (
                 <Link
                   key={meeting.id}
-                  href={`/meetings/${meeting.inviteToken || meeting.id}/result/overview`}
+                  href={`/meetings/${meeting.token}/result/overview`}
                   className="min-w-[320px] shrink-0 snap-center"
                 >
                   <ActiveMeetingCard meeting={meeting} />
@@ -53,10 +53,7 @@ const HomePageClient = ({ meetings }: HomePageClientProps) => {
         <div className="flex flex-col gap-3 px-5 pb-20">
           {endedMeetings.length > 0 ? (
             endedMeetings.map((meeting) => (
-              <Link
-                key={meeting.id}
-                href={`/meetings/${meeting.inviteToken || meeting.id}/history`}
-              >
+              <Link key={meeting.id} href={`/meetings/${meeting.id}/history`}>
                 <EndedMeetingCard meeting={meeting} />
               </Link>
             ))

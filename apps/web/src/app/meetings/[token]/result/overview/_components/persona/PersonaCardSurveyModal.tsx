@@ -68,9 +68,11 @@ const PersonaCardSurveyContent = ({ participant }: { participant: MeetingPartici
     <>
       {/* 상단 프로필 */}
       <div className="mb-2 flex items-center gap-3 border-neutral-200 px-1">
-        <AvatarIcon variant={participant.profileColor} />
+        <AvatarIcon variant={participant.color} />
         <div className="flex flex-col">
-          <span className="subheading-1 font-bold text-neutral-1600">{participant.nickname}</span>
+          <span className="subheading-1 font-bold text-neutral-1600">
+            {participant.attendeeNickname}
+          </span>
         </div>
       </div>
 
