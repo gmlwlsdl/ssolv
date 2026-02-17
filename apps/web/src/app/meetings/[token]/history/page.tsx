@@ -9,9 +9,8 @@ import { meetingsApi } from '@/services/meetings';
 import { MeetingOverview } from '@/services/overview';
 
 const MeetingHistoryPage = async ({ params }: { params: Promise<{ token: string }> }) => {
-  const { token } = await params;
-
-  const history: MeetingOverview = await meetingsApi.getMeetingHistory(token);
+  const { token: id } = await params;
+  const history: MeetingOverview = await meetingsApi.getMeetingHistory(Number(id));
 
   const { mainCountsArr } = buildPreferenceSummary(history?.participantList || []);
 
