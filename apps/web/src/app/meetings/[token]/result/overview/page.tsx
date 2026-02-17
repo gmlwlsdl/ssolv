@@ -18,7 +18,8 @@ interface OverviewPageProps {
 const OverviewPageContent = async ({ params }: OverviewPageProps) => {
   const queryClient = new QueryClient();
 
-  const { token } = await params;
+  const { token: rawToken } = await params;
+  const token = decodeURIComponent(rawToken);
 
   await validateTokenAndJoin(token); // TODO: 초대 토큰 검증 및 모임 참여 처리
 

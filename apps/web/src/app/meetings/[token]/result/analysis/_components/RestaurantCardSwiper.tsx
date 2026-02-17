@@ -16,7 +16,8 @@ import { RecommendedPlaceResponse } from '@/services/place';
 
 const RestaurantCardSwiper = () => {
   const params = useParams();
-  const { token } = params as { token: string };
+  const { token: rawToken } = params as { token: string };
+  const token = decodeURIComponent(rawToken);
 
   const { data: placesData } = useQuery<RecommendedPlaceResponse, ApiError>({
     ...getPlacesQueryOptions(token),

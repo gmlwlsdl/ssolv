@@ -14,7 +14,8 @@ const SurveyPage = async ({
   params: Promise<{ token: string }>;
   searchParams: Promise<{ role?: string }>;
 }) => {
-  const { token } = await params;
+  const { token: rawToken } = await params;
+  const token = decodeURIComponent(rawToken);
   const { role } = await searchParams;
 
   // todo: 쿼리스트링 -> 상태 관리

@@ -21,7 +21,8 @@ const OverviewClient = () => {
   const params = useParams();
   const searchParams = useSearchParams();
 
-  const { token } = params as { token: string };
+  const { token: rawToken } = params as { token: string };
+  const token = decodeURIComponent(rawToken);
   const created = searchParams.get('created');
 
   const { isOpen: modalOpen, handler: modalHandler } = useDisclosure();

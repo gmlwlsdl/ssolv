@@ -12,7 +12,8 @@ import { cn } from '@/lib/cn';
 
 const MenuPreferenceList = () => {
   const params = useParams();
-  const { token } = params as { token: string };
+  const { token: rawToken } = params as { token: string };
+  const token = decodeURIComponent(rawToken);
   const { data: overview } = useQuery({
     ...getOverviewQueryOptions(token),
   });

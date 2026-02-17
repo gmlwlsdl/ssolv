@@ -18,7 +18,8 @@ const addTokenToUrl = (url: string, token: string): string => {
 };
 
 const useCopyClipBoard = () => {
-  const { token } = useParams() as { token: string };
+  const { token: rawToken } = useParams() as { token: string };
+  const token = decodeURIComponent(rawToken);
   const { success: successToast, error: errorToast } = useToast();
 
   const pathname = usePathname();

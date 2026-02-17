@@ -18,7 +18,8 @@ const NAVIGATION_HEIGHT = '3.5rem';
 
 const RestaurantsClient = () => {
   const params = useParams();
-  const { token } = params as { token: string };
+  const { token: rawToken } = params as { token: string };
+  const token = decodeURIComponent(rawToken);
 
   const { pickCount } = useRestaurantPickCount();
 
