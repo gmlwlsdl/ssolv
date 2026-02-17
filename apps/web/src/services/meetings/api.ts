@@ -11,8 +11,7 @@ export const meetingsApi = {
     const response = await api.get<MeetingResponse[]>('/meetings');
     return response.map(formatMeetingResponse);
   },
-  getMeetingHistory: (meetingId: number) =>
-    api.get<MeetingOverview>(`/meetings/${meetingId}/history`),
+  getMeetingHistory: (token: string) => api.get<MeetingOverview>(`/meetings/${token}/history`),
   createMeeting: async (form: CreateMeetingRequest) => {
     const response = await api.post<CreateMeetingResponse, CreateMeetingRequest>('/meetings', form);
     return formatCreateMeetingResponse(response);
@@ -22,6 +21,5 @@ export const meetingsApi = {
     api.get<{ token: string }>(`/meetings/validate-invite`, {
       params: { token },
     }),
-  getMeetingToken: (meetingId: number) =>
-    api.get<{ token: string }>(`/meetings/${meetingId}/invite-token`),
+  getMeetingToken: (token: string) => api.get<{ token: string }>(`/meetings/${token}/invite-token`),
 } as const;

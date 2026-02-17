@@ -2,7 +2,7 @@ import {
   FoodCategoryResponse,
   UpdateAttendeeProfileRequest,
   MeetingDetailResponse,
-} from '@/app/meetings/[id]/survey/_models/types';
+} from '@/app/meetings/[token]/survey/_models/types';
 import { api } from '@/lib/api';
 
 /**
@@ -16,18 +16,18 @@ export const surveyApi = {
     }),
 
   /** 모임 상세 조회 (참가자 목록 포함) */
-  getMeetingDetail: (meetingId: number) => {
-    return api.get<MeetingDetailResponse>(`/meetings/${meetingId}`);
+  getMeetingDetail: (token: string) => {
+    return api.get<MeetingDetailResponse>(`/meetings/${token}`);
   },
 
   /** 참석자 프로필 확정 (닉네임 + 색상) */
-  putAttendeeProfile: (meetingId: number, body: UpdateAttendeeProfileRequest) => {
-    return api.put(`/meetings/${meetingId}/attendees`, body);
+  putAttendeeProfile: (token: string, body: UpdateAttendeeProfileRequest) => {
+    return api.put(`/meetings/${token}/attendees`, body);
   },
 
   /** 설문 제출 (선호 음식 선택) */
-  postSurveyResult: (meetingId: number, selectedCategoryList: number[]) => {
-    return api.post(`/meetings/${meetingId}/surveys`, {
+  postSurveyResult: (token: string, selectedCategoryList: number[]) => {
+    return api.post(`/meetings/${token}/surveys`, {
       selectedCategoryList,
     });
   },

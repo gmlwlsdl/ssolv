@@ -27,6 +27,7 @@ export interface MeetingInfo {
   isClosed: boolean;
   stationName: string;
   endAt: string;
+  inviteToken?: string;
 }
 export interface MeetingOverview {
   currentUserId: number;
@@ -34,6 +35,6 @@ export interface MeetingOverview {
   participantList: MeetingParticipant[];
 }
 
-export const getOverview = async (meetingId: number): Promise<MeetingOverview> => {
-  return api.get<MeetingOverview>(`/meetings/${meetingId}`);
+export const getOverview = async (token: string): Promise<MeetingOverview> => {
+  return api.get<MeetingOverview>(`/meetings/${token}`);
 };

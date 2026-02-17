@@ -11,12 +11,12 @@ import {
 } from '@/services/place';
 
 export const placeQueryKeys = createQueryKeys('place', {
-  getPlaces: (meetingId: number) => [meetingId],
+  getPlaces: (token: string) => [token],
 });
 
-export const getPlacesQueryOptions = (meetingId: number) => ({
-  queryKey: placeQueryKeys.getPlaces(meetingId).queryKey,
-  queryFn: () => getPlaces(meetingId),
+export const getPlacesQueryOptions = (token: string) => ({
+  queryKey: placeQueryKeys.getPlaces(token).queryKey,
+  queryFn: () => getPlaces(token),
 });
 
 interface MutationContext {
@@ -31,8 +31,8 @@ export const usePlaceLikeMutation = () => {
     mutationFn: (request) => postPlaceLike(request),
 
     // 옵티미스틱 업데이트
-    onMutate: async ({ meetingId, placeId }) => {
-      const { queryKey } = placeQueryKeys.getPlaces(meetingId);
+    onMutate: async ({ token, placeId }) => {
+      const { queryKey } = placeQueryKeys.getPlaces(token);
 
       await queryClient.cancelQueries({ queryKey });
 
@@ -66,8 +66,8 @@ export const usePlaceLikeMutation = () => {
       }
     },
 
-    onSuccess: (response, { meetingId, placeId }) => {
-      const { queryKey } = placeQueryKeys.getPlaces(meetingId);
+    onSuccess: (response, { token, placeId }) => {
+      const { queryKey } = placeQueryKeys.getPlaces(token);
 
       queryClient.setQueryData<RecommendedPlaceResponse>(queryKey, (old) => {
         if (!old) return old;
