@@ -26,8 +26,8 @@ export interface RecommendedPlaceResponse {
   items: RecommendedPlace[];
 }
 
-export const getPlaces = async (meetingId: number) => {
-  const response = await api.get<RecommendedPlaceResponse>(`/places?meetingId=${meetingId}`);
+export const getPlaces = async (token: string) => {
+  const response = await api.get<RecommendedPlaceResponse>(`/places?token=${token}`);
   return response;
 };
 
@@ -37,13 +37,13 @@ export interface PlaceLikeResponse {
   message: string;
 }
 export interface PlaceLikeRequest {
-  meetingId: number;
+  token: string;
   placeId: number;
 }
 
 export const postPlaceLike = async (request: PlaceLikeRequest) => {
   const response = await api.post<PlaceLikeResponse, null>(
-    `/meetings/${request.meetingId}/places/${request.placeId}/like`
+    `/meetings/${request.token}/places/${request.placeId}/like`
   );
   return response;
 };
