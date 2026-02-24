@@ -120,7 +120,8 @@ const MyPageClient = ({ profile }: MyPageClientProps) => {
       {/* 로그아웃 확인 모달 */}
       <ConfirmModal
         isOpen={showLogoutModal}
-        title="로그아웃 하시겠습니까?"
+        title="로그아웃 하시겠어요?"
+        description={'로그아웃해도 해당 계정의 데이터는\n계속 저장되어 있습니다.'}
         confirmText="로그아웃"
         cancelText="취소"
         onConfirm={handleLogout}
@@ -130,7 +131,8 @@ const MyPageClient = ({ profile }: MyPageClientProps) => {
       {/* 회원탈퇴 확인 모달 */}
       <ConfirmModal
         isOpen={showWithdrawModal}
-        title={'정말 탈퇴하시겠습니까?\n모든 데이터가 삭제됩니다.'}
+        title="정말 탈퇴하시겠어요?"
+        description={'탈퇴 버튼 선택 시\n계정은 삭제되며 복구되지 않습니다.'}
         confirmText="탈퇴"
         cancelText="취소"
         onConfirm={handleWithdraw}
