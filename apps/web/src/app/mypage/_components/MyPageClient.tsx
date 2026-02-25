@@ -4,11 +4,10 @@ import { useState } from 'react';
 
 import TopNavigation from '@/components/layout/TopNavigation';
 import { ConfirmModal } from '@/components/ui/Modal';
+import Toggle from '@/components/ui/Toggle';
 import { UserProfile } from '@/data/models/member';
 import { useDisclosure } from '@/hooks/useDisclosure';
 import { logout, withdraw } from '@/services/auth';
-
-import Toggle from './Toggle';
 
 const APP_VERSION = 'v1.0.0';
 const SERVICE_EMAIL = 'ssolvofficial@gmail.com';
@@ -23,6 +22,7 @@ interface MyPageClientProps {
  * @description 사용자 프로필, 알림 설정, 로그아웃, 회원탈퇴 등을 처리합니다.
  */
 const MyPageClient = ({ profile }: MyPageClientProps) => {
+  // TODO: 알림 설정 API 연동 필요 (초기값 서버에서 조회, 변경 시 PATCH 요청)
   const [notificationEnabled, setNotificationEnabled] = useState(true);
   const { isOpen: showLogoutModal, handler: logoutModalHandler } = useDisclosure();
   const { isOpen: showWithdrawModal, handler: withdrawModalHandler } = useDisclosure();
