@@ -102,11 +102,6 @@ const MyPageClient = ({ profile }: MyPageClientProps) => {
           </div>
         </button>
 
-        {/* 구분선 */}
-        <div className="px-5">
-          <hr className="border-neutral-300" />
-        </div>
-
         {/* 회원탈퇴 */}
         <button
           type="button"
