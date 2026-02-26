@@ -21,5 +21,4 @@ export const meetingsApi = {
     api.get<{ token: string }>(`/meetings/validate-invite`, {
       params: { token },
     }),
-  getMeetingToken: (token: string) => api.get<{ token: string }>(`/meetings/${token}/invite-token`),
 } as const;
