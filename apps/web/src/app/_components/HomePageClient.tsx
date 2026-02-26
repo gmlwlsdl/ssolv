@@ -11,7 +11,6 @@ import {
 import { useMeetingsByStatus } from '@/app/_hooks/useMeetingsByStatus';
 import { Meeting } from '@/app/_models/types';
 import { cn } from '@/lib/cn';
-
 interface HomePageClientProps {
   meetings: Meeting[];
 }
@@ -35,8 +34,7 @@ const HomePageClient = ({ meetings }: HomePageClientProps) => {
               return (
                 <Link
                   key={meeting.id}
-                  // TODO: 모임현황 일관된 경로로 변경 필요
-                  href={`/meetings/${meeting.id}/result/overview`}
+                  href={`/meetings/${meeting.token}/result/overview`}
                   className="min-w-[320px] shrink-0 snap-center"
                 >
                   <ActiveMeetingCard meeting={meeting} />

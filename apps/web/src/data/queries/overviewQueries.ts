@@ -3,10 +3,10 @@ import { createQueryKeys } from '@lukemorales/query-key-factory';
 import { getOverview } from '@/services/overview';
 
 export const overviewQueryKeys = createQueryKeys('overview', {
-  getOverview: (eventId: number) => [eventId],
+  getOverview: (token: string) => [token],
 });
 
-export const getOverviewQueryOptions = (eventId: number) => ({
-  queryKey: overviewQueryKeys.getOverview(eventId).queryKey,
-  queryFn: () => getOverview(eventId),
+export const getOverviewQueryOptions = (token: string) => ({
+  queryKey: overviewQueryKeys.getOverview(token).queryKey,
+  queryFn: () => getOverview(token),
 });

@@ -72,3 +72,4 @@ next-env.d.ts
 # .agent
 .agent
 AGENTS.md
+claude.local.md

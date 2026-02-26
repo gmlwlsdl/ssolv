@@ -37,8 +37,8 @@ const CreatePageClient = () => {
         stationId: meetingForm.formData.station.id,
         endAt: `${meetingForm.formData.date}T${meetingForm.formData.time}:00:00`,
       };
-      const { id, token } = await meetingsApi.createMeeting(formattedForm);
-      router.replace(`/meetings/${id}/result/overview?token=${token}&created=1`);
+      const { token } = await meetingsApi.createMeeting(formattedForm);
+      router.replace(`/meetings/${token}/result/overview?created=1`);
     } catch (error) {
       console.error('모임 생성 실패:', error);
       // TODO: 모임 생성 실패 에러 처리

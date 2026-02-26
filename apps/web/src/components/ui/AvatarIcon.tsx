@@ -5,52 +5,41 @@ import { cn } from '@/lib/cn';
 
 const IMAGE_PATH = '/images/avatar';
 
-type AvatarVariantMeta = { bg: string; iconSrc: string };
+type AvatarVariantMeta = { iconSrc: string };
 
 const AVATAR_VARIANTS: Record<AvatarVariantKey, AvatarVariantMeta> = {
   none: {
-    bg: 'bg-yellow-400',
     iconSrc: `${IMAGE_PATH}/default.svg`,
   },
   default: {
-    bg: 'bg-yellow-400',
     iconSrc: `${IMAGE_PATH}/default.svg`,
   },
-  strawberry: {
-    bg: 'bg-[#FFBDBF]',
-    iconSrc: `${IMAGE_PATH}/strawberry.svg`,
+  banana: {
+    iconSrc: `${IMAGE_PATH}/banana.svg`,
   },
-  matcha: {
-    bg: 'bg-[#6ADE81]',
-    iconSrc: `${IMAGE_PATH}/matcha.svg`,
+  broccoli: {
+    iconSrc: `${IMAGE_PATH}/broccoli.svg`,
   },
-  orange: {
-    bg: 'bg-orange-300',
-    iconSrc: `${IMAGE_PATH}/orange.svg`,
+  carrot: {
+    iconSrc: `${IMAGE_PATH}/carrot.svg`,
   },
-  grape: {
-    bg: 'bg-[#D3A2F1]',
-    iconSrc: `${IMAGE_PATH}/grape.svg`,
+  lemon: {
+    iconSrc: `${IMAGE_PATH}/lemon.svg`,
   },
-  chocolate: {
-    bg: 'bg-[#9B7E6B]',
-    iconSrc: `${IMAGE_PATH}/chocolate.svg`,
+  mushroom: {
+    iconSrc: `${IMAGE_PATH}/mushroom.svg`,
   },
-  milk: {
-    bg: 'bg-[#D7ECFF]',
-    iconSrc: `${IMAGE_PATH}/milk.svg`,
+  paprika: {
+    iconSrc: `${IMAGE_PATH}/paprika.svg`,
   },
-  mint: {
-    bg: 'bg-[#ABEBE2]',
-    iconSrc: `${IMAGE_PATH}/mint.svg`,
+  pear: {
+    iconSrc: `${IMAGE_PATH}/pear.svg`,
   },
-  sweetPotato: {
-    bg: 'bg-[#AC7E94]',
-    iconSrc: `${IMAGE_PATH}/sweetPotato.svg`,
+  tomato: {
+    iconSrc: `${IMAGE_PATH}/tomato.svg`,
   },
-  pistachio: {
-    bg: 'bg-[#A8D39E]',
-    iconSrc: `${IMAGE_PATH}/pistachio.svg`,
+  turnip: {
+    iconSrc: `${IMAGE_PATH}/turnip.svg`,
   },
 } as const;
 
@@ -83,16 +72,13 @@ const AvatarIcon = ({ variant, className }: AvatarIconProps) => {
   const resolvedVariant = resolveVariant(variant);
   const iconSrc = AVATAR_VARIANTS[resolvedVariant];
   return (
-    <div
-      className={cn('flex h-12 w-12 items-center justify-center rounded-xl', iconSrc.bg, className)}
-    >
-      <div className="relative h-2/3 w-2/3">
+    <div className={cn('flex h-12 w-12 items-center justify-center rounded-xl', className)}>
+      <div className="relative h-full w-full">
         <Image
           src={iconSrc.iconSrc}
           alt={resolvedVariant}
-          sizes="60px"
           fill
-          className="object-contain"
+          className="rounded-xl object-contain"
         />
       </div>
     </div>
