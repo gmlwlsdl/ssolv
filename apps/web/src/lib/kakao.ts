@@ -31,8 +31,8 @@ export const shareKakaoLink = (shareUrl?: string) => {
     objectType: 'feed',
     content: {
       title: '식당 추천을 위한 설문이 시작됐어요!',
-      description: '모무찌에서 먹고 싶은 메뉴를 어필해보세요.',
-      imageUrl: `${window.location.origin}/images/momuzzi-kakao.png`,
+      description: '솔브에서 먹고 싶은 메뉴를 어필해보세요.',
+      imageUrl: `${window.location.origin}/og-image-invite.png`,
       imageWidth: 1200,
       imageHeight: 604,
       link: {
