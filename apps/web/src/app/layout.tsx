@@ -15,7 +15,7 @@ import './globals.css';
 const APP_NAME = 'Solv';
 const APP_TITLE = '모두의 취향을 모은 식당 추천 - Solv';
 const APP_DESCRIPTION = '결정은 가볍게, 취향은 하나로';
-const APP_URL = 'https://www.ssolv.site';
+const APP_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const OG_IMAGE_URL = `${APP_URL}/og-image-represent.png`;
 
 export const metadata: Metadata = {
