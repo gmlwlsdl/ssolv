@@ -7,13 +7,15 @@ import { cn } from '@/lib/cn';
 const PROVIDER_CONFIG = {
   kakao: {
     text: '카카오톡으로 시작하기',
-    icon: '/icons/kakao-icon.svg',
+    icon: '/images/brand/kakao.svg',
+    iconAlt: '카카오 로고',
     className: 'bg-yellow-400 text-neutral-1600',
     apiPath: '/api/auth/kakao',
   },
   apple: {
     text: 'Apple로 계속하기',
-    icon: '/icons/apple-icon.svg',
+    icon: '/images/brand/apple.svg',
+    iconAlt: 'Apple 로고',
     className: 'bg-black text-white',
     apiPath: '/api/auth/apple',
   },
@@ -63,7 +65,7 @@ const LoginButton = ({ provider = 'kakao', redirectTo }: LoginButtonProps) => {
         config.className
       )}
     >
-      <Image src={config.icon} alt={`${provider} 아이콘`} width={24} height={24} />
+      <Image src={config.icon} alt={config.iconAlt} width={24} height={24} />
       {config.text}
     </button>
   );

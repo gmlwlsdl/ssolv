@@ -34,11 +34,12 @@ const HomePageLayout = ({ children, errorCode }: HomePageLayoutProps) => {
         isOpen={showErrorModal}
         title={error?.title ?? ''}
         message={error?.message ?? ''}
+        illustration={error?.illustration}
         onClose={errorModalHandler.close}
       />
 
       <header className="flex items-center justify-between px-5 pt-9 pb-2 select-none">
-        <Image src="/images/ssolv-wordmark.svg" alt="솔브 작은 로고" width={81} height={32} />
+        <Image src="/images/brand/solv-wordmark.svg" alt="솔브 작은 로고" width={96} height={32} />
         <Link href="/mypage" aria-label="마이페이지">
           <Image src="/icons/profile.svg" alt="프로필 아이콘" width={32} height={32} />
         </Link>

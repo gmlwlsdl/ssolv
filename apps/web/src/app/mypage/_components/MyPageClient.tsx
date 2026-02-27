@@ -3,7 +3,7 @@
 import { useState } from 'react';
 
 import TopNavigation from '@/components/layout/TopNavigation';
-import { ConfirmModal } from '@/components/ui/Modal';
+import { ConfirmModal, ErrorModal } from '@/components/ui/Modal';
 import Toggle from '@/components/ui/Toggle';
 import { UserProfile } from '@/data/models/member';
 import { useDisclosure } from '@/hooks/useDisclosure';
@@ -26,6 +26,7 @@ const MyPageClient = ({ profile }: MyPageClientProps) => {
   const [notificationEnabled, setNotificationEnabled] = useState(true);
   const { isOpen: showLogoutModal, handler: logoutModalHandler } = useDisclosure();
   const { isOpen: showWithdrawModal, handler: withdrawModalHandler } = useDisclosure();
+  const { isOpen: showWithdrawErrorModal, handler: withdrawErrorModalHandler } = useDisclosure();
 
   const handleLogout = async () => {
     logoutModalHandler.close();
@@ -37,7 +38,7 @@ const MyPageClient = ({ profile }: MyPageClientProps) => {
     try {
       await withdraw();
     } catch {
-      alert('탈퇴 처리 중 오류가 발생했습니다.');
+      withdrawErrorModalHandler.open();
     }
   };
 
@@ -132,6 +133,15 @@ const MyPageClient = ({ profile }: MyPageClientProps) => {
         cancelText="취소"
         onConfirm={handleWithdraw}
         onCancel={withdrawModalHandler.close}
+      />
+
+      {/* 회원탈퇴 실패 모달 */}
+      <ErrorModal
+        isOpen={showWithdrawErrorModal}
+        title="탈퇴 처리 중 오류가 발생했어요"
+        message="잠시 후 다시 시도해주세요."
+        illustration="/images/modal/modal-error.svg"
+        onClose={withdrawErrorModalHandler.close}
       />
     </div>
   );
