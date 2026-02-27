@@ -16,7 +16,6 @@
     "@use-funnel/browser": "^0.0.15",
     "@use-funnel/core": "^0.0.12",
     "@use-funnel/next": "^0.0.21",
-    "canvas-confetti": "^1.9.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "dayjs": "^1.11.18",
@@ -32,7 +31,6 @@
   "devDependencies": {
     "@next/eslint-plugin-next": "^15.5.2",
     "@tailwindcss/postcss": "^4.1.12",
-    "@types/canvas-confetti": "^1.9.0",
     "@types/node": "^22.18.0",
     "@types/react": "^19",
     "@types/react-dom": "^19",
