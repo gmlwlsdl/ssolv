@@ -16,13 +16,13 @@ type ModalCase = {
 
 const CASES: ModalCase[] = [
   {
-    label: 'Confirm only',
+    label: '확인만',
     title: '확인 버튼만 있는 모달',
     description: '취소 없이 확인만 가능한 케이스입니다.',
     hasCancel: false,
   },
   {
-    label: 'Confirm + Cancel',
+    label: '확인 + 취소',
     title: '정말 나가시겠어요?',
     description: '변경사항이 저장되지 않을 수 있습니다.',
     confirmText: '나가기',
@@ -30,14 +30,14 @@ const CASES: ModalCase[] = [
     hasCancel: true,
   },
   {
-    label: 'Logout',
+    label: '로그아웃',
     title: '로그아웃 하시겠어요?',
     confirmText: '로그아웃',
     cancelText: '취소',
     hasCancel: true,
   },
   {
-    label: 'Withdraw',
+    label: '회원탈퇴',
     title: '정말 탈퇴하시겠어요?',
     description: '탈퇴 시 모든 데이터가 삭제되며\n복구할 수 없습니다.',
     confirmText: '탈퇴하기',
@@ -45,7 +45,7 @@ const CASES: ModalCase[] = [
     hasCancel: true,
   },
   {
-    label: 'Create Cancel',
+    label: '생성 취소',
     title: '모임 생성을 취소할까요?',
     description: '입력한 정보가 모두 사라져요.',
     confirmText: '취소하기',

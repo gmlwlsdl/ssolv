@@ -35,7 +35,7 @@ const ChipGroupStoryPage = () => {
       <div className="flex flex-col gap-10">
         {/* Empty state */}
         <div>
-          <p className="mb-3 label-1 font-semibold text-neutral-700">Default (empty)</p>
+          <p className="mb-3 label-1 font-semibold text-neutral-700">기본 (선택 없음)</p>
           <ChipGroupMultiSelect
             options={CUISINE_OPTIONS}
             selectedIds={selectedIds}
@@ -50,7 +50,7 @@ const ChipGroupStoryPage = () => {
         {/* Pre-selected */}
         <div>
           <p className="mb-3 label-1 font-semibold text-neutral-700">
-            With pre-selection (unselectedVariant: survey)
+            사전 선택 포함 (unselectedVariant: survey)
           </p>
           <ChipGroupMultiSelect
             options={CUISINE_OPTIONS}
