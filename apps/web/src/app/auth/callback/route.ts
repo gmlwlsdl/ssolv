@@ -34,6 +34,23 @@ const setAuthCookies = async (accessToken: string, refreshToken: string) => {
   });
 };
 
+/** 로그인 응답에서 사용자 프로필 정보를 쿠키에 저장 */
+const setUserProfileCookie = async (profile: {
+  email: string;
+  nickname: string;
+  profileImage: string;
+}) => {
+  const cookieStore = await cookies();
+
+  cookieStore.set('userProfile', JSON.stringify(profile), {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    path: '/',
+    maxAge: 604800, // refreshToken과 동일한 수명
+  });
+};
+
 // 에러 리다이렉트 헬퍼
 const redirectToLogin = (error: string) => {
   return NextResponse.redirect(`${BASE_URL}/login?error=${encodeURIComponent(error)}`, 303);
@@ -81,7 +98,7 @@ export const GET = async (request: NextRequest) => {
       return redirectToLogin('backend_error');
     }
 
-    const { data: { accessToken, refreshToken } = {} } = await response.json();
+    const { data: { accessToken, refreshToken, userProfile } = {} } = await response.json();
 
     if (!accessToken || !refreshToken) {
       console.error('토큰이 응답에 포함되지 않았습니다');
@@ -89,6 +106,9 @@ export const GET = async (request: NextRequest) => {
     }
 
     await setAuthCookies(accessToken, refreshToken);
+    if (userProfile) {
+      await setUserProfileCookie(userProfile);
+    }
     return redirectToDestination(state);
   } catch (error) {
     console.error('카카오 로그인 처리 중 에러:', error);
@@ -132,7 +152,7 @@ export const POST = async (request: NextRequest) => {
       return redirectToLogin(`backend_error_${response.status}`);
     }
 
-    const { data: { accessToken, refreshToken } = {} } = await response.json();
+    const { data: { accessToken, refreshToken, userProfile } = {} } = await response.json();
 
     if (!accessToken || !refreshToken) {
       console.error('토큰이 응답에 포함되지 않았습니다');
@@ -140,6 +160,9 @@ export const POST = async (request: NextRequest) => {
     }
 
     await setAuthCookies(accessToken, refreshToken);
+    if (userProfile) {
+      await setUserProfileCookie(userProfile);
+    }
     return redirectToDestination(state);
   } catch (error) {
     console.error('애플 로그인 처리 중 에러:', error);

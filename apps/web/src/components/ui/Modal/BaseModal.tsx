@@ -24,7 +24,7 @@ const BaseModal = ({
       <div role="presentation" className="absolute inset-0 bg-black/60" onClick={onClose} />
       <div
         className={cn(
-          'relative flex w-full max-w-[310px] flex-col rounded-2xl bg-white p-4 pt-6',
+          'relative flex w-full max-w-[320px] flex-col rounded-2xl bg-white p-4 pt-6',
           className
         )}
       >
