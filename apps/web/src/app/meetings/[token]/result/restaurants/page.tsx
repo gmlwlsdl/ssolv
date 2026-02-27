@@ -9,7 +9,8 @@ interface RestaurantsPageProps {
 }
 
 const RestaurantsPage = async ({ params }: RestaurantsPageProps) => {
-  const { token } = await params;
+  const { token: rawToken } = await params;
+  const token = decodeURIComponent(rawToken);
 
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery({
