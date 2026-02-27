@@ -12,17 +12,17 @@ import '@mantine/core/styles.layer.css';
 import '@mantine/dates/styles.css';
 import './globals.css';
 
-const APP_NAME = 'solv';
-const APP_TITLE = '식당 추천을 위한 설문이 시작됐어요!';
-const APP_DESCRIPTION = '솔브에서 먹고 싶은 메뉴를 어필해보세요.';
-const APP_URL = 'https://www.ssolv.site';
-const OG_IMAGE_URL = `${APP_URL}/og-image.png`;
+const APP_NAME = 'Solv';
+const APP_TITLE = '모두의 취향을 모은 식당 추천 - Solv';
+const APP_DESCRIPTION = '결정은 가볍게, 취향은 하나로';
+const APP_URL = process.env.NEXT_PUBLIC_BASE_URL;
+const OG_IMAGE_URL = `${APP_URL}/og-image-represent.png`;
 
 export const metadata: Metadata = {
   title: APP_TITLE,
   description: APP_DESCRIPTION,
   keywords: ['식당', '추천', '설문', '맛집', '음식'],
-  authors: [{ name: 'ssolv' }],
+  authors: [{ name: 'solv' }],
 
   icons: {
     icon: '/favicon.png',
@@ -65,7 +65,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
     <html lang="ko" suppressHydrationWarning>
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-      <meta name="apple-mobile-web-app-title" content="모무찌" />
+      <meta name="apple-mobile-web-app-title" content="Solv" />
       <meta name="theme-color" content="#e03900" />
       <link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png" />
       <link rel="manifest" href="/manifest.json" />
