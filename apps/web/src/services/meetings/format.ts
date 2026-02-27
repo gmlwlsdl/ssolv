@@ -8,15 +8,13 @@ export const formatMeetingResponse = (response: MeetingResponse): Meeting => ({
   participantList: response.participantList,
 });
 
-export const formatCreateMeetingResponse = (
-  response: CreateMeetingResponse
-): { id: number; token: string | null } => {
-  const { id, validateTokenUrl } = response;
+export const formatCreateMeetingResponse = (response: CreateMeetingResponse): { token: string } => {
+  const { validateTokenUrl } = response;
   const token = new URL(validateTokenUrl).searchParams.get('token');
 
   if (!token) {
     throw new Error('validateTokenUrl에서 방 토큰을 찾을 수 없음');
   }
 
-  return { id, token };
+  return { token };
 };

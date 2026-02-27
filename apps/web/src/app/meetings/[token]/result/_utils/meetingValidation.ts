@@ -7,16 +7,13 @@ import { isAccessDenied, isAlreadyJoined } from '@/utils/errorGuards';
 /**
  * 초대 토큰 검증 및 모임 참여 처리
  *
- * @param eventId - 이벤트(모임) ID
  * @param token - 초대 토큰
  * @throws 진입 불가능한 에러인 경우 리다이렉트
  *
  * @example
  * ```ts
  * // 레이아웃이나 페이지에서 사용
- * if (token) {
- *   await validateTokenAndJoin(eventId, token);
- * }
+ * await validateTokenAndJoin(token);
  * ```
  */
 export const validateTokenAndJoin = async (token: string): Promise<void> => {
