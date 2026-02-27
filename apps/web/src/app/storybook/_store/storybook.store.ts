@@ -9,6 +9,7 @@ interface StorybookState {
   setProps: (props: Record<string, unknown>) => void;
   setProp: (key: string, value: unknown) => void;
   resetProps: () => void;
+  clearStory: () => void;
 }
 
 const buildDefaultProps = (config: StoryConfig): Record<string, unknown> =>
@@ -29,4 +30,6 @@ export const useStorybookStore = create<StorybookState>((set, get) => ({
     const { currentStory } = get();
     if (currentStory) set({ currentProps: buildDefaultProps(currentStory) });
   },
+
+  clearStory: () => set({ currentStory: null, currentProps: {} }),
 }));

@@ -27,7 +27,9 @@ const VariantCard = ({ variant, config }: { variant: VariantDef; config: StoryCo
           BG_CLASSES[bg]
         )}
       >
-        <Component {...variant.props} />
+        <div className="w-full">
+          <Component {...variant.props} />
+        </div>
       </div>
       <p className="text-center label-2 text-neutral-600">{variant.label}</p>
     </div>
@@ -40,6 +42,7 @@ interface StorybookPreviewProps {
 
 const StorybookPreview = ({ config }: StorybookPreviewProps) => {
   const currentProps = useStorybookStore((s) => s.currentProps);
+  const isCurrentStory = useStorybookStore((s) => s.currentStory?.title === config.title);
   const [playgroundBg, setPlaygroundBg] = useState<BgMode>('white');
   const Component = config.component;
 
@@ -63,7 +66,7 @@ const StorybookPreview = ({ config }: StorybookPreviewProps) => {
         </section>
       )}
 
-      {Object.keys(config.controls).length > 0 && (
+      {isCurrentStory && Object.keys(config.controls).length > 0 && (
         <section>
           <div className="mb-4 flex items-center justify-between">
             <h2 className="label-1 font-semibold tracking-wide text-neutral-600 uppercase">
@@ -92,7 +95,9 @@ const StorybookPreview = ({ config }: StorybookPreviewProps) => {
               BG_CLASSES[playgroundBg]
             )}
           >
-            <Component {...currentProps} />
+            <div className="w-full">
+              <Component {...currentProps} />
+            </div>
           </div>
         </section>
       )}

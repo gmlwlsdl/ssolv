@@ -93,15 +93,7 @@ const ControlInput = ({
 const StorybookControls = () => {
   const { currentStory, currentProps, setProp, resetProps } = useStorybookStore();
 
-  if (!currentStory || Object.keys(currentStory.controls).length === 0) {
-    return (
-      <div className="flex h-full items-center justify-center p-4">
-        <p className="text-center label-2 text-neutral-500">
-          이 페이지에는 조작 가능한 Controls가 없어요.
-        </p>
-      </div>
-    );
-  }
+  if (!currentStory || Object.keys(currentStory.controls).length === 0) return null;
 
   const childrenVal = currentProps['children'];
   const snippet = Object.entries(currentProps)

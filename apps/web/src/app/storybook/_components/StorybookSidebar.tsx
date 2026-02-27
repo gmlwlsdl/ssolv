@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+import { useStorybookStore } from '@/app/storybook/_store/storybook.store';
 import { cn } from '@/lib/cn';
 
 const NAV = [
@@ -51,6 +52,7 @@ const NAV = [
 
 const StorybookSidebar = () => {
   const pathname = usePathname();
+  const clearStory = useStorybookStore((s) => s.clearStory);
 
   return (
     <aside className="no-scrollbar h-full overflow-y-auto border-r border-neutral-300 bg-neutral-100 py-6">
@@ -69,6 +71,7 @@ const StorybookSidebar = () => {
                 <li key={href}>
                   <Link
                     href={href}
+                    onClick={clearStory}
                     className={cn(
                       'block rounded-lg px-2 py-1.5 label-2 font-medium transition-colors',
                       pathname === href
