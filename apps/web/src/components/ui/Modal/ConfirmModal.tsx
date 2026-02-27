@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import Button from '@/components/ui/Button';
 import BaseModal from '@/components/ui/Modal/BaseModal';
 import { cn } from '@/lib/cn';
@@ -6,22 +8,22 @@ interface ConfirmModalProps {
   isOpen: boolean;
   title: string;
   description?: string;
+  illustration?: string;
   confirmText?: string;
   cancelText?: string;
   onConfirm: () => void;
   onCancel?: () => void;
-  icon?: React.ReactNode;
 }
 
 const ConfirmModal = ({
   isOpen,
   title,
   description,
+  illustration,
   confirmText = '네',
   cancelText = '아니오',
   onConfirm,
   onCancel,
-  icon,
 }: ConfirmModalProps) => {
   const textAndButtons = (
     <div className="flex flex-col gap-6">
@@ -47,9 +49,9 @@ const ConfirmModal = ({
 
   return (
     <BaseModal isOpen={isOpen} onClose={onCancel ?? onConfirm}>
-      {icon ? (
+      {illustration ? (
         <div className="flex flex-col gap-4">
-          <div className="flex justify-center">{icon}</div>
+          <Image src={illustration} alt="" width={100} height={100} className="mx-auto" />
           {textAndButtons}
         </div>
       ) : (
