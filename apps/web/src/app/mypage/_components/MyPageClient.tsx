@@ -1,13 +1,17 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
+import { useQuery } from '@tanstack/react-query';
 
 import TopNavigation from '@/components/layout/TopNavigation';
 import { ConfirmModal } from '@/components/ui/Modal';
 import Toggle from '@/components/ui/Toggle';
 import { UserProfile } from '@/data/models/member';
+import { getNotificationSettingQueryOptions } from '@/data/queries/notificationQueries';
 import { useDisclosure } from '@/hooks/useDisclosure';
 import { logout, withdraw } from '@/services/auth';
+import { updateNotificationSetting } from '@/services/notification';
 
 const APP_VERSION = 'v1.0.0';
 const SERVICE_EMAIL = 'ssolvofficial@gmail.com';
@@ -22,10 +26,38 @@ interface MyPageClientProps {
  * @description 사용자 프로필, 알림 설정, 로그아웃, 회원탈퇴 등을 처리합니다.
  */
 const MyPageClient = ({ profile }: MyPageClientProps) => {
-  // TODO: 알림 설정 API 연동 필요 (초기값 서버에서 조회, 변경 시 PATCH 요청)
   const [notificationEnabled, setNotificationEnabled] = useState(true);
   const { isOpen: showLogoutModal, handler: logoutModalHandler } = useDisclosure();
   const { isOpen: showWithdrawModal, handler: withdrawModalHandler } = useDisclosure();
+
+  // TODO: 백엔드 완료 시 enabled: false 제거
+  const { data: notificationSetting } = useQuery({
+    ...getNotificationSettingQueryOptions(),
+    enabled: false,
+  });
+
+  useEffect(() => {
+    if (notificationSetting !== undefined) {
+      setNotificationEnabled(notificationSetting.notificationEnabled);
+    }
+  }, [notificationSetting]);
+
+  /**
+   * 알림 설정 토글 핸들러
+   *
+   * @description 낙관적 업데이트 후 API 호출, 실패 시 롤백합니다.
+   * @param next - 변경할 알림 활성화 여부
+   */
+  const handleNotificationToggle = async (next: boolean) => {
+    const prev = notificationEnabled;
+    setNotificationEnabled(next);
+    try {
+      await updateNotificationSetting({ notificationEnabled: next });
+    } catch (error) {
+      setNotificationEnabled(prev);
+      console.error('알림 설정 변경 실패:', error instanceof Error ? error.message : error);
+    }
+  };
 
   const handleLogout = async () => {
     logoutModalHandler.close();
@@ -69,7 +101,7 @@ const MyPageClient = ({ profile }: MyPageClientProps) => {
             <span className="body-3 font-medium text-neutral-1500">알림 설정</span>
             <Toggle
               checked={notificationEnabled}
-              onChange={setNotificationEnabled}
+              onChange={handleNotificationToggle}
               ariaLabel="알림 설정 토글"
             />
           </div>
