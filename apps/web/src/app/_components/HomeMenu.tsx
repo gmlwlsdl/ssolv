@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 
 import { ActionButton } from '@/app/_components';
 import FloatingActionButton from '@/app/_components/FloatingActionButton';
-import ComingSoonModal from '@/components/ui/Modal/ComingSoonModal';
+import { ConfirmModal } from '@/components/ui/Modal';
 import { useDisclosure } from '@/hooks/useDisclosure';
 
 interface HomeMenuProps {
@@ -46,7 +46,7 @@ const HomeMenu = ({ isOpen, onClose, onToggle }: HomeMenuProps) => {
             onClick={handleCreateMeeting}
           />
           <ActionButton
-            icon="/icons/green-arrow.svg"
+            icon="/icons/arrow-green.svg"
             label="초대받은 모임 참여하기"
             onClick={handleComingSoon}
           />
@@ -58,7 +58,14 @@ const HomeMenu = ({ isOpen, onClose, onToggle }: HomeMenuProps) => {
         </div>
       )}
       <FloatingActionButton isOpen={isOpen} onClick={onToggle} />
-      <ComingSoonModal isOpen={showComingSoonMadal} onClose={comingSoonModalHandler.close} />
+      <ConfirmModal
+        isOpen={showComingSoonMadal}
+        title="해당 서비스는 준비중이에요!"
+        description="많은 기대 부탁드립니다!"
+        illustration="/images/modal/modal-coming-soon.svg"
+        confirmText="확인"
+        onConfirm={comingSoonModalHandler.close}
+      />
     </>
   );
 };

@@ -52,9 +52,10 @@ const middleware = async (req: NextRequest) => {
     }
 
     if (!accessToken) {
-      const redirectTo = `${pathname}${req.nextUrl.search}`;
       const loginUrl = new URL('/login', req.url);
-      loginUrl.searchParams.set('redirectTo', redirectTo);
+      if (pathname !== '/') {
+        loginUrl.searchParams.set('redirectTo', `${pathname}${req.nextUrl.search}`);
+      }
       return NextResponse.redirect(loginUrl);
     }
   }

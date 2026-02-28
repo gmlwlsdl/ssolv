@@ -9,7 +9,7 @@ export const CUISINE_MAP = {
 
 export type CuisineId = keyof typeof CUISINE_MAP;
 
-const BASE_URL = '/images/menu';
+const BASE_URL = '/icons/food';
 
 export const getCuisineImageSrc = (id: number): string => {
   if (!(id in CUISINE_MAP)) {

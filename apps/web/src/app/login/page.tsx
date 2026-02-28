@@ -10,10 +10,10 @@ const LoginPage = async ({ searchParams }: { searchParams: Promise<{ redirectTo?
       <div className="flex w-full max-w-[375px] flex-1 items-center justify-center">
         <main className="flex flex-col items-center gap-4">
           <Image
-            src={'/images/ssolv-wordmark.svg'}
-            alt="Ssolv 워드마크 아이콘"
-            width={183}
-            height={68}
+            src={'/images/brand/solv-wordmark.svg'}
+            alt="Solv 워드마크 아이콘"
+            width={219}
+            height={73}
             priority
           />
           <p className="body-3 text-neutral-1200">바로 추천받는 우리 모임의 식당</p>
