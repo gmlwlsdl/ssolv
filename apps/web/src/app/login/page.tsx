@@ -1,9 +1,14 @@
 import Image from 'next/image';
 
 import LoginButton from '@/app/login/_components/LoginButton';
+import LoginErrorModal from '@/app/login/_components/LoginErrorModal';
 
-const LoginPage = async ({ searchParams }: { searchParams: Promise<{ redirectTo?: string }> }) => {
-  const { redirectTo } = await searchParams;
+const LoginPage = async ({
+  searchParams,
+}: {
+  searchParams: Promise<{ redirectTo?: string; error?: string }>;
+}) => {
+  const { redirectTo, error } = await searchParams;
 
   return (
     <div className="flex h-[100dvh] w-full flex-col items-center gathering-card">
@@ -24,6 +29,8 @@ const LoginPage = async ({ searchParams }: { searchParams: Promise<{ redirectTo?
         <LoginButton provider="kakao" redirectTo={redirectTo} />
         <LoginButton provider="apple" redirectTo={redirectTo} />
       </div>
+
+      {error && <LoginErrorModal errorType={error} />}
     </div>
   );
 };
