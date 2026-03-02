@@ -113,6 +113,16 @@ const handleLoginResponse = async (response: Response, state: string | null, pro
   if (userProfile) {
     await setUserProfileCookie(userProfile);
   }
+
+  const cookieStore = await cookies();
+  cookieStore.set('lastLoginProvider', provider.toLowerCase(), {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    path: '/',
+    maxAge: 60 * 60 * 24 * 30, // 30일
+  });
+
   return redirectToDestination(state);
 };
 

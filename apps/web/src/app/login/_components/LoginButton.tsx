@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import Image from 'next/image';
 
+import Badge from '@/components/ui/Badge';
 import { ErrorModal } from '@/components/ui/Modal';
 import { LOGIN_ERROR_TYPES } from '@/data/constants/errorCodes';
 import { getErrorConfig } from '@/data/constants/errorConfig';
@@ -27,14 +28,15 @@ const PROVIDER_CONFIG = {
   },
 } as const;
 
-type Provider = keyof typeof PROVIDER_CONFIG;
+export type Provider = keyof typeof PROVIDER_CONFIG;
 
 interface LoginButtonProps {
   provider?: Provider;
   redirectTo?: string | null;
+  isLastUsed?: boolean;
 }
 
-const LoginButton = ({ provider = 'kakao', redirectTo }: LoginButtonProps) => {
+const LoginButton = ({ provider = 'kakao', redirectTo, isLastUsed = false }: LoginButtonProps) => {
   const config = PROVIDER_CONFIG[provider];
   const [isLoading, setIsLoading] = useState(false);
   const { isOpen: showError, handler: errorHandler } = useDisclosure();
@@ -72,20 +74,27 @@ const LoginButton = ({ provider = 'kakao', redirectTo }: LoginButtonProps) => {
 
   return (
     <>
-      <button
-        type="button"
-        aria-label={config.text}
-        onClick={handleLogin}
-        disabled={isLoading}
-        className={cn(
-          'flex h-[62px] w-full cursor-pointer items-center justify-center gap-2 rounded-[14px] p-[10px] body-3 font-semibold transition-all duration-200',
-          config.className,
-          isLoading && 'cursor-not-allowed opacity-60'
+      <div className="relative">
+        {isLastUsed && (
+          <div className="absolute -top-2.5 left-3 z-10">
+            <Badge variant="highlight">최근 로그인</Badge>
+          </div>
         )}
-      >
-        <Image src={config.icon} alt={config.iconAlt} width={24} height={24} />
-        {isLoading ? '로그인 중...' : config.text}
-      </button>
+        <button
+          type="button"
+          aria-label={config.text}
+          onClick={handleLogin}
+          disabled={isLoading}
+          className={cn(
+            'flex h-[62px] w-full cursor-pointer items-center justify-center gap-2 rounded-[14px] p-[10px] body-3 font-semibold transition-all duration-200',
+            config.className,
+            isLoading && 'cursor-not-allowed opacity-60'
+          )}
+        >
+          <Image src={config.icon} alt={config.iconAlt} width={24} height={24} />
+          {isLoading ? '로그인 중...' : config.text}
+        </button>
+      </div>
 
       <ErrorModal
         isOpen={showError}
