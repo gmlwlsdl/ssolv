@@ -8,8 +8,18 @@ import type { ApiErrorResponse } from '@/data/models/api';
 const BACKEND_API = process.env.NEXT_PUBLIC_API_URL!;
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL!;
 
-/** 백엔드 에러 코드(O001~O019) + HTTP 상태코드 → 클라이언트 에러 타입으로 변환 */
-const resolveLoginErrorType = (status: number, errorCode?: string): string => {
+/** 인증 실패(401)로 분류되는 에러 코드 목록 */
+const AUTH_FAILED_CODES = [
+  ERROR_CODES.KAKAO_INVALID_GRANT, // O001
+  ERROR_CODES.KAKAO_AUTH_FAILED, // O002
+  ERROR_CODES.APPLE_INVALID_GRANT, // O011
+  ERROR_CODES.APPLE_AUTH_FAILED, // O012
+  ERROR_CODES.APPLE_INVALID_ID_TOKEN, // O018
+  ERROR_CODES.APPLE_TOKEN_VERIFICATION_FAILED, // O019
+] as const;
+
+/** 백엔드 에러 코드(O001~O019) → 클라이언트 에러 타입으로 변환 */
+const resolveLoginErrorType = (errorCode?: string): string => {
   if (errorCode === ERROR_CODES.ALREADY_REGISTERED_WITH_OTHER_LOGIN) {
     return LOGIN_ERROR_TYPES.EMAIL_CONFLICT;
   }
@@ -18,7 +28,7 @@ const resolveLoginErrorType = (status: number, errorCode?: string): string => {
     return LOGIN_ERROR_TYPES.RATE_LIMITED;
   }
 
-  if (status === 401) {
+  if (errorCode && AUTH_FAILED_CODES.includes(errorCode as (typeof AUTH_FAILED_CODES)[number])) {
     return LOGIN_ERROR_TYPES.AUTH_FAILED;
   }
 
@@ -98,7 +108,7 @@ const handleLoginResponse = async (response: Response, state: string | null, pro
   if (!response.ok) {
     const { code, raw } = await parseBackendError(response);
     console.error(`[${provider}] 백엔드 에러 응답:`, raw);
-    const errorType = resolveLoginErrorType(response.status, code);
+    const errorType = resolveLoginErrorType(code);
     return redirectToLogin(errorType);
   }
 
