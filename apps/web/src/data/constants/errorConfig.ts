@@ -29,6 +29,31 @@ export const ERROR_CONFIG = {
     message: `찾으시는 모임이 변경 혹은 삭제되어\n찾을 수 없어요.`,
     illustration: '/images/modal/modal-not-found.svg',
   },
+  // 로그인 에러 (클라이언트 에러 타입 기준 그룹핑)
+  email_conflict: {
+    code: 'email_conflict',
+    title: '이미 가입된 이메일이에요',
+    message: `다른 소셜 계정으로 가입된 이메일이에요.\n기존 계정으로 로그인해 주세요.`,
+    illustration: '/images/modal/modal-error.svg',
+  },
+  auth_failed: {
+    code: 'auth_failed',
+    title: '인증에 실패했어요',
+    message: `소셜 로그인 인증에 실패했어요.\n다시 시도해 주세요.`,
+    illustration: '/images/modal/modal-error.svg',
+  },
+  rate_limited: {
+    code: 'rate_limited',
+    title: '요청이 너무 많아요',
+    message: `잠시 후 다시 시도해 주세요.`,
+    illustration: '/images/modal/modal-error.svg',
+  },
+  oauth_failed: {
+    code: 'oauth_failed',
+    title: '로그인이 취소되었어요',
+    message: `소셜 로그인이 취소되었어요.\n다시 시도해 주세요.`,
+    illustration: '/images/modal/modal-error.svg',
+  },
   DEFAULT: {
     code: 'DEFAULT',
     title: '문제가 발생했어요!',
