@@ -14,13 +14,15 @@ import { cn } from '@/lib/cn';
 const PROVIDER_CONFIG = {
   kakao: {
     text: '카카오톡으로 시작하기',
+    lastUsedText: '카카오톡으로 계속하기',
     icon: '/images/brand/kakao.svg',
     iconAlt: '카카오 로고',
     className: 'bg-yellow-400 text-neutral-1600',
     apiPath: '/api/auth/kakao',
   },
   apple: {
-    text: 'Apple로 계속하기',
+    text: 'Apple로 시작하기',
+    lastUsedText: 'Apple로 계속하기',
     icon: '/images/brand/apple.svg',
     iconAlt: 'Apple 로고',
     className: 'bg-black text-white',
@@ -92,7 +94,7 @@ const LoginButton = ({ provider = 'kakao', redirectTo, isLastUsed = false }: Log
           )}
         >
           <Image src={config.icon} alt={config.iconAlt} width={24} height={24} />
-          {isLoading ? '로그인 중...' : config.text}
+          {isLoading ? '로그인 중...' : isLastUsed ? config.lastUsedText : config.text}
         </button>
       </div>
 

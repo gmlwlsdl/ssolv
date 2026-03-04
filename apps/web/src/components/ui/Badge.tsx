@@ -9,7 +9,7 @@ interface BadgeProps {
 
 const VARIANT_STYLES: Record<BadgeVariant, string> = {
   default: 'bg-neutral-200 text-neutral-600',
-  highlight: 'bg-orange-500 text-white shadow-sm',
+  highlight: 'bg-red-500 text-white shadow-sm',
 };
 
 const Badge = ({ children, variant = 'default' }: BadgeProps) => {
