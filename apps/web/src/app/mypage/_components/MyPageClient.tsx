@@ -92,6 +92,16 @@ const MyPageClient = ({ profile }: MyPageClientProps) => {
           </div>
         </div>
 
+        {/* 개인정보 처리방침 */}
+        <a
+          href="/privacy"
+          className="flex w-full cursor-pointer items-center justify-between px-5 pt-5"
+        >
+          <div className="flex w-full items-center border-b border-neutral-300 pb-5">
+            <span className="body-3 font-medium text-neutral-1500">개인정보 처리방침</span>
+          </div>
+        </a>
+
         {/* 로그아웃 */}
         <button
           type="button"
