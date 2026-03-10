@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
 import TopNavigation from '@/components/layout/TopNavigation';
-import { ConfirmModal } from '@/components/ui/Modal';
+import { ConfirmModal, ErrorModal } from '@/components/ui/Modal';
 import Toggle from '@/components/ui/Toggle';
 import { UserProfile } from '@/data/models/member';
 import { getNotificationSettingQueryOptions } from '@/data/queries/notificationQueries';
@@ -29,6 +29,7 @@ const MyPageClient = ({ profile }: MyPageClientProps) => {
   const [notificationEnabled, setNotificationEnabled] = useState(true);
   const { isOpen: showLogoutModal, handler: logoutModalHandler } = useDisclosure();
   const { isOpen: showWithdrawModal, handler: withdrawModalHandler } = useDisclosure();
+  const { isOpen: showWithdrawErrorModal, handler: withdrawErrorModalHandler } = useDisclosure();
 
   const { data: notificationSetting } = useQuery({
     ...getNotificationSettingQueryOptions(),
@@ -67,7 +68,7 @@ const MyPageClient = ({ profile }: MyPageClientProps) => {
     try {
       await withdraw();
     } catch {
-      alert('탈퇴 처리 중 오류가 발생했습니다.');
+      withdrawErrorModalHandler.open();
     }
   };
 
@@ -121,6 +122,16 @@ const MyPageClient = ({ profile }: MyPageClientProps) => {
           </div>
         </div>
 
+        {/* 개인정보 처리방침 */}
+        <a
+          href="/privacy"
+          className="flex w-full cursor-pointer items-center justify-between px-5 pt-5"
+        >
+          <div className="flex w-full items-center border-b border-neutral-300 pb-5">
+            <span className="body-3 font-medium text-neutral-1500">개인정보 처리방침</span>
+          </div>
+        </a>
+
         {/* 로그아웃 */}
         <button
           type="button"
@@ -162,6 +173,15 @@ const MyPageClient = ({ profile }: MyPageClientProps) => {
         cancelText="취소"
         onConfirm={handleWithdraw}
         onCancel={withdrawModalHandler.close}
+      />
+
+      {/* 회원탈퇴 실패 모달 */}
+      <ErrorModal
+        isOpen={showWithdrawErrorModal}
+        title="탈퇴 처리 중 오류가 발생했어요"
+        message="잠시 후 다시 시도해주세요."
+        illustration="/images/modal/modal-error.svg"
+        onClose={withdrawErrorModalHandler.close}
       />
     </div>
   );

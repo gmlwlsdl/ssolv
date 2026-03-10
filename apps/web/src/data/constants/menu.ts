@@ -1,4 +1,4 @@
-const IMAGE_PATH = '/images/menu';
+const IMAGE_PATH = '/icons/food';
 
 export const FOOD_MAP_CONSTANT = {
   mexican: { name: '멕시칸', imageSrc: `${IMAGE_PATH}/멕시칸.svg` },
