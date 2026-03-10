@@ -30,10 +30,8 @@ const MyPageClient = ({ profile }: MyPageClientProps) => {
   const { isOpen: showLogoutModal, handler: logoutModalHandler } = useDisclosure();
   const { isOpen: showWithdrawModal, handler: withdrawModalHandler } = useDisclosure();
 
-  // TODO: 백엔드 완료 시 enabled: false 제거
   const { data: notificationSetting } = useQuery({
     ...getNotificationSettingQueryOptions(),
-    enabled: false,
   });
 
   useEffect(() => {
