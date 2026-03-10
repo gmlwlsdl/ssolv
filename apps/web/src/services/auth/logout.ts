@@ -1,17 +1,23 @@
-import { FCM_TOKEN_STORAGE_KEY, deleteFcmToken } from '@/services/notification';
+interface LogoutOptions {
+  /** 로그아웃 전 실행할 정리 작업 (예: FCM 토큰 삭제). 실패해도 로그아웃은 진행됩니다. */
+  onBeforeLogout?: () => Promise<void>;
+}
 
-export const logout = async () => {
+/**
+ * 로그아웃 처리
+ *
+ * @param options.onBeforeLogout - 로그아웃 전 실행할 정리 작업 (의존성 주입)
+ *
+ * @sideeffect 세션 쿠키 삭제, `/login`으로 리다이렉트
+ */
+export const logout = async ({ onBeforeLogout }: LogoutOptions = {}) => {
   if (typeof window === 'undefined') return;
 
-  // 로그아웃 전 FCM 토큰 삭제
-  const fcmToken = localStorage.getItem(FCM_TOKEN_STORAGE_KEY);
-  if (fcmToken) {
+  if (onBeforeLogout) {
     try {
-      await deleteFcmToken({ fcmToken });
+      await onBeforeLogout();
     } catch {
-      // FCM 토큰 삭제 실패해도 로그아웃 진행
-    } finally {
-      localStorage.removeItem(FCM_TOKEN_STORAGE_KEY);
+      // 정리 실패해도 로그아웃 진행
     }
   }
 
