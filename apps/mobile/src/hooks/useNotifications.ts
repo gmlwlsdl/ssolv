@@ -56,6 +56,21 @@ const injectMessage = (
 };
 
 /**
+ * @description WebView를 딥링크 경로로 직접 이동시킵니다.
+ *
+ * nativeMessage 이벤트 방식은 React useEffect 리스너 등록 타이밍에 따라
+ * 이벤트가 유실될 수 있어, window.location.replace를 사용합니다.
+ */
+const injectNavigate = (webViewRef: RefObject<WebView | null>, path: string): void => {
+  webViewRef.current?.injectJavaScript(`
+    (function() {
+      try { window.location.replace(${JSON.stringify(path)}); } catch(e) {}
+    })();
+    true;
+  `);
+};
+
+/**
  * @description Firebase Cloud Messaging 푸시 알림 훅.
  *
  * - 알림 권한 요청 및 FCM 토큰 발급
@@ -74,11 +89,18 @@ export const useNotifications = ({ webViewRef }: UseNotificationsProps) => {
 
   /**
    * @description WebView 준비 여부에 따라 즉시 전송하거나 큐에 보관합니다.
+   *
+   * - `notificationOpened`: window.location.replace로 직접 이동합니다.
+   * - 그 외: nativeMessage 이벤트로 전달합니다.
    */
   const send = useCallback(
     (message: NativeToWebMessage) => {
       if (isReadyRef.current) {
-        injectMessage(webViewRef, message);
+        if (message.type === 'notificationOpened') {
+          injectNavigate(webViewRef, message.data.path);
+        } else {
+          injectMessage(webViewRef, message);
+        }
       } else {
         pendingRef.current.push(message);
       }
@@ -92,7 +114,13 @@ export const useNotifications = ({ webViewRef }: UseNotificationsProps) => {
    */
   const onWebViewLoad = useCallback(() => {
     isReadyRef.current = true;
-    pendingRef.current.forEach((msg) => injectMessage(webViewRef, msg));
+    pendingRef.current.forEach((msg) => {
+      if (msg.type === 'notificationOpened') {
+        injectNavigate(webViewRef, msg.data.path);
+      } else {
+        injectMessage(webViewRef, msg);
+      }
+    });
     pendingRef.current = [];
   }, [webViewRef]);
 
