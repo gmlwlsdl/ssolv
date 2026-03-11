@@ -1,13 +1,19 @@
 'use client';
 
-import { useState } from 'react';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import TopNavigation from '@/components/layout/TopNavigation';
 import { ConfirmModal, ErrorModal } from '@/components/ui/Modal';
 import Toggle from '@/components/ui/Toggle';
 import { UserProfile } from '@/data/models/member';
+import {
+  getNotificationSettingQueryOptions,
+  notificationQueryKeys,
+} from '@/data/queries/notificationQueries';
 import { useDisclosure } from '@/hooks/useDisclosure';
 import { logout, withdraw } from '@/services/auth';
+import { deleteFcmToken, FCM_TOKEN_STORAGE_KEY } from '@/services/notification/fcm-token';
+import { updateNotificationSetting } from '@/services/notification/notification-setting';
 
 const APP_VERSION = 'v1.0.0';
 const SERVICE_EMAIL = 'ssolvofficial@gmail.com';
@@ -22,15 +28,47 @@ interface MyPageClientProps {
  * @description 사용자 프로필, 알림 설정, 로그아웃, 회원탈퇴 등을 처리합니다.
  */
 const MyPageClient = ({ profile }: MyPageClientProps) => {
-  // TODO: 알림 설정 API 연동 필요 (초기값 서버에서 조회, 변경 시 PATCH 요청)
-  const [notificationEnabled, setNotificationEnabled] = useState(true);
+  const queryClient = useQueryClient();
   const { isOpen: showLogoutModal, handler: logoutModalHandler } = useDisclosure();
   const { isOpen: showWithdrawModal, handler: withdrawModalHandler } = useDisclosure();
   const { isOpen: showWithdrawErrorModal, handler: withdrawErrorModalHandler } = useDisclosure();
 
+  const { data: notificationSetting } = useQuery({
+    ...getNotificationSettingQueryOptions(),
+  });
+
+  const notificationEnabled = notificationSetting?.notificationEnabled ?? true;
+
+  /**
+   * 알림 설정 토글 핸들러
+   *
+   * @description queryClient.setQueryData로 낙관적 업데이트, 실패 시 롤백합니다.
+   * @param next - 변경할 알림 활성화 여부
+   */
+  const handleNotificationToggle = async (next: boolean) => {
+    const { queryKey } = notificationQueryKeys.getSetting;
+
+    queryClient.setQueryData(queryKey, { notificationEnabled: next });
+
+    try {
+      await updateNotificationSetting({ notificationEnabled: next });
+    } catch (error) {
+      queryClient.setQueryData(queryKey, { notificationEnabled: !next });
+      console.error('알림 설정 변경 실패:', error instanceof Error ? error.message : error);
+    }
+  };
+
   const handleLogout = async () => {
     logoutModalHandler.close();
-    await logout();
+    await logout({
+      onBeforeLogout: async () => {
+        const fcmToken = localStorage.getItem(FCM_TOKEN_STORAGE_KEY);
+        if (fcmToken) {
+          await deleteFcmToken({ fcmToken });
+          localStorage.removeItem(FCM_TOKEN_STORAGE_KEY);
+        }
+      },
+    });
   };
 
   const handleWithdraw = async () => {
@@ -70,7 +108,7 @@ const MyPageClient = ({ profile }: MyPageClientProps) => {
             <span className="body-3 font-medium text-neutral-1500">알림 설정</span>
             <Toggle
               checked={notificationEnabled}
-              onChange={setNotificationEnabled}
+              onChange={handleNotificationToggle}
               ariaLabel="알림 설정 토글"
             />
           </div>
