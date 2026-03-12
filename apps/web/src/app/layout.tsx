@@ -4,6 +4,7 @@ import { NuqsAdapter } from 'nuqs/adapters/next/app';
 
 import ScaledStage from '@/components/layout/ScaledStage';
 import { ToastProvider } from '@/features/toast';
+import { Amplitude } from '@/lib/amplitude';
 import ReactQueryProvider from '@/providers/ReactQueryProvider';
 
 import type { Viewport, Metadata } from 'next';
@@ -63,6 +64,7 @@ export const viewport: Viewport = {
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="ko" suppressHydrationWarning>
+      <Amplitude />
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       <meta name="apple-mobile-web-app-title" content="Solv" />
