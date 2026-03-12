@@ -5,6 +5,7 @@ import { StyleSheet } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { WebView, WebViewMessageEvent } from 'react-native-webview';
 
+import { useNotifications } from './hooks/useNotifications';
 import { useWebViewHandlers } from './hooks/useWebViewHandlers';
 import { injectedJavaScript } from './lib/injectedJavaScript';
 
@@ -28,6 +29,8 @@ const App = () => {
     webAppUrl: WEB_APP_URL,
   });
 
+  const { onWebViewLoad } = useNotifications({ webViewRef });
+
   const handleMessage = (event: WebViewMessageEvent) => {
     try {
       const data = JSON.parse(event.nativeEvent.data) as WebViewMessage;
@@ -50,6 +53,7 @@ const App = () => {
           ref={webViewRef}
           source={{ uri: WEB_APP_URL }}
           style={styles.webview}
+          onLoadEnd={onWebViewLoad}
           onShouldStartLoadWithRequest={handleShouldStartLoadWithRequest}
           onError={handleWebViewError}
           onHttpError={handleWebViewError}
