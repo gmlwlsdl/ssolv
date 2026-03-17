@@ -1,3 +1,4 @@
+export { default as AnalyticsProvider } from './AnalyticsProvider';
 export { EVENT_NAMES, PAGE_TYPES } from './events';
 export { track } from './track';
 
