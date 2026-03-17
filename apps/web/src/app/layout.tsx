@@ -4,6 +4,7 @@ import { NuqsAdapter } from 'nuqs/adapters/next/app';
 
 import ScaledStage from '@/components/layout/ScaledStage';
 import { ToastProvider } from '@/features/toast';
+import NativeMessageProvider from '@/providers/NativeMessageProvider';
 import ReactQueryProvider from '@/providers/ReactQueryProvider';
 
 import type { Viewport, Metadata } from 'next';
@@ -94,7 +95,9 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         >
           <MantineProvider>
             <ReactQueryProvider>
-              <NuqsAdapter>{children}</NuqsAdapter>
+              <NativeMessageProvider>
+                <NuqsAdapter>{children}</NuqsAdapter>
+              </NativeMessageProvider>
             </ReactQueryProvider>
           </MantineProvider>
         </ScaledStage>

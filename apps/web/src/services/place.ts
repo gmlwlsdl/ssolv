@@ -27,7 +27,7 @@ export interface RecommendedPlaceResponse {
 }
 
 export const getPlaces = async (token: string) => {
-  const response = await api.get<RecommendedPlaceResponse>(`/places?token=${token}`);
+  const response = await api.get<RecommendedPlaceResponse>(`/places?meetingId=${token}`);
   return response;
 };
 
