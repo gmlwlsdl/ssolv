@@ -1,5 +1,4 @@
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
-import Image from 'next/image';
 
 import MorePicksButton from '@/app/meetings/[token]/result/_components/MorePicksButton';
 import MenuPreferenceList from '@/app/meetings/[token]/result/analysis/_components/MenuPreferenceList';
@@ -63,7 +62,6 @@ const AnalysisPage = async ({ params }: AnalysisPageProps) => {
 
         <div className="flex flex-col gap-4">
           <div className="flex items-center gap-2.5">
-            <Image src="/images/avatar/orange.svg" alt="orange" width={24} height={24} />
             <span className="body-3 font-semibold text-neutral-400">선호하는 음식</span>
           </div>
           <PieChart data={cuisinesChartData} />
@@ -71,7 +69,6 @@ const AnalysisPage = async ({ params }: AnalysisPageProps) => {
 
         <div className="flex flex-col gap-4">
           <div className="flex items-center gap-2.5">
-            <Image src="/images/avatar/default.svg" alt="default" width={24} height={24} />
             <span className="body-3 font-semibold text-neutral-400">선호하는 메뉴</span>
           </div>
           <HydrationBoundary state={dehydratedState}>
