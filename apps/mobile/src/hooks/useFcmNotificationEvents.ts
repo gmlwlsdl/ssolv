@@ -3,6 +3,8 @@ import { useEffect } from 'react';
 import messaging from '@react-native-firebase/messaging';
 import { Alert } from 'react-native';
 
+import { track } from '../lib/analytics';
+
 /** FCM 알림 타입 → 딥링크 경로 맵 */
 const NOTIFICATION_PATH_MAP: Record<string, (meetingToken: string) => string> = {
   MEETING_RESULT_READY: (token) => `/meetings/${token}/result/overview`,
@@ -40,23 +42,36 @@ export const useFcmNotificationEvents = (onPath: (path: string) => void) => {
       .getInitialNotification()
       .then((msg) => {
         if (!msg?.data) return;
-        const path = resolveNotificationPath(msg.data as Record<string, string>);
-        if (path) onPath(path);
+        const data = msg.data as Record<string, string>;
+        const path = resolveNotificationPath(data);
+        if (path) {
+          track.pushOpened({
+            push_type: data.type ?? 'unknown',
+            ...(data.meetingToken && { meeting_id: data.meetingToken }),
+          });
+          onPath(path);
+        }
       });
 
     // 백그라운드 상태에서 알림 탭
     const unsubscribeOpened = messaging().onNotificationOpenedApp((msg) => {
       if (!msg?.data) return;
-      const path = resolveNotificationPath(msg.data as Record<string, string>);
-      if (path) onPath(path);
+      const data = msg.data as Record<string, string>;
+      const path = resolveNotificationPath(data);
+      if (path) {
+        track.pushOpened({
+          push_type: data.type ?? 'unknown',
+          ...(data.meetingToken && { meeting_id: data.meetingToken }),
+        });
+        onPath(path);
+      }
     });
 
     // 포그라운드 알림 수신 - 시스템 배너가 표시되지 않으므로 Alert으로 대체
     // 사용자가 '확인' 버튼을 탭했을 때만 딥링크로 이동
     const unsubscribeForeground = messaging().onMessage(async (msg) => {
-      const path = msg.data
-        ? resolveNotificationPath(msg.data as Record<string, string>)
-        : undefined;
+      const data = msg.data as Record<string, string> | undefined;
+      const path = data ? resolveNotificationPath(data) : undefined;
 
       Alert.alert(
         msg.notification?.title ?? '알림',
@@ -64,7 +79,16 @@ export const useFcmNotificationEvents = (onPath: (path: string) => void) => {
         path
           ? [
               { text: '나중에', style: 'cancel' },
-              { text: '확인', onPress: () => onPath(path) },
+              {
+                text: '확인',
+                onPress: () => {
+                  track.pushOpened({
+                    push_type: data?.type ?? 'unknown',
+                    ...(data?.meetingToken && { meeting_id: data.meetingToken }),
+                  });
+                  onPath(path);
+                },
+              },
             ]
           : [{ text: '확인' }]
       );
