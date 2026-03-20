@@ -22,18 +22,21 @@ const BottomSheet = ({
       <div role="presentation" className="fixed inset-0 z-40 bg-black/60" onClick={onClose} />
       <div
         className={cn(
-          'no-scrollbar fixed bottom-0 left-1/2 z-50 flex w-full max-w-[475px] -translate-x-1/2 flex-col justify-between gap-4 overflow-auto rounded-t-2xl bg-white p-5',
+          'no-scrollbar fixed bottom-0 left-1/2 z-50 flex w-full max-w-[475px] -translate-x-1/2 flex-col justify-between gap-4 overflow-auto rounded-t-2xl bg-white p-5 pt-safe-top',
           heightClassName
         )}
       >
-        <div className="text-center">
-          <p className="body-3 font-semibold text-orange-700">{title}</p>
+        <div className="relative flex items-center justify-center px-4 py-2">
+          <p className="absolute left-1/2 -translate-x-1/2 body-3 font-semibold text-orange-700">
+            {title}
+          </p>
+
           {showCloseButton && (
             <X
               onClick={onClose}
               size={24}
               strokeWidth={2.25}
-              className="absolute top-5 right-4 cursor-pointer text-orange-800"
+              className="absolute right-4 cursor-pointer text-orange-800"
             />
           )}
         </div>
