@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@amplitude/analytics-react-native": "^1.5.49",
-    "@react-native-async-storage/async-storage": "^3.0.1",
+    "@react-native-async-storage/async-storage": "^2.2.0",
     "@react-native-firebase/app": "^23.8.6",
     "@react-native-firebase/messaging": "^23.8.6",
     "expo": "~54.0.18",

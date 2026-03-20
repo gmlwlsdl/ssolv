@@ -6,7 +6,7 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/solv-mobile-icon.png",
-    "userInterfaceStyle": "automatic",
+    "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "description": "모두의 취향을 모아, 바로 추천받는 우리 모임의 식당",
 
