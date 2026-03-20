@@ -63,7 +63,7 @@ const SurveyActionButton = ({ overview }: { overview: MeetingOverview }) => {
     <>
       {isPending && <Loading />}
 
-      <div className="sticky bottom-0 px-5 py-3">
+      <div className="sticky bottom-0 px-5 py-6">
         <Button onClick={handleClick} disabled={isPending} theme={'orange'}>
           <span className="body-3 font-semibold text-white">{buttonState.label}</span>
         </Button>

@@ -14,7 +14,7 @@ const MorePicksButton = ({ showHomeButton = false }: MorePicksButtonProps) => {
   const { increasePickCount, canLoadMore } = useRestaurantPickCount();
 
   return (
-    <div className={cn('sticky bottom-0 flex gap-3 px-5 py-3', !canLoadMore && 'hidden')}>
+    <div className={cn('sticky bottom-0 flex gap-3 px-5 py-6', !canLoadMore && 'hidden')}>
       {showHomeButton && (
         <Link href="/">
           <Button type="button" theme="gray" className="w-fit px-9 py-5">
