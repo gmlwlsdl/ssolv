@@ -11,11 +11,14 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@amplitude/analytics-react-native": "^1.5.49",
+    "@react-native-async-storage/async-storage": "^3.0.1",
     "@react-native-firebase/app": "^23.8.6",
     "@react-native-firebase/messaging": "^23.8.6",
     "expo": "~54.0.18",
     "expo-apple-authentication": "~8.0.8",
     "expo-build-properties": "^1.0.10",
+    "expo-constants": "^55.0.7",
     "expo-dev-client": "~6.0.20",
     "expo-linear-gradient": "^55.0.9",
     "expo-linking": "^8.0.8",
