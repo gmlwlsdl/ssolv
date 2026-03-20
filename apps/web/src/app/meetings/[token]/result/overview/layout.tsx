@@ -6,7 +6,13 @@ interface OverviewLayoutProps {
 }
 const OverviewLayout = ({ children }: OverviewLayoutProps) => {
   return (
-    <div className="flex flex-1 flex-col bg-neutral-100">
+    <div
+      className="flex flex-1 flex-col bg-neutral-100"
+      style={{
+        marginTop: 'calc(-1 * env(safe-area-inset-top))',
+        paddingTop: 'env(safe-area-inset-top)',
+      }}
+    >
       <TopNavigation
         showBackButton
         leftHref="/"
