@@ -29,7 +29,7 @@ const HomePageLayout = ({ children, errorCode }: HomePageLayoutProps) => {
   }, [errorCode, errorModalHandler]);
 
   return (
-    <div className="no-scrollbar flex h-[100dvh] flex-col overflow-auto bg-neutral-100">
+    <div className="no-scrollbar flex h-[100dvh] flex-col overflow-auto bg-neutral-100 pt-safe-top">
       <ErrorModal
         isOpen={showErrorModal}
         title={error?.title ?? ''}
@@ -38,7 +38,7 @@ const HomePageLayout = ({ children, errorCode }: HomePageLayoutProps) => {
         onClose={errorModalHandler.close}
       />
 
-      <header className="flex items-center justify-between px-5 pt-9 pb-2 select-none">
+      <header className="flex items-center justify-between px-5 pt-2 pb-2 select-none">
         <Image src="/images/brand/solv-wordmark.svg" alt="솔브 작은 로고" width={96} height={32} />
         <Link href="/mypage" aria-label="마이페이지">
           <Image src="/icons/profile.svg" alt="프로필 아이콘" width={32} height={32} />

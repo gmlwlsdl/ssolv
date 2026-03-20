@@ -61,6 +61,8 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   viewportFit: 'cover',
+  maximumScale: 1,
+  userScalable: false,
 };
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {

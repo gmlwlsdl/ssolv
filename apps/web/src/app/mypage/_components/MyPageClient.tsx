@@ -81,7 +81,7 @@ const MyPageClient = ({ profile }: MyPageClientProps) => {
   };
 
   return (
-    <div className="no-scrollbar flex h-[100dvh] flex-col overflow-auto bg-neutral-100">
+    <div className="no-scrollbar flex h-[100dvh] flex-col overflow-auto bg-white pt-safe-top">
       {/* 상단 네비게이션 */}
       <TopNavigation
         title="마이페이지"

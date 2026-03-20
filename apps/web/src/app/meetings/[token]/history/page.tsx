@@ -18,7 +18,7 @@ const MeetingHistoryPage = async ({ params }: { params: Promise<{ token: string 
   }));
 
   return (
-    <div className="no-scrollbar h-[100dvh] overflow-auto bg-neutral-1600">
+    <div className="no-scrollbar h-[100dvh] overflow-auto bg-neutral-1600 pt-safe-top">
       <TopNavigation showBackButton leftHref={`/`} className="text-white" />
 
       <div className="flex w-full flex-1 flex-col gap-9 bg-neutral-1600 px-5 py-[1.9375rem]">

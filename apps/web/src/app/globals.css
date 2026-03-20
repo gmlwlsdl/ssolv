@@ -3,10 +3,12 @@
 @layer base {
   html,
   body {
+    overscroll-behavior-y: none;
     -webkit-tap-highlight-color: transparent;
     -webkit-text-size-adjust: 100%;
     touch-action: manipulation;
     font-family: 'Pretendard', sans-serif;
+    height: 100vh;
   }
 
   /* input type=search 브라우저 기본 UI 표시하지 않음 */
@@ -201,6 +203,11 @@
   --color-white-alpha-4: #ffffff8f; /* 56% */
   --color-white-alpha-5: #ffffffb8; /* 72% */
   --color-white-alpha-6: #ffffffe0; /* 88% */
+}
+
+/* WebView safe-area(노치/상태바) 영역을 고려한 상단 패딩 */
+@utility pt-safe-top {
+  padding-top: env(safe-area-inset-top);
 }
 
 @layer utilities {

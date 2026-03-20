@@ -44,7 +44,6 @@ const ScaledStage = ({
         className="min-h-screen-safe mx-auto flex max-w-[475px] flex-1 flex-col"
         style={{
           boxShadow: '0 0 18px rgba(250, 165, 148, 0.28)',
-          paddingTop: 'env(safe-area-inset-top)',
         }}
       >
         {/* iOS safe-area 여백(필요하면) */}

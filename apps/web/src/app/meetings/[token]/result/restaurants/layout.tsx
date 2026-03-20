@@ -9,13 +9,7 @@ const RestaurantsLayout = async ({ children, params }: PageProps) => {
   const { token } = await params;
 
   return (
-    <div
-      className="flex flex-1 flex-col bg-neutral-1600"
-      style={{
-        marginTop: 'calc(-1 * env(safe-area-inset-top))',
-        paddingTop: 'env(safe-area-inset-top)',
-      }}
-    >
+    <div className="flex flex-1 flex-col bg-neutral-1600 pt-safe-top">
       <RestaurantsNavigation token={token} />
       {children}
     </div>
