@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
 import Constants from 'expo-constants';
+import * as ExpoSplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { Platform, StyleSheet, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -11,6 +12,8 @@ import { useNotifications } from './hooks/useNotifications';
 import { useWebViewHandlers } from './hooks/useWebViewHandlers';
 import amplitude from './lib/amplitude';
 import { track } from './lib/analytics';
+
+ExpoSplashScreen.preventAutoHideAsync();
 
 const WEB_APP_URL = process.env.EXPO_PUBLIC_WEB_URL;
 
@@ -42,6 +45,7 @@ const App = () => {
   const [isWebViewLoaded, setIsWebViewLoaded] = useState(false);
 
   useEffect(() => {
+    ExpoSplashScreen.hideAsync();
     track.appOpen({ is_cold_start: true });
   }, []);
 

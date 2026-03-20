@@ -9,6 +9,9 @@
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "description": "모두의 취향을 모아, 바로 추천받는 우리 모임의 식당",
+    "splash": {
+      "backgroundColor": "#FF4F14"
+    },
 
     "ios": {
       "supportsTablet": true,
