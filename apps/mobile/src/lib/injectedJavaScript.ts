@@ -16,9 +16,22 @@ export const injectedJavaScript = `
       let lastColor = '';
       let colorCheckTimeout = null;
 
+      function getEffectiveBackgroundColor() {
+        const isTransparent = (color) =>
+          !color || color === 'transparent' || color === 'rgba(0, 0, 0, 0)';
+
+        const bodyBg = window.getComputedStyle(document.body).backgroundColor;
+        if (!isTransparent(bodyBg)) return bodyBg;
+
+        const htmlBg = window.getComputedStyle(document.documentElement).backgroundColor;
+        if (!isTransparent(htmlBg)) return htmlBg;
+
+        return '#ffffff';
+      }
+
       function sendBackgroundColor() {
         try {
-          const bgColor = window.getComputedStyle(document.body).backgroundColor;
+          const bgColor = getEffectiveBackgroundColor();
           // 색상이 실제로 변경되었을 때만 메시지 전송 (불필요한 업데이트 방지)
           if (bgColor !== lastColor) {
             lastColor = bgColor;
