@@ -7,7 +7,7 @@ interface UseWebViewHandlersProps {
   webAppUrl: string;
 }
 
-const AUTH_PROVIDER_HOSTS = ['kauth.kakao.com', 'accounts.kakao.com'];
+const AUTH_PROVIDER_HOSTS = ['kauth.kakao.com', 'accounts.kakao.com', 'sharer.kakao.com'];
 /**
  * @description WebView 관련 핸들러들을 제공하는 커스텀 훅으로,
  * WebView의 페이지 로드 요청 처리 및 에러 발생 시 동작을 정의합니다.
