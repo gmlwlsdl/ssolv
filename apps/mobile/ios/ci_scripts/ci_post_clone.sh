@@ -2,6 +2,9 @@
 
 set -e
 
+echo "=== Restoring GoogleService-Info.plist ==="
+echo "$GOOGLE_SERVICE_INFO_PLIST" | base64 --decode > "$CI_PRIMARY_REPOSITORY_PATH/apps/mobile/ios/Solv/GoogleService-Info.plist"
+
 echo "=== Installing Node (via nvm) ==="
 
 export NVM_DIR="$HOME/.nvm"
