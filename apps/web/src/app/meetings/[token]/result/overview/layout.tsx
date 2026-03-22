@@ -6,7 +6,7 @@ interface OverviewLayoutProps {
 }
 const OverviewLayout = ({ children }: OverviewLayoutProps) => {
   return (
-    <div className="flex flex-1 flex-col bg-neutral-100">
+    <div className="min-h-screen-safe flex flex-1 flex-col bg-neutral-100 pt-safe-top">
       <TopNavigation
         showBackButton
         leftHref="/"

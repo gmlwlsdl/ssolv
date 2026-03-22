@@ -20,7 +20,7 @@ const CreatePageLayout = ({ children }: CreatePageLayoutProps) => {
   };
 
   return (
-    <div className="no-scrollbar relative flex h-[100dvh] flex-col overflow-y-auto bg-white">
+    <div className="no-scrollbar relative flex h-[100dvh] flex-col overflow-y-auto bg-white pt-safe-top">
       <TopNavigation showBackButton onLeftClick={modalHandler.open} />
 
       <header className="mt-2 flex flex-col gap-3 px-5 pt-2 pb-8 select-none">

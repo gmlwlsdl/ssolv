@@ -1,21 +1,19 @@
 import { useEffect, useRef, useState } from 'react';
 
 import Constants from 'expo-constants';
+import * as ExpoSplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
-import { Platform, StyleSheet } from 'react-native';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import { WebView, WebViewMessageEvent } from 'react-native-webview';
+import { Platform, StyleSheet, View } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { WebView } from 'react-native-webview';
 
+import SplashScreen from './components/SplashScreen';
 import { useNotifications } from './hooks/useNotifications';
 import { useWebViewHandlers } from './hooks/useWebViewHandlers';
 import amplitude from './lib/amplitude';
 import { track } from './lib/analytics';
-import { injectedJavaScript } from './lib/injectedJavaScript';
 
-type WebViewMessage = {
-  type: 'backgroundColor';
-  color: string;
-};
+ExpoSplashScreen.preventAutoHideAsync();
 
 const WEB_APP_URL = process.env.EXPO_PUBLIC_WEB_URL;
 
@@ -44,9 +42,10 @@ const buildWebViewUrl = (): string => {
 
 const App = () => {
   const webViewRef = useRef<WebView>(null);
-  const [backgroundColor, setBackgroundColor] = useState('transparent');
+  const [isWebViewLoaded, setIsWebViewLoaded] = useState(false);
 
   useEffect(() => {
+    ExpoSplashScreen.hideAsync();
     track.appOpen({ is_cold_start: true });
   }, []);
 
@@ -57,34 +56,22 @@ const App = () => {
 
   const { onWebViewLoad } = useNotifications({ webViewRef });
 
-  const handleMessage = (event: WebViewMessageEvent) => {
-    try {
-      const data = JSON.parse(event.nativeEvent.data) as WebViewMessage;
-
-      if (data.type === 'backgroundColor') {
-        setBackgroundColor(data.color);
-      }
-    } catch (error) {
-      console.warn('배경색 변경 실패:', error);
-    }
+  const handleWebViewLoad = () => {
+    onWebViewLoad();
+    setIsWebViewLoaded(true);
   };
 
   return (
     <SafeAreaProvider>
-      <SafeAreaView
-        style={[styles.container, { backgroundColor }]}
-        edges={['top', 'left', 'right']}
-      >
+      <View style={styles.container}>
         <WebView
           ref={webViewRef}
           source={{ uri: buildWebViewUrl() }}
           style={styles.webview}
-          onLoadEnd={onWebViewLoad}
+          onLoadEnd={handleWebViewLoad}
           onShouldStartLoadWithRequest={handleShouldStartLoadWithRequest}
           onError={handleWebViewError}
           onHttpError={handleWebViewError}
-          onMessage={handleMessage}
-          injectedJavaScript={injectedJavaScript}
           javaScriptEnabled
           domStorageEnabled
           startInLoadingState
@@ -97,7 +84,8 @@ const App = () => {
           cacheEnabled
         />
         <StatusBar style="auto" />
-      </SafeAreaView>
+      </View>
+      <SplashScreen visible={!isWebViewLoaded} />
     </SafeAreaProvider>
   );
 };

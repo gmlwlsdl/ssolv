@@ -45,7 +45,7 @@ const SurveyLayout = ({
   return (
     <div
       id="survey-layout-root"
-      className={cn('relative flex min-h-dvh flex-col bg-neutral-100', className)}
+      className={cn('relative flex min-h-dvh flex-col bg-neutral-100 pt-safe-top', className)}
     >
       <TopNavigation
         title={title}

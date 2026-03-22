@@ -37,7 +37,7 @@ const StepFormLayout = ({
 
       <div className="sticky bottom-0 flex w-full flex-col">
         {showNotice && <CuisineNoticeFrame />}
-        <div className="flex gap-3 bg-orange-50 py-3">
+        <div className="flex gap-3 bg-orange-50 py-6">
           {onCancel && (
             <Button theme="gray" onClick={onCancel} className="w-[114px]">
               {prevButtonText}

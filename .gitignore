@@ -73,3 +73,4 @@ next-env.d.ts
 .agent
 AGENTS.md
 CLAUDE.local.md
+.claude

@@ -10,7 +10,7 @@ const AnalysisLayout = async ({
   const { token } = await params;
 
   return (
-    <div className="flex flex-1 flex-col bg-neutral-1600">
+    <div className="flex flex-1 flex-col bg-neutral-1600 pt-safe-top">
       <TopNavigation
         showBackButton
         leftHref={`/meetings/${token}/result/overview`}

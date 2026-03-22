@@ -10,10 +10,9 @@
     "newArchEnabled": true,
     "description": "모두의 취향을 모아, 바로 추천받는 우리 모임의 식당",
     "splash": {
-      "image": "./assets/solv-splash-icon.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#FF4F14"
     },
+
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.solv.app",
@@ -23,12 +22,12 @@
         "ITSAppUsesNonExemptEncryption": false
       },
       "entitlements": {
-        "aps-environment": "development"
+        "aps-environment": "production"
       }
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/momuzzi-mobile-icon.png",
+        "foregroundImage": "./assets/solv-mobile-icon.png",
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
@@ -36,7 +35,7 @@
       "package": "com.solv.app"
     },
     "web": {
-      "favicon": "./assets/momuzzi-mobile-icon.png"
+      "favicon": "./assets/solv-mobile-icon.png"
     },
     "plugins": [
       "expo-web-browser",

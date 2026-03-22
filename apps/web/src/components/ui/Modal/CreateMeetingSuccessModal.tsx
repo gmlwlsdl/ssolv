@@ -23,7 +23,9 @@ const CreateMeetingSuccessModal = ({ isOpen, onClose }: CreateMeetingSuccessModa
 
   const handleCopyUrl = async () => {
     try {
-      const url = typeof window !== 'undefined' ? window.location.href : '';
+      const currentUrl = new URL(window.location.href);
+      currentUrl.searchParams.delete('created');
+      const url = currentUrl.toString();
       await navigator.clipboard.writeText(url);
       success(`참여 링크가 복사되었어요.\n공유해서 참여를 독촉해보세요.`, { duration: 2500 });
       onClose();

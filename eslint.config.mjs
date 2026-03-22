@@ -198,6 +198,7 @@ const eslintConfig = [
     files: ['apps/mobile/**/*.{js,jsx,ts,tsx}'],
     rules: {
       'import/namespace': 'off',
+      '@typescript-eslint/no-require-imports': 'off',
     },
   },
 ];

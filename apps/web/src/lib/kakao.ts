@@ -27,7 +27,7 @@ export const shareKakaoLink = (shareUrl?: string) => {
 
   const url = shareUrl || window.location.href;
 
-  window.Kakao.Link.sendDefault({
+  window.Kakao.Share.sendDefault({
     objectType: 'feed',
     content: {
       title: '식당 추천을 위한 설문이 시작됐어요!',
@@ -57,7 +57,7 @@ declare global {
     Kakao: {
       isInitialized: () => boolean;
       init: (appKey: string) => void;
-      Link: {
+      Share: {
         sendDefault: (config: {
           objectType: string;
           content: {
