@@ -25,7 +25,6 @@ export const useFcmToken = (onToken: (token: string) => void) => {
       try {
         await messaging().registerDeviceForRemoteMessages();
         const token = await messaging().getToken();
-        console.log('[FCM Token]', token);
         onToken(token);
       } catch (err) {
         console.error('[FCM] 토큰 발급 실패:', err);
