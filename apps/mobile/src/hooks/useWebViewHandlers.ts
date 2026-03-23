@@ -2,12 +2,17 @@ import { RefObject, useCallback } from 'react';
 
 import * as Linking from 'expo-linking';
 import { WebView } from 'react-native-webview';
+
 interface UseWebViewHandlersProps {
   webViewRef: RefObject<WebView | null>;
   webAppUrl: string;
+  onPopupOpen: (url: string) => void;
 }
 
-const AUTH_PROVIDER_HOSTS = ['kauth.kakao.com', 'accounts.kakao.com', 'sharer.kakao.com'];
+const KAKAO_DOMAIN = 'kakao.com';
+/** 카카오링크/카카오톡 공유 시 앱을 직접 실행하는 커스텀 URL 스킴 목록 */
+const KAKAO_CUSTOM_SCHEMES = new Set(['kakaolink', 'kakaokompassauth', 'kakaotalk']);
+
 /**
  * @description WebView 관련 핸들러들을 제공하는 커스텀 훅으로,
  * WebView의 페이지 로드 요청 처리 및 에러 발생 시 동작을 정의합니다.
@@ -15,21 +20,38 @@ const AUTH_PROVIDER_HOSTS = ['kauth.kakao.com', 'accounts.kakao.com', 'sharer.ka
  * @author 박희진
  */
 
-export const useWebViewHandlers = ({ webViewRef, webAppUrl }: UseWebViewHandlersProps) => {
+export const useWebViewHandlers = ({
+  webViewRef,
+  webAppUrl,
+  onPopupOpen,
+}: UseWebViewHandlersProps) => {
   /**
    * @description WebView에서 페이지 로드를 시작하기 전에 호출되는 핸들러로,
-   * 웹앱 URL, 카카오 로그인 관련 URL은 WebView에서 처리하고, 그 외 외부 링크는 기본 브라우저에서 처리합니다.
+   * 웹앱 URL, 카카오 전체 도메인(*.kakao.com)은 WebView에서 처리하고,
+   * 카카오 커스텀 URL 스킴(kakaolink://)은 네이티브 앱으로 전달하며,
+   * 그 외 외부 링크는 기본 브라우저에서 처리합니다.
    */
   const handleShouldStartLoadWithRequest = useCallback(
     (request: { url: string }): boolean => {
       const { url } = request;
 
       try {
-        const urlObj = new URL(request.url);
+        const urlObj = new URL(url);
         const webAppHost = new URL(webAppUrl).hostname;
-        const allowedHosts = [webAppHost, ...AUTH_PROVIDER_HOSTS];
+        const scheme = urlObj.protocol.replace(':', '');
 
-        if (allowedHosts.includes(urlObj.hostname)) {
+        // 웹앱 자체 도메인 허용
+        if (urlObj.hostname === webAppHost) return true;
+
+        // 카카오 커스텀 URL 스킴(kakaolink://, kakaotalk:// 등) → 카카오톡 앱으로 전달
+        if (KAKAO_CUSTOM_SCHEMES.has(scheme)) {
+          Linking.openURL(url);
+          return false;
+        }
+
+        // 카카오 전체 도메인 허용 (kakao.com 및 모든 서브도메인)
+        // 공유 플로우 중 sharer.kakao.com 외 다른 서브도메인을 거치는 경우 대응
+        if (urlObj.hostname === KAKAO_DOMAIN || urlObj.hostname.endsWith(`.${KAKAO_DOMAIN}`)) {
           return true;
         }
       } catch {
@@ -67,8 +89,24 @@ export const useWebViewHandlers = ({ webViewRef, webAppUrl }: UseWebViewHandlers
     [webViewRef, webAppUrl]
   );
 
+  /**
+   * @description WebView에서 window.open()이 호출될 때 실행되는 핸들러로,
+   * 카카오 공유 등 팝업 URL을 인터셉트하여 오버레이 팝업 WebView에서 처리합니다.
+   * iOS에서 window.open()이 외부 브라우저로 열리는 문제를 방지합니다.
+   */
+  const handleOpenWindow = useCallback(
+    (syntheticEvent: any) => {
+      const { targetUrl } = syntheticEvent.nativeEvent;
+      if (targetUrl) {
+        onPopupOpen(targetUrl);
+      }
+    },
+    [onPopupOpen]
+  );
+
   return {
     handleShouldStartLoadWithRequest,
     handleWebViewError,
+    handleOpenWindow,
   };
 };

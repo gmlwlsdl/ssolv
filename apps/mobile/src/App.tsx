@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import Constants from 'expo-constants';
 import * as ExpoSplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
-import { Platform, StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { WebView } from 'react-native-webview';
 
@@ -40,19 +40,34 @@ const buildWebViewUrl = (): string => {
   return url.toString();
 };
 
+/** @description window.close() 호출 시 팝업을 닫기 위해 주입하는 스크립트 */
+const POPUP_INJECTED_JAVASCRIPT = `
+  (function() {
+    var originalClose = window.close.bind(window);
+    window.close = function() {
+      window.ReactNativeWebView.postMessage('window.close');
+      originalClose();
+    };
+  })();
+  true;
+`;
+
 const App = () => {
   const webViewRef = useRef<WebView>(null);
   const [isWebViewLoaded, setIsWebViewLoaded] = useState(false);
+  const [popupUrl, setPopupUrl] = useState<string | null>(null);
 
   useEffect(() => {
     ExpoSplashScreen.hideAsync();
     track.appOpen({ is_cold_start: true });
   }, []);
 
-  const { handleShouldStartLoadWithRequest, handleWebViewError } = useWebViewHandlers({
-    webViewRef,
-    webAppUrl: WEB_APP_URL,
-  });
+  const { handleShouldStartLoadWithRequest, handleWebViewError, handleOpenWindow } =
+    useWebViewHandlers({
+      webViewRef,
+      webAppUrl: WEB_APP_URL,
+      onPopupOpen: setPopupUrl,
+    });
 
   const { onWebViewLoad } = useNotifications({ webViewRef });
 
@@ -70,6 +85,7 @@ const App = () => {
           style={styles.webview}
           onLoadEnd={handleWebViewLoad}
           onShouldStartLoadWithRequest={handleShouldStartLoadWithRequest}
+          onOpenWindow={handleOpenWindow}
           onError={handleWebViewError}
           onHttpError={handleWebViewError}
           javaScriptEnabled
@@ -84,6 +100,30 @@ const App = () => {
           cacheEnabled
         />
         <StatusBar style="auto" />
+        {popupUrl && (
+          <View style={StyleSheet.absoluteFillObject}>
+            <TouchableOpacity
+              style={styles.popupCloseButton}
+              onPress={() => setPopupUrl(null)}
+              activeOpacity={0.7}
+            />
+            <WebView
+              source={{ uri: popupUrl }}
+              style={styles.webview}
+              onShouldStartLoadWithRequest={handleShouldStartLoadWithRequest}
+              onMessage={(event) => {
+                if (event.nativeEvent.data === 'window.close') {
+                  setPopupUrl(null);
+                }
+              }}
+              injectedJavaScript={POPUP_INJECTED_JAVASCRIPT}
+              javaScriptEnabled
+              domStorageEnabled
+              sharedCookiesEnabled
+              thirdPartyCookiesEnabled
+            />
+          </View>
+        )}
       </View>
       <SplashScreen visible={!isWebViewLoaded} />
     </SafeAreaProvider>
@@ -97,6 +137,10 @@ const styles = StyleSheet.create({
   webview: {
     flex: 1,
     backgroundColor: 'transparent',
+  },
+  popupCloseButton: {
+    height: 44,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
 });
 
