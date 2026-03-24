@@ -4,9 +4,10 @@ import { useEffect, useRef } from 'react';
 
 import { usePathname } from 'next/navigation';
 
-import { PAGE_TYPES, track } from '@/lib/analytics';
+import { PAGE_TYPES } from './events';
+import { track } from './track';
 
-import type { PageType } from '@/lib/analytics';
+import type { PageType } from './events';
 
 /**
  * pathname → page_type 매핑 테이블
