@@ -3,6 +3,12 @@ import { RefObject, useCallback } from 'react';
 import * as Linking from 'expo-linking';
 import { WebView } from 'react-native-webview';
 
+import type {
+  WebViewErrorEvent,
+  WebViewHttpErrorEvent,
+  WebViewOpenWindowEvent,
+} from 'react-native-webview/lib/WebViewTypes';
+
 interface UseWebViewHandlersProps {
   webViewRef: RefObject<WebView | null>;
   webAppUrl: string;
@@ -71,7 +77,7 @@ export const useWebViewHandlers = ({
    * 에러 발생 시 로딩을 멈추고 에러 페이지로 이동시킵니다.
    */
   const handleWebViewError = useCallback(
-    (syntheticEvent: any) => {
+    (syntheticEvent: WebViewErrorEvent | WebViewHttpErrorEvent) => {
       const { nativeEvent } = syntheticEvent;
       console.warn('WebView load error:', nativeEvent);
 
@@ -95,7 +101,7 @@ export const useWebViewHandlers = ({
    * iOS에서 window.open()이 외부 브라우저로 열리는 문제를 방지합니다.
    */
   const handleOpenWindow = useCallback(
-    (syntheticEvent: any) => {
+    (syntheticEvent: WebViewOpenWindowEvent) => {
       const { targetUrl } = syntheticEvent.nativeEvent;
       if (targetUrl) {
         onPopupOpen(targetUrl);
