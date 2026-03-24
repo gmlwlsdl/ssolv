@@ -19,6 +19,8 @@ const KAKAO_DOMAIN = 'kakao.com';
 /** 카카오링크/카카오톡 공유 시 앱을 직접 실행하는 커스텀 URL 스킴 목록 */
 const KAKAO_CUSTOM_SCHEMES = new Set(['kakaolink', 'kakaokompassauth', 'kakaotalk']);
 
+const APPLE_DOMAIN = 'appleid.apple.com';
+
 /**
  * @description WebView 관련 핸들러들을 제공하는 커스텀 훅으로,
  * WebView의 페이지 로드 요청 처리 및 에러 발생 시 동작을 정의합니다.
@@ -58,6 +60,12 @@ export const useWebViewHandlers = ({
         // 카카오 전체 도메인 허용 (kakao.com 및 모든 서브도메인)
         // 공유 플로우 중 sharer.kakao.com 외 다른 서브도메인을 거치는 경우 대응
         if (urlObj.hostname === KAKAO_DOMAIN || urlObj.hostname.endsWith(`.${KAKAO_DOMAIN}`)) {
+          return true;
+        }
+
+        // Apple 로그인 도메인 허용 (appleid.apple.com)
+        // response_mode: form_post 방식으로 콜백이 처리되므로 WebView 내에서 유지
+        if (urlObj.hostname === APPLE_DOMAIN) {
           return true;
         }
       } catch {
