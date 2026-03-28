@@ -1,6 +1,6 @@
 import { cn } from '@/lib/cn';
 
-type BadgeVariant = 'default' | 'highlight' | 'orange';
+export type BadgeVariant = 'default' | 'highlight' | 'orange';
 
 interface BadgeProps {
   children: React.ReactNode;

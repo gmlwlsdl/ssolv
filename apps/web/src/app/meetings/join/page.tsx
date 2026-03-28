@@ -34,12 +34,12 @@ const JoinMeetingPage = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLink(e.target.value);
-    if (hasError) setHasError(false);
+    setHasError(false);
   };
 
   const handleClear = () => {
     setLink('');
-    if (hasError) setHasError(false);
+    setHasError(false);
   };
 
   const isEmpty = !link.trim();

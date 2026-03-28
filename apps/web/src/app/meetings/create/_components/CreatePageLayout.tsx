@@ -3,16 +3,15 @@
 import { useRouter } from 'next/navigation';
 
 import TopNavigation from '@/components/layout/TopNavigation';
-import Badge from '@/components/ui/Badge';
+import Badge, { type BadgeVariant } from '@/components/ui/Badge';
 import { ConfirmModal } from '@/components/ui/Modal';
 import { useDisclosure } from '@/hooks/useDisclosure';
 
 interface CreatePageLayoutProps {
   children: React.ReactNode;
   badge?: string;
-  badgeVariant?: 'default' | 'highlight' | 'orange';
+  badgeVariant?: BadgeVariant;
   heading?: string;
-  /** 제공 시 뒤로가기 확인 모달 없이 즉시 호출됩니다. */
   onBack?: () => void;
 }
 
