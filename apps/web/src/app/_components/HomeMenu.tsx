@@ -4,7 +4,6 @@ import { useRouter } from 'next/navigation';
 
 import { ActionButton } from '@/app/_components';
 import FloatingActionButton from '@/app/_components/FloatingActionButton';
-import JoinMeetingModal from '@/app/_components/JoinMeetingModal';
 import { ConfirmModal } from '@/components/ui/Modal';
 import { useDisclosure } from '@/hooks/useDisclosure';
 
@@ -16,7 +15,6 @@ interface HomeMenuProps {
 
 const HomeMenu = ({ isOpen, onClose, onToggle }: HomeMenuProps) => {
   const { isOpen: showComingSoonMadal, handler: comingSoonModalHandler } = useDisclosure();
-  const { isOpen: showJoinMeetingModal, handler: joinMeetingModalHandler } = useDisclosure();
 
   const router = useRouter();
 
@@ -27,7 +25,7 @@ const HomeMenu = ({ isOpen, onClose, onToggle }: HomeMenuProps) => {
 
   const handleJoinMeeting = () => {
     onClose();
-    joinMeetingModalHandler.open();
+    router.push('/meetings/join');
   };
 
   const handleComingSoon = () => {
@@ -65,7 +63,6 @@ const HomeMenu = ({ isOpen, onClose, onToggle }: HomeMenuProps) => {
         </div>
       )}
       <FloatingActionButton isOpen={isOpen} onClick={onToggle} />
-      <JoinMeetingModal isOpen={showJoinMeetingModal} onClose={joinMeetingModalHandler.close} />
       <ConfirmModal
         isOpen={showComingSoonMadal}
         title="해당 서비스는 준비중이에요!"

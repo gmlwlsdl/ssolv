@@ -1,6 +1,6 @@
 import { cn } from '@/lib/cn';
 
-type BadgeVariant = 'default' | 'highlight';
+type BadgeVariant = 'default' | 'highlight' | 'orange';
 
 interface BadgeProps {
   children: React.ReactNode;
@@ -10,6 +10,7 @@ interface BadgeProps {
 const VARIANT_STYLES: Record<BadgeVariant, string> = {
   default: 'bg-neutral-200 text-neutral-600',
   highlight: 'bg-red-500 text-white shadow-sm',
+  orange: 'bg-orange-100 text-orange-500',
 };
 
 const Badge = ({ children, variant = 'default' }: BadgeProps) => {
