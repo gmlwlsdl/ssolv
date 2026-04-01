@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 import { AnimatePresence, motion } from 'framer-motion';
 import { Heart, MapPin, Send, Star } from 'lucide-react';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 
 import { CARD_UI } from '@/app/meetings/[token]/result/_components/RestaurantCardContent/restaurantCardThemes';
 import RestaurantImageGallery from '@/app/meetings/[token]/result/_components/RestaurantCardContent/RestaurantImageGallery';
@@ -30,9 +30,9 @@ const RestaurantCardContent = ({
   imagePriority,
   className,
 }: RestaurantCardContentProps) => {
-  const router = useRouter();
   const params = useParams();
-  const { token } = params as { token: string };
+  const { token: rawToken } = params as { token: string };
+  const token = decodeURIComponent(rawToken);
 
   const { success: successToast } = useToast();
 
@@ -140,7 +140,7 @@ const RestaurantCardContent = ({
             ui.addrButton
           )}
           onClick={() => {
-            router.push(place.link);
+            window.location.href = place.link;
           }}
         >
           <span className={ui.addrText}>지도에서 보기</span>
