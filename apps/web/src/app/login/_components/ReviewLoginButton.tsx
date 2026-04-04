@@ -12,9 +12,19 @@ const ReviewLoginButton = () => {
     setIsLoading(true);
 
     try {
-      // TODO: 앱 심사용 로그인 API 구현 예정
-      await fetch('/api/auth/review', { method: 'POST' });
-    } finally {
+      const BACKEND_API = process.env.NEXT_PUBLIC_API_URL;
+      const response = await fetch(`${BACKEND_API}/auth/demo-login`, {
+        method: 'POST',
+        credentials: 'include',
+      });
+
+      if (!response.ok) {
+        setIsLoading(false);
+        return;
+      }
+
+      window.location.href = '/';
+    } catch {
       setIsLoading(false);
     }
   };
