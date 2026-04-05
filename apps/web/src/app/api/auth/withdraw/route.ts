@@ -2,8 +2,6 @@ import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 
 const BACKEND_API = process.env.NEXT_PUBLIC_API_URL!;
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL!;
-const KAKAO_CLIENT_ID = process.env.KAKAO_CLIENT_ID!;
 
 export async function DELETE() {
   try {
@@ -30,18 +28,11 @@ export async function DELETE() {
       );
     }
 
-    const lastProvider = cookieStore.get('lastLoginProvider')?.value;
-
     cookieStore.delete('accessToken');
     cookieStore.delete('refreshToken');
     cookieStore.delete('lastLoginProvider');
 
-    const redirectUrl =
-      lastProvider === 'kakao'
-        ? `https://kauth.kakao.com/oauth/logout?client_id=${KAKAO_CLIENT_ID}&logout_redirect_uri=${BASE_URL}/login`
-        : `${BASE_URL}/login`;
-
-    return NextResponse.json({ success: true, redirectUrl });
+    return NextResponse.json({ success: true });
   } catch (error) {
     console.error('회원탈퇴 처리 중 에러:', error);
     return NextResponse.json(
