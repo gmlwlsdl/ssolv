@@ -6,6 +6,11 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL!;
 const KAKAO_CLIENT_ID = process.env.KAKAO_CLIENT_ID!;
 
 export async function DELETE() {
+  if (!KAKAO_CLIENT_ID || !BASE_URL) {
+    console.error('필수 환경변수(KAKAO_CLIENT_ID, NEXT_PUBLIC_BASE_URL)가 설정되지 않았습니다');
+    return NextResponse.json({ errorMessage: '서버 설정 오류가 발생했습니다' }, { status: 500 });
+  }
+
   try {
     const cookieStore = await cookies();
     const accessToken = cookieStore.get('accessToken')?.value;
