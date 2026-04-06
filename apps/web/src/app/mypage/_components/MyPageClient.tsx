@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useState } from 'react';
 
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
@@ -37,7 +37,7 @@ const MyPageClient = ({ profile }: MyPageClientProps) => {
   const { isOpen: showWithdrawModal, handler: withdrawModalHandler } = useDisclosure();
   const { isOpen: showWithdrawErrorModal, handler: withdrawErrorModalHandler } = useDisclosure();
   const { isOpen: showKakaoLogoutModal, handler: kakaoLogoutModalHandler } = useDisclosure();
-  const kakaoLogoutUrl = useRef<string | null>(null);
+  const [kakaoLogoutUrl, setKakaoLogoutUrl] = useState<string | null>(null);
 
   const { data: notificationSetting } = useQuery({
     ...getNotificationSettingQueryOptions(),
@@ -83,7 +83,7 @@ const MyPageClient = ({ profile }: MyPageClientProps) => {
       const { provider, redirectUrl } = await withdraw();
 
       if (provider === 'kakao') {
-        kakaoLogoutUrl.current = redirectUrl;
+        setKakaoLogoutUrl(redirectUrl);
         kakaoLogoutModalHandler.open();
         return;
       }
@@ -95,9 +95,7 @@ const MyPageClient = ({ profile }: MyPageClientProps) => {
   };
 
   const handleKakaoLogoutConfirm = () => {
-    if (kakaoLogoutUrl.current) {
-      window.location.href = kakaoLogoutUrl.current;
-    }
+    window.location.href = kakaoLogoutUrl ?? '/login';
   };
 
   return (
