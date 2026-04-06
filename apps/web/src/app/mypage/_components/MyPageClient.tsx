@@ -1,5 +1,7 @@
 'use client';
 
+import { useRef } from 'react';
+
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import TopNavigation from '@/components/layout/TopNavigation';
@@ -18,6 +20,8 @@ import { updateNotificationSetting } from '@/services/notification/notification-
 const APP_VERSION = 'v1.0.0';
 const SERVICE_EMAIL = 'ssolvofficial@gmail.com';
 
+const KAKAO_LOGOUT_GUIDE = "'카카오계정과 함께 로그아웃'을 눌러\n카카오 계정 연결을 해제해주세요.";
+
 interface MyPageClientProps {
   profile: UserProfile;
 }
@@ -32,6 +36,8 @@ const MyPageClient = ({ profile }: MyPageClientProps) => {
   const { isOpen: showLogoutModal, handler: logoutModalHandler } = useDisclosure();
   const { isOpen: showWithdrawModal, handler: withdrawModalHandler } = useDisclosure();
   const { isOpen: showWithdrawErrorModal, handler: withdrawErrorModalHandler } = useDisclosure();
+  const { isOpen: showKakaoLogoutModal, handler: kakaoLogoutModalHandler } = useDisclosure();
+  const kakaoLogoutUrl = useRef<string | null>(null);
 
   const { data: notificationSetting } = useQuery({
     ...getNotificationSettingQueryOptions(),
@@ -74,9 +80,23 @@ const MyPageClient = ({ profile }: MyPageClientProps) => {
   const handleWithdraw = async () => {
     withdrawModalHandler.close();
     try {
-      await withdraw();
+      const { provider, redirectUrl } = await withdraw();
+
+      if (provider === 'kakao') {
+        kakaoLogoutUrl.current = redirectUrl;
+        kakaoLogoutModalHandler.open();
+        return;
+      }
+
+      window.location.href = redirectUrl;
     } catch {
       withdrawErrorModalHandler.open();
+    }
+  };
+
+  const handleKakaoLogoutConfirm = () => {
+    if (kakaoLogoutUrl.current) {
+      window.location.href = kakaoLogoutUrl.current;
     }
   };
 
@@ -181,6 +201,14 @@ const MyPageClient = ({ profile }: MyPageClientProps) => {
         cancelText="취소"
         onConfirm={handleWithdraw}
         onCancel={withdrawModalHandler.close}
+      />
+
+      <ConfirmModal
+        isOpen={showKakaoLogoutModal}
+        title="탈퇴가 완료되었어요"
+        description={KAKAO_LOGOUT_GUIDE}
+        confirmText="카카오 계정 연결 해제하기"
+        onConfirm={handleKakaoLogoutConfirm}
       />
 
       {/* 회원탈퇴 실패 모달 */}
