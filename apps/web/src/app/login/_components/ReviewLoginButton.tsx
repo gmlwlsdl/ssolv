@@ -12,10 +12,8 @@ const ReviewLoginButton = () => {
     setIsLoading(true);
 
     try {
-      const BACKEND_API = process.env.NEXT_PUBLIC_API_URL;
-      const response = await fetch(`${BACKEND_API}/auth/demo-login`, {
+      const response = await fetch('/api/auth/demo-login', {
         method: 'POST',
-        credentials: 'include',
       });
 
       if (!response.ok) {
