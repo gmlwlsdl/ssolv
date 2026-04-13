@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import Constants from 'expo-constants';
 import * as ExpoSplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
+import { requestTrackingPermissionsAsync } from 'expo-tracking-transparency';
 import { Platform, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { WebView } from 'react-native-webview';
@@ -10,7 +11,7 @@ import { WebView } from 'react-native-webview';
 import SplashScreen from './components/SplashScreen';
 import { useNotifications } from './hooks/useNotifications';
 import { useWebViewHandlers } from './hooks/useWebViewHandlers';
-import amplitude from './lib/amplitude';
+import amplitude, { initAmplitude } from './lib/amplitude';
 import { track } from './lib/analytics';
 
 ExpoSplashScreen.preventAutoHideAsync();
@@ -24,6 +25,7 @@ if (!WEB_APP_URL) {
 /**
  * 웹뷰 URL에 앱 공통 속성을 파라미터로 추가
  * 웹에서 useCommonProperties가 이 값들을 파싱하여 Amplitude에 세팅
+ * Amplitude 초기화 이후 호출해야 device_id를 올바르게 포함합니다.
  */
 const buildWebViewUrl = (): string => {
   const url = new URL(WEB_APP_URL);
@@ -56,10 +58,20 @@ const App = () => {
   const webViewRef = useRef<WebView>(null);
   const [isWebViewLoaded, setIsWebViewLoaded] = useState(false);
   const [popupUrl, setPopupUrl] = useState<string | null>(null);
+  const [webViewUrl, setWebViewUrl] = useState<string | null>(null);
 
   useEffect(() => {
-    ExpoSplashScreen.hideAsync();
-    track.appOpen({ is_cold_start: true });
+    const initialize = async () => {
+      if (Platform.OS === 'ios') {
+        await requestTrackingPermissionsAsync();
+      }
+
+      initAmplitude();
+      setWebViewUrl(buildWebViewUrl());
+      track.appOpen({ is_cold_start: true });
+    };
+
+    initialize();
   }, []);
 
   const { handleShouldStartLoadWithRequest, handleWebViewError, handleOpenWindow } =
@@ -79,26 +91,28 @@ const App = () => {
   return (
     <SafeAreaProvider>
       <View style={styles.container}>
-        <WebView
-          ref={webViewRef}
-          source={{ uri: buildWebViewUrl() }}
-          style={styles.webview}
-          onLoadEnd={handleWebViewLoad}
-          onShouldStartLoadWithRequest={handleShouldStartLoadWithRequest}
-          onOpenWindow={handleOpenWindow}
-          onError={handleWebViewError}
-          onHttpError={handleWebViewError}
-          javaScriptEnabled
-          domStorageEnabled
-          startInLoadingState
-          scalesPageToFit
-          keyboardDisplayRequiresUserAction={false}
-          mixedContentMode="compatibility"
-          thirdPartyCookiesEnabled
-          sharedCookiesEnabled
-          incognito={false}
-          cacheEnabled
-        />
+        {webViewUrl && (
+          <WebView
+            ref={webViewRef}
+            source={{ uri: webViewUrl }}
+            style={styles.webview}
+            onLoadEnd={handleWebViewLoad}
+            onShouldStartLoadWithRequest={handleShouldStartLoadWithRequest}
+            onOpenWindow={handleOpenWindow}
+            onError={handleWebViewError}
+            onHttpError={handleWebViewError}
+            javaScriptEnabled
+            domStorageEnabled
+            startInLoadingState
+            scalesPageToFit
+            keyboardDisplayRequiresUserAction={false}
+            mixedContentMode="compatibility"
+            thirdPartyCookiesEnabled
+            sharedCookiesEnabled
+            incognito={false}
+            cacheEnabled
+          />
+        )}
         <StatusBar style="auto" />
         {popupUrl && (
           <View style={StyleSheet.absoluteFillObject}>

@@ -20,7 +20,8 @@
       "googleServicesFile": "./GoogleService-Info.plist",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false,
-        "LSApplicationQueriesSchemes": ["kakaolink", "kakaokompassauth", "kakaotalk"]
+        "LSApplicationQueriesSchemes": ["kakaolink", "kakaokompassauth", "kakaotalk"],
+        "NSUserTrackingUsageDescription": "앱 사용 경험 개선 및 맞춤형 서비스 제공을 위해 사용됩니다."
       },
       "entitlements": {
         "aps-environment": "production"
@@ -39,6 +40,7 @@
       "favicon": "./assets/solv-mobile-icon.png"
     },
     "plugins": [
+      "expo-tracking-transparency",
       "expo-web-browser",
       "expo-apple-authentication",
       "@react-native-firebase/app",
