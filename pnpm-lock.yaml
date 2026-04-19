@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  expo-tracking-transparency@4.0.2:
+    hash: rwtx6szd6mj7njqy4a4qjrdo7i
+    path: patches/expo-tracking-transparency@4.0.2.patch
+
 importers:
 
   .:
@@ -174,6 +179,9 @@ importers:
       '@react-native-async-storage/async-storage':
         specifier: ^2.2.0
         version: 2.2.0(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))
+      '@react-native-community/push-notification-ios':
+        specifier: ^1.12.0
+        version: 1.12.0(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0)
       '@react-native-firebase/app':
         specifier: ^23.8.6
         version: 23.8.6(@react-native-async-storage/async-storage@2.2.0(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0)))(expo@54.0.21(@babel/core@7.28.5)(react-native-webview@13.16.0(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0))(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0))(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0)
@@ -209,7 +217,7 @@ importers:
         version: 3.0.8(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0)
       expo-tracking-transparency:
         specifier: ^4.0.2
-        version: 4.0.2(expo@54.0.21(@babel/core@7.28.5)(react-native-webview@13.16.0(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0))(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0))
+        version: 4.0.2(patch_hash=rwtx6szd6mj7njqy4a4qjrdo7i)(expo@54.0.21(@babel/core@7.28.5)(react-native-webview@13.16.0(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0))(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0))
       expo-web-browser:
         specifier: ^15.0.8
         version: 15.0.8(expo@54.0.21(@babel/core@7.28.5)(react-native-webview@13.16.0(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0))(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0))(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))
@@ -1774,6 +1782,12 @@ packages:
     resolution: {integrity: sha512-gvRvjR5JAaUZF8tv2Kcq/Gbt3JHwbKFYfmb445rhOj6NUMx3qPLixmDx5pZAyb9at1bYvJ4/eTUipU5aki45xw==}
     peerDependencies:
       react-native: ^0.0.0-0 || >=0.65 <1.0
+
+  '@react-native-community/push-notification-ios@1.12.0':
+    resolution: {integrity: sha512-nu6ctimVlK4E3id3QHs9yZJ4vCP5UG3lRaBvSboJZ2IWU0XROcIJnNVIXsSH7C3hTlb84lNwPWir3y/TxRj0oA==}
+    peerDependencies:
+      react: '>=16.6.3'
+      react-native: '>=0.58.4'
 
   '@react-native-firebase/app@23.8.6':
     resolution: {integrity: sha512-oHM/0c5CbMSDLzIAjdQTH2im7Lr1AoajDYyehye9ge6zH/tuhCtwXtkf19zE0MyFsSqd06IoYRfZP7W05D4m+w==}
@@ -7762,6 +7776,12 @@ snapshots:
       merge-options: 3.0.4
       react-native: 0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0)
 
+  '@react-native-community/push-notification-ios@1.12.0(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      invariant: 2.2.4
+      react: 19.1.0
+      react-native: 0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0)
+
   '@react-native-firebase/app@23.8.6(@react-native-async-storage/async-storage@2.2.0(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0)))(expo@54.0.21(@babel/core@7.28.5)(react-native-webview@13.16.0(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0))(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0))(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0)':
     dependencies:
       firebase: 12.8.0(@react-native-async-storage/async-storage@2.2.0(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0)))
@@ -9492,7 +9512,7 @@ snapshots:
       react-native: 0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0)
       react-native-is-edge-to-edge: 1.2.1(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0)
 
-  expo-tracking-transparency@4.0.2(expo@54.0.21(@babel/core@7.28.5)(react-native-webview@13.16.0(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0))(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0)):
+  expo-tracking-transparency@4.0.2(patch_hash=rwtx6szd6mj7njqy4a4qjrdo7i)(expo@54.0.21(@babel/core@7.28.5)(react-native-webview@13.16.0(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0))(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0)):
     dependencies:
       expo: 54.0.21(@babel/core@7.28.5)(react-native-webview@13.16.0(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0))(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0)
 
