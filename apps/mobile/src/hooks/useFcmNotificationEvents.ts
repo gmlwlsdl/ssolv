@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 import messaging from '@react-native-firebase/messaging';
 import { Alert } from 'react-native';
@@ -36,6 +36,9 @@ const resolveNotificationPath = (data: Record<string, string>): string | undefin
  * @sideeffect Firebase 리스너 등록, 포그라운드 알림 Alert 표시
  */
 export const useFcmNotificationEvents = (onPath: (path: string) => void) => {
+  const onPathRef = useRef(onPath);
+  onPathRef.current = onPath;
+
   useEffect(() => {
     // 종료 상태에서 알림 탭으로 앱 시작
     messaging()
@@ -49,7 +52,7 @@ export const useFcmNotificationEvents = (onPath: (path: string) => void) => {
             push_type: data.type ?? 'unknown',
             ...(data.meetingToken && { meeting_id: data.meetingToken }),
           });
-          onPath(path);
+          onPathRef.current(path);
         }
       });
 
@@ -63,7 +66,7 @@ export const useFcmNotificationEvents = (onPath: (path: string) => void) => {
           push_type: data.type ?? 'unknown',
           ...(data.meetingToken && { meeting_id: data.meetingToken }),
         });
-        onPath(path);
+        onPathRef.current(path);
       }
     });
 
@@ -86,7 +89,7 @@ export const useFcmNotificationEvents = (onPath: (path: string) => void) => {
                     push_type: data?.type ?? 'unknown',
                     ...(data?.meetingToken && { meeting_id: data.meetingToken }),
                   });
-                  onPath(path);
+                  onPathRef.current(path);
                 },
               },
             ]
@@ -98,5 +101,5 @@ export const useFcmNotificationEvents = (onPath: (path: string) => void) => {
       unsubscribeOpened();
       unsubscribeForeground();
     };
-  }, [onPath]);
+  }, []); // onPathRef stays current — listeners don't need to restart when callback changes
 };

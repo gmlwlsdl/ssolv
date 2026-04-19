@@ -1,11 +1,13 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import messaging from '@react-native-firebase/messaging';
 import { Platform } from 'react-native';
 
 const APNS_POLL_INTERVAL_MS = 500;
 const APNS_MAX_ATTEMPTS = 10; // 최대 5초 대기
 const APNS_RETRY_DELAY_MS = 10_000; // 타임아웃 후 재시도 대기
+const FCM_TOKEN_CACHE_KEY = '@fcm_token';
 
 /**
  * @description iOS에서 APNs 토큰이 준비될 때까지 폴링으로 대기.
@@ -30,15 +32,18 @@ const waitForApnsToken = async (isCancelled: () => boolean): Promise<string | nu
 /**
  * @description FCM 토큰 생애주기를 관리하는 훅.
  *
- * - 권한 요청 및 초기 토큰 발급
+ * - 권한 요청 및 초기 토큰 발급 (캐시 히트 시 서버 요청 생략)
  * - iOS: APNs 토큰 준비 대기 후 FCM 토큰 발급. 타임아웃 시 10초 후 1회 재시도.
- * - 토큰 갱신 구독
+ * - 토큰 갱신 구독 (갱신 시 캐시 업데이트)
  *
  * @param onToken - 토큰이 발급/갱신될 때 호출되는 콜백
  *
  * @sideeffect FCM 권한 요청 다이얼로그 표시, Firebase 리스너 등록
  */
 export const useFcmToken = (onToken: (token: string) => void) => {
+  const onTokenRef = useRef(onToken);
+  onTokenRef.current = onToken;
+
   useEffect(() => {
     let cancelled = false;
     let retryTimer: ReturnType<typeof setTimeout> | null = null;
@@ -52,7 +57,9 @@ export const useFcmToken = (onToken: (token: string) => void) => {
       if (cancelled) return false;
       const token = await messaging().getToken();
       if (cancelled) return false;
-      onToken(token);
+
+      await AsyncStorage.setItem(FCM_TOKEN_CACHE_KEY, token);
+      onTokenRef.current(token);
       return true;
     };
 
@@ -63,6 +70,12 @@ export const useFcmToken = (onToken: (token: string) => void) => {
         status === messaging.AuthorizationStatus.PROVISIONAL;
 
       if (!granted) return;
+
+      const cachedToken = await AsyncStorage.getItem(FCM_TOKEN_CACHE_KEY);
+      if (cachedToken) {
+        onTokenRef.current(cachedToken);
+        return;
+      }
 
       try {
         await messaging().registerDeviceForRemoteMessages();
@@ -84,11 +97,15 @@ export const useFcmToken = (onToken: (token: string) => void) => {
 
     init();
 
-    const unsubscribeRefresh = messaging().onTokenRefresh(onToken);
+    const unsubscribeRefresh = messaging().onTokenRefresh(async (token) => {
+      await AsyncStorage.setItem(FCM_TOKEN_CACHE_KEY, token);
+      onTokenRef.current(token);
+    });
+
     return () => {
       cancelled = true;
       unsubscribeRefresh();
       if (retryTimer) clearTimeout(retryTimer);
     };
-  }, [onToken]);
+  }, []); // onTokenRef stays current — listeners don't need to restart when callback changes
 };
