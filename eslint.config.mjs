@@ -182,6 +182,7 @@ const eslintConfig = [
       'dist/**',
       'next-env.d.ts',
       '.eslintrc.cjs',
+      'apps/mobile/metro.config.js',
     ],
   },
 
