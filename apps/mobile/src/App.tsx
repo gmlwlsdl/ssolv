@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 
+import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import Constants from 'expo-constants';
 import * as ExpoSplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { requestTrackingPermissionsAsync } from 'expo-tracking-transparency';
-import { Platform, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { AppState, Platform, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { WebView } from 'react-native-webview';
 
@@ -61,17 +62,30 @@ const App = () => {
   const [webViewUrl, setWebViewUrl] = useState<string | null>(null);
 
   useEffect(() => {
+    const clearIosBadge = () => {
+      if (Platform.OS === 'ios') {
+        PushNotificationIOS.setApplicationIconBadgeNumber(0);
+      }
+    };
+
     const initialize = async () => {
       if (Platform.OS === 'ios') {
         await requestTrackingPermissionsAsync();
       }
 
+      clearIosBadge();
       initAmplitude();
       setWebViewUrl(buildWebViewUrl());
       track.appOpen({ is_cold_start: true });
     };
 
     initialize();
+
+    const subscription = AppState.addEventListener('change', (state) => {
+      if (state === 'active') clearIosBadge();
+    });
+
+    return () => subscription.remove();
   }, []);
 
   const { handleShouldStartLoadWithRequest, handleWebViewError, handleOpenWindow } =

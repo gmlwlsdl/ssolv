@@ -2069,6 +2069,8 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
+  - RNCPushNotificationIOS (1.12.0):
+    - React-Core
   - RNFBApp (23.8.6):
     - Firebase/CoreOnly (= 12.8.0)
     - hermes-engine
@@ -2138,7 +2140,7 @@ DEPENDENCIES:
   - "ExpoLinking (from `../../../node_modules/.pnpm/expo-linking@8.0.8_expo@54.0.21_@babel+core@7.28.5_react-native-webview@13.16.0_react-native@_xf5wy6swogbonnhthri7fxvlve/node_modules/expo-linking/ios`)"
   - "ExpoModulesCore (from `../../../node_modules/.pnpm/expo-modules-core@3.0.23_react-native@0.81.5_@babel+core@7.28.5_@types+react@19.1.11_react@19.1.0__react@19.1.0/node_modules/expo-modules-core`)"
   - "ExpoSplashScreen (from `../../../node_modules/.pnpm/expo-splash-screen@55.0.12_expo@54.0.21_@babel+core@7.28.5_react-native-webview@13.16.0_react_kin5mpserxjsd7yswbqdjbx7wi/node_modules/expo-splash-screen/ios`)"
-  - "ExpoTrackingTransparency (from `../../../node_modules/.pnpm/expo-tracking-transparency@4.0.2_expo@54.0.21_@babel+core@7.28.5_react-native-webview@13.16.0_u33pp3zbx2g2o3rfwxsz54mn24/node_modules/expo-tracking-transparency/ios`)"
+  - "ExpoTrackingTransparency (from `../../../node_modules/.pnpm/expo-tracking-transparency@4.0.2_patch_hash=rwtx6szd6mj7njqy4a4qjrdo7i_expo@54.0.21_@babel+co_tb4ppjgws7diuxwxkf5qukyboa/node_modules/expo-tracking-transparency/ios`)"
   - "ExpoWebBrowser (from `../../../node_modules/.pnpm/expo-web-browser@15.0.8_expo@54.0.21_@babel+core@7.28.5_react-native-webview@13.16.0_react-na_pygnc4cjhbwxhilpyprg5aqlou/node_modules/expo-web-browser/ios`)"
   - "EXUpdatesInterface (from `../../../node_modules/.pnpm/expo-updates-interface@2.0.0_expo@54.0.21_@babel+core@7.28.5_react-native-webview@13.16.0_rea_wu6wrjfcwn3lamzoxkqn2rx2iy/node_modules/expo-updates-interface/ios`)"
   - "FBLazyVector (from `../../../node_modules/.pnpm/react-native@0.81.5_@babel+core@7.28.5_@types+react@19.1.11_react@19.1.0/node_modules/react-native/Libraries/FBLazyVector`)"
@@ -2212,6 +2214,7 @@ DEPENDENCIES:
   - "ReactCommon/turbomodule/core (from `../../../node_modules/.pnpm/react-native@0.81.5_@babel+core@7.28.5_@types+react@19.1.11_react@19.1.0/node_modules/react-native/ReactCommon`)"
   - "ReactNativeDependencies (from `../../../node_modules/.pnpm/react-native@0.81.5_@babel+core@7.28.5_@types+react@19.1.11_react@19.1.0/node_modules/react-native/third-party-podspecs/ReactNativeDependencies.podspec`)"
   - "RNCAsyncStorage (from `../../../node_modules/.pnpm/@react-native-async-storage+async-storage@2.2.0_react-native@0.81.5_@babel+core@7.28.5_@types_le5sr5cw7db62pf6v2abvn4xwi/node_modules/@react-native-async-storage/async-storage`)"
+  - "RNCPushNotificationIOS (from `../../../node_modules/.pnpm/@react-native-community+push-notification-ios@1.12.0_react-native@0.81.5_@babel+core@7.28.5_@_ubydinwd6v6lzaj2gxknjirwru/node_modules/@react-native-community/push-notification-ios`)"
   - "RNFBApp (from `../../../node_modules/.pnpm/@react-native-firebase+app@23.8.6_@react-native-async-storage+async-storage@2.2.0_react-nativ_ama5rckcqxy5fxesg3delpgzhy/node_modules/@react-native-firebase/app`)"
   - "RNFBMessaging (from `../../../node_modules/.pnpm/@react-native-firebase+messaging@23.8.6_@react-native-firebase+app@23.8.6_@react-native-async_6etdu4wewkfrpdeixsv27r7joe/node_modules/@react-native-firebase/messaging`)"
   - "Yoga (from `../../../node_modules/.pnpm/react-native@0.81.5_@babel+core@7.28.5_@types+react@19.1.11_react@19.1.0/node_modules/react-native/ReactCommon/yoga`)"
@@ -2267,7 +2270,7 @@ EXTERNAL SOURCES:
   ExpoSplashScreen:
     :path: "../../../node_modules/.pnpm/expo-splash-screen@55.0.12_expo@54.0.21_@babel+core@7.28.5_react-native-webview@13.16.0_react_kin5mpserxjsd7yswbqdjbx7wi/node_modules/expo-splash-screen/ios"
   ExpoTrackingTransparency:
-    :path: "../../../node_modules/.pnpm/expo-tracking-transparency@4.0.2_expo@54.0.21_@babel+core@7.28.5_react-native-webview@13.16.0_u33pp3zbx2g2o3rfwxsz54mn24/node_modules/expo-tracking-transparency/ios"
+    :path: "../../../node_modules/.pnpm/expo-tracking-transparency@4.0.2_patch_hash=rwtx6szd6mj7njqy4a4qjrdo7i_expo@54.0.21_@babel+co_tb4ppjgws7diuxwxkf5qukyboa/node_modules/expo-tracking-transparency/ios"
   ExpoWebBrowser:
     :path: "../../../node_modules/.pnpm/expo-web-browser@15.0.8_expo@54.0.21_@babel+core@7.28.5_react-native-webview@13.16.0_react-na_pygnc4cjhbwxhilpyprg5aqlou/node_modules/expo-web-browser/ios"
   EXUpdatesInterface:
@@ -2411,6 +2414,8 @@ EXTERNAL SOURCES:
     :podspec: "../../../node_modules/.pnpm/react-native@0.81.5_@babel+core@7.28.5_@types+react@19.1.11_react@19.1.0/node_modules/react-native/third-party-podspecs/ReactNativeDependencies.podspec"
   RNCAsyncStorage:
     :path: "../../../node_modules/.pnpm/@react-native-async-storage+async-storage@2.2.0_react-native@0.81.5_@babel+core@7.28.5_@types_le5sr5cw7db62pf6v2abvn4xwi/node_modules/@react-native-async-storage/async-storage"
+  RNCPushNotificationIOS:
+    :path: "../../../node_modules/.pnpm/@react-native-community+push-notification-ios@1.12.0_react-native@0.81.5_@babel+core@7.28.5_@_ubydinwd6v6lzaj2gxknjirwru/node_modules/@react-native-community/push-notification-ios"
   RNFBApp:
     :path: "../../../node_modules/.pnpm/@react-native-firebase+app@23.8.6_@react-native-async-storage+async-storage@2.2.0_react-nativ_ama5rckcqxy5fxesg3delpgzhy/node_modules/@react-native-firebase/app"
   RNFBMessaging:
@@ -2519,6 +2524,7 @@ SPEC CHECKSUMS:
   ReactCommon: e6e232202a447d353e5531f2be82f50f47cbaa9a
   ReactNativeDependencies: 71ce9c28beb282aa720ea7b46980fff9669f428a
   RNCAsyncStorage: e85a99325df9eb0191a6ee2b2a842644c7eb29f4
+  RNCPushNotificationIOS: b9dcb4f28c85f77483c3f86d2fcb1e0f0ab396fa
   RNFBApp: a279e708283bdada105e97ae1a6861639667e960
   RNFBMessaging: 754dd54e516c0e505172ea810a4f10126961633a
   Yoga: 5934998fbeaef7845dbf698f698518695ab4cd1a
