@@ -34,8 +34,7 @@
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "package": "com.solv.app",
-      "permissions": ["com.google.android.gms.permission.AD_ID"]
+      "package": "com.solv.app"
     },
     "web": {
       "favicon": "./assets/solv-mobile-icon.png"
