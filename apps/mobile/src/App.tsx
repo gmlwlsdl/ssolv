@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
+import * as AppleAuthentication from 'expo-apple-authentication';
 import Constants from 'expo-constants';
 import * as ExpoSplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
@@ -12,6 +13,8 @@ import { useNotifications } from './hooks/useNotifications';
 import { useWebViewHandlers } from './hooks/useWebViewHandlers';
 import amplitude from './lib/amplitude';
 import { track } from './lib/analytics';
+
+import type { WebViewMessageEvent } from 'react-native-webview/lib/WebViewTypes';
 
 ExpoSplashScreen.preventAutoHideAsync();
 
@@ -69,6 +72,58 @@ const App = () => {
       onPopupOpen: setPopupUrl,
     });
 
+  // WKWebView는 Touch ID/Face ID를 Apple 로그인에 사용할 수 없으므로
+  // 웹에서 APPLE_LOGIN_REQUEST 메시지를 받으면 네이티브 API로 처리
+  const handleWebViewMessage = useCallback(
+    async (event: WebViewMessageEvent) => {
+      const { data } = event.nativeEvent;
+
+      if (data === 'APPLE_LOGIN_REQUEST' && Platform.OS === 'ios') {
+        try {
+          const credential = await AppleAuthentication.signInAsync({
+            requestedScopes: [
+              AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
+              AppleAuthentication.AppleAuthenticationScope.EMAIL,
+            ],
+          });
+
+          const result = {
+            type: 'APPLE_LOGIN_SUCCESS',
+            authorizationCode: credential.authorizationCode,
+            identityToken: credential.identityToken,
+            user: credential.fullName
+              ? JSON.stringify({
+                  name: {
+                    firstName: credential.fullName.givenName ?? '',
+                    lastName: credential.fullName.familyName ?? '',
+                  },
+                })
+              : null,
+          };
+
+          webViewRef.current?.injectJavaScript(`
+            if (window.__appleLoginCallback) {
+              window.__appleLoginCallback(${JSON.stringify(result)});
+            }
+            true;
+          `);
+        } catch (error: unknown) {
+          const errorCode = (error as { code?: string })?.code;
+          const type = errorCode === 'ERR_CANCELED' ? 'APPLE_LOGIN_CANCEL' : 'APPLE_LOGIN_ERROR';
+
+          webViewRef.current?.injectJavaScript(`
+            if (window.__appleLoginCallback) {
+              window.__appleLoginCallback({ type: '${type}' });
+            }
+            true;
+          `);
+        }
+        return;
+      }
+    },
+    [webViewRef]
+  );
+
   const { onWebViewLoad } = useNotifications({ webViewRef });
 
   const handleWebViewLoad = () => {
@@ -86,6 +141,7 @@ const App = () => {
           onLoadEnd={handleWebViewLoad}
           onShouldStartLoadWithRequest={handleShouldStartLoadWithRequest}
           onOpenWindow={handleOpenWindow}
+          onMessage={handleWebViewMessage}
           onError={handleWebViewError}
           onHttpError={handleWebViewError}
           javaScriptEnabled
