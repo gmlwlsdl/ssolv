@@ -2,6 +2,23 @@
 
 import { useState } from 'react';
 
+declare global {
+  interface Window {
+    ReactNativeWebView?: { postMessage: (msg: string) => void };
+    __appleLoginCallback?: (result: NativeAppleLoginResult) => void;
+  }
+}
+
+type NativeAppleLoginResult =
+  | {
+      type: 'APPLE_LOGIN_SUCCESS';
+      authorizationCode: string;
+      identityToken: string;
+      user: string | null;
+    }
+  | { type: 'APPLE_LOGIN_CANCEL' }
+  | { type: 'APPLE_LOGIN_ERROR' };
+
 import Image from 'next/image';
 
 import Badge from '@/components/ui/Badge';
@@ -47,6 +64,53 @@ const LoginButton = ({ provider = 'kakao', redirectTo, isLastUsed = false }: Log
   const handleLogin = async () => {
     if (isLoading) return;
     setIsLoading(true);
+
+    // WKWebView는 Touch ID/Face ID를 Apple 로그인에 사용할 수 없으므로
+    // 네이티브 앱 환경에서는 native Sign in with Apple API 경유
+    if (provider === 'apple' && window.ReactNativeWebView) {
+      window.__appleLoginCallback = async (result) => {
+        delete window.__appleLoginCallback;
+
+        if (result.type === 'APPLE_LOGIN_CANCEL') {
+          setIsLoading(false);
+          return;
+        }
+
+        if (result.type === 'APPLE_LOGIN_ERROR') {
+          errorHandler.open();
+          setIsLoading(false);
+          return;
+        }
+
+        try {
+          const res = await fetch('/api/auth/apple-native', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              authorizationCode: result.authorizationCode,
+              identityToken: result.identityToken,
+              user: result.user,
+              state: redirectTo,
+            }),
+          });
+
+          if (!res.ok) {
+            errorHandler.open();
+            setIsLoading(false);
+            return;
+          }
+
+          const { redirectUrl } = await res.json();
+          window.location.href = redirectUrl;
+        } catch {
+          errorHandler.open();
+          setIsLoading(false);
+        }
+      };
+
+      window.ReactNativeWebView.postMessage('APPLE_LOGIN_REQUEST');
+      return;
+    }
 
     try {
       const params = new URLSearchParams();
