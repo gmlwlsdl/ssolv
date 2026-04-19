@@ -6,7 +6,7 @@ settings:
 
 patchedDependencies:
   expo-tracking-transparency@4.0.2:
-    hash: rwtx6szd6mj7njqy4a4qjrdo7i
+    hash: hs2ecrmr7lshbes3wnsv4z6c54
     path: patches/expo-tracking-transparency@4.0.2.patch
 
 importers:
@@ -217,7 +217,7 @@ importers:
         version: 3.0.8(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0)
       expo-tracking-transparency:
         specifier: ^4.0.2
-        version: 4.0.2(patch_hash=rwtx6szd6mj7njqy4a4qjrdo7i)(expo@54.0.21(@babel/core@7.28.5)(react-native-webview@13.16.0(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0))(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0))
+        version: 4.0.2(patch_hash=hs2ecrmr7lshbes3wnsv4z6c54)(expo@54.0.21(@babel/core@7.28.5)(react-native-webview@13.16.0(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0))(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0))
       expo-web-browser:
         specifier: ^15.0.8
         version: 15.0.8(expo@54.0.21(@babel/core@7.28.5)(react-native-webview@13.16.0(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0))(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0))(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))
@@ -9512,7 +9512,7 @@ snapshots:
       react-native: 0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0)
       react-native-is-edge-to-edge: 1.2.1(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0)
 
-  expo-tracking-transparency@4.0.2(patch_hash=rwtx6szd6mj7njqy4a4qjrdo7i)(expo@54.0.21(@babel/core@7.28.5)(react-native-webview@13.16.0(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0))(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0)):
+  expo-tracking-transparency@4.0.2(patch_hash=hs2ecrmr7lshbes3wnsv4z6c54)(expo@54.0.21(@babel/core@7.28.5)(react-native-webview@13.16.0(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0))(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0)):
     dependencies:
       expo: 54.0.21(@babel/core@7.28.5)(react-native-webview@13.16.0(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0))(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0)
 
