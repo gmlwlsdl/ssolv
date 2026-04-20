@@ -1,0 +1,29 @@
+# [Why] expo-tracking-transparency@4.0.2의 expo-module.config.json이 구버전 Expo 모듈 API 형식을 사용하고 있어
+#        Expo SDK 52+ 환경에서 빌드 시 "Unrecognized Expo module config" 오류가 발생함.
+#
+# [What] 구버전 포맷 → 신버전 포맷으로 변경:
+#   - "platforms": ["ios"] → ["apple"]  (visionOS 등 Apple 플랫폼 통합 명칭)
+#   - "ios.modulesClassNames" → "apple.modules"
+#   - "android.modulesClassNames" → "android.modules"
+#
+# [When to remove] expo-tracking-transparency 패키지가 4.0.2 이후 버전으로 업그레이드되어
+#                  해당 수정이 upstream에 반영되면 이 패치와 package.json의 patchedDependencies 항목을 함께 제거.
+diff --git a/expo-module.config.json b/expo-module.config.json
+index 657ca7fbd72fd5247355e92a49645f36123ac466..b9bb4fb956e87a1653e84ca32f607fda163f8245 100644
+--- a/expo-module.config.json
++++ b/expo-module.config.json
+@@ -1,10 +1,10 @@
+ {
+   "name": "expo-tracking-transparency",
+-  "platforms": ["ios", "android"],
+-  "ios": {
+-    "modulesClassNames": ["TrackingTransparencyModule"]
++  "platforms": ["apple", "android"],
++  "apple": {
++    "modules": ["TrackingTransparencyModule"]
+   },
+   "android": {
+-    "modulesClassNames": ["expo.modules.trackingtransparency.TrackingTransparencyModule"]
++    "modules": ["expo.modules.trackingtransparency.TrackingTransparencyModule"]
+   }
+ }

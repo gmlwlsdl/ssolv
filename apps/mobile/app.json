@@ -12,7 +12,6 @@
     "splash": {
       "backgroundColor": "#FF4F14"
     },
-
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.solv.app",
@@ -20,11 +19,13 @@
       "googleServicesFile": "./GoogleService-Info.plist",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false,
-        "LSApplicationQueriesSchemes": ["kakaolink", "kakaokompassauth", "kakaotalk"]
+        "LSApplicationQueriesSchemes": ["kakaolink", "kakaokompassauth", "kakaotalk"],
+        "NSUserTrackingUsageDescription": "앱 사용 경험 개선 및 맞춤형 서비스 제공을 위해 사용됩니다."
       },
       "entitlements": {
         "aps-environment": "production"
-      }
+      },
+      "appleTeamId": "2R4SBNV568"
     },
     "android": {
       "adaptiveIcon": {
@@ -39,6 +40,7 @@
       "favicon": "./assets/solv-mobile-icon.png"
     },
     "plugins": [
+      "expo-tracking-transparency",
       "expo-web-browser",
       "expo-apple-authentication",
       "@react-native-firebase/app",
@@ -47,7 +49,12 @@
         "expo-build-properties",
         {
           "ios": {
-            "extraPods": [{ "name": "GoogleUtilities", "modular_headers": true }]
+            "extraPods": [
+              {
+                "name": "GoogleUtilities",
+                "modular_headers": true
+              }
+            ]
           }
         }
       ]
