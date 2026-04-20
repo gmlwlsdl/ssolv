@@ -72,14 +72,18 @@ const App = () => {
     };
 
     const initialize = async () => {
-      if (Platform.OS === 'ios') {
-        await requestTrackingPermissionsAsync();
-      }
+      try {
+        if (Platform.OS === 'ios') {
+          await requestTrackingPermissionsAsync();
+        }
 
-      clearIosBadge();
-      initAmplitude();
-      setWebViewUrl(buildWebViewUrl());
-      track.appOpen({ is_cold_start: true });
+        clearIosBadge();
+        initAmplitude();
+        setWebViewUrl(buildWebViewUrl());
+        track.appOpen({ is_cold_start: true });
+      } finally {
+        await ExpoSplashScreen.hideAsync();
+      }
     };
 
     initialize();

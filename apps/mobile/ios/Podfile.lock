@@ -2140,7 +2140,7 @@ DEPENDENCIES:
   - "ExpoLinking (from `../../../node_modules/.pnpm/expo-linking@8.0.8_expo@54.0.21_@babel+core@7.28.5_react-native-webview@13.16.0_react-native@_xf5wy6swogbonnhthri7fxvlve/node_modules/expo-linking/ios`)"
   - "ExpoModulesCore (from `../../../node_modules/.pnpm/expo-modules-core@3.0.23_react-native@0.81.5_@babel+core@7.28.5_@types+react@19.1.11_react@19.1.0__react@19.1.0/node_modules/expo-modules-core`)"
   - "ExpoSplashScreen (from `../../../node_modules/.pnpm/expo-splash-screen@55.0.12_expo@54.0.21_@babel+core@7.28.5_react-native-webview@13.16.0_react_kin5mpserxjsd7yswbqdjbx7wi/node_modules/expo-splash-screen/ios`)"
-  - "ExpoTrackingTransparency (from `../../../node_modules/.pnpm/expo-tracking-transparency@4.0.2_patch_hash=rwtx6szd6mj7njqy4a4qjrdo7i_expo@54.0.21_@babel+co_tb4ppjgws7diuxwxkf5qukyboa/node_modules/expo-tracking-transparency/ios`)"
+  - "ExpoTrackingTransparency (from `../../../node_modules/.pnpm/expo-tracking-transparency@4.0.2_patch_hash=hs2ecrmr7lshbes3wnsv4z6c54_expo@54.0.21_@babel+co_ykkrwtbvykrewynzlgshgrmnce/node_modules/expo-tracking-transparency/ios`)"
   - "ExpoWebBrowser (from `../../../node_modules/.pnpm/expo-web-browser@15.0.8_expo@54.0.21_@babel+core@7.28.5_react-native-webview@13.16.0_react-na_pygnc4cjhbwxhilpyprg5aqlou/node_modules/expo-web-browser/ios`)"
   - "EXUpdatesInterface (from `../../../node_modules/.pnpm/expo-updates-interface@2.0.0_expo@54.0.21_@babel+core@7.28.5_react-native-webview@13.16.0_rea_wu6wrjfcwn3lamzoxkqn2rx2iy/node_modules/expo-updates-interface/ios`)"
   - "FBLazyVector (from `../../../node_modules/.pnpm/react-native@0.81.5_@babel+core@7.28.5_@types+react@19.1.11_react@19.1.0/node_modules/react-native/Libraries/FBLazyVector`)"
@@ -2270,7 +2270,7 @@ EXTERNAL SOURCES:
   ExpoSplashScreen:
     :path: "../../../node_modules/.pnpm/expo-splash-screen@55.0.12_expo@54.0.21_@babel+core@7.28.5_react-native-webview@13.16.0_react_kin5mpserxjsd7yswbqdjbx7wi/node_modules/expo-splash-screen/ios"
   ExpoTrackingTransparency:
-    :path: "../../../node_modules/.pnpm/expo-tracking-transparency@4.0.2_patch_hash=rwtx6szd6mj7njqy4a4qjrdo7i_expo@54.0.21_@babel+co_tb4ppjgws7diuxwxkf5qukyboa/node_modules/expo-tracking-transparency/ios"
+    :path: "../../../node_modules/.pnpm/expo-tracking-transparency@4.0.2_patch_hash=hs2ecrmr7lshbes3wnsv4z6c54_expo@54.0.21_@babel+co_ykkrwtbvykrewynzlgshgrmnce/node_modules/expo-tracking-transparency/ios"
   ExpoWebBrowser:
     :path: "../../../node_modules/.pnpm/expo-web-browser@15.0.8_expo@54.0.21_@babel+core@7.28.5_react-native-webview@13.16.0_react-na_pygnc4cjhbwxhilpyprg5aqlou/node_modules/expo-web-browser/ios"
   EXUpdatesInterface:
