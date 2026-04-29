@@ -4,11 +4,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-patchedDependencies:
-  expo-tracking-transparency@4.0.2:
-    hash: hs2ecrmr7lshbes3wnsv4z6c54
-    path: patches/expo-tracking-transparency@4.0.2.patch
-
 importers:
 
   .:
@@ -215,9 +210,6 @@ importers:
       expo-status-bar:
         specifier: ~3.0.8
         version: 3.0.8(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0)
-      expo-tracking-transparency:
-        specifier: ^4.0.2
-        version: 4.0.2(patch_hash=hs2ecrmr7lshbes3wnsv4z6c54)(expo@54.0.21(@babel/core@7.28.5)(react-native-webview@13.16.0(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0))(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0))
       expo-web-browser:
         specifier: ^15.0.8
         version: 15.0.8(expo@54.0.21(@babel/core@7.28.5)(react-native-webview@13.16.0(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0))(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0))(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))
@@ -3287,11 +3279,6 @@ packages:
     peerDependencies:
       react: '*'
       react-native: '*'
-
-  expo-tracking-transparency@4.0.2:
-    resolution: {integrity: sha512-ZQzdR9D6LHr60QEwwJq2OLl0bwzgqt+O2C/OqSchFR1IekL4syf53f9QmjHK8oRIkLzEGxKIirTrKcE0j9Ko6A==}
-    peerDependencies:
-      expo: '*'
 
   expo-updates-interface@2.0.0:
     resolution: {integrity: sha512-pTzAIufEZdVPKql6iMi5ylVSPqV1qbEopz9G6TSECQmnNde2nwq42PxdFBaUEd8IZJ/fdJLQnOT3m6+XJ5s7jg==}
@@ -9511,10 +9498,6 @@ snapshots:
       react: 19.1.0
       react-native: 0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0)
       react-native-is-edge-to-edge: 1.2.1(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0)
-
-  expo-tracking-transparency@4.0.2(patch_hash=hs2ecrmr7lshbes3wnsv4z6c54)(expo@54.0.21(@babel/core@7.28.5)(react-native-webview@13.16.0(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0))(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0)):
-    dependencies:
-      expo: 54.0.21(@babel/core@7.28.5)(react-native-webview@13.16.0(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0))(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0)
 
   expo-updates-interface@2.0.0(expo@54.0.21(@babel/core@7.28.5)(react-native-webview@13.16.0(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0))(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.11)(react@19.1.0))(react@19.1.0)):
     dependencies:
