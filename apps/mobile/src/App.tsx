@@ -5,7 +5,6 @@ import * as AppleAuthentication from 'expo-apple-authentication';
 import Constants from 'expo-constants';
 import * as ExpoSplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
-import { requestTrackingPermissionsAsync } from 'expo-tracking-transparency';
 import { AppState, Platform, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { WebView } from 'react-native-webview';
@@ -73,10 +72,6 @@ const App = () => {
 
     const initialize = async () => {
       try {
-        if (Platform.OS === 'ios') {
-          await requestTrackingPermissionsAsync();
-        }
-
         clearIosBadge();
         initAmplitude();
         setWebViewUrl(buildWebViewUrl());
