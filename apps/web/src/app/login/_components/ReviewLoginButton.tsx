@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 
+import { demoLogin } from '@/app/login/_actions/demo-login';
 import { cn } from '@/lib/cn';
 
 const ReviewLoginButton = () => {
@@ -10,18 +11,8 @@ const ReviewLoginButton = () => {
   const handleReviewLogin = async () => {
     if (isLoading) return;
     setIsLoading(true);
-
     try {
-      const response = await fetch('/api/auth/demo-login', {
-        method: 'POST',
-      });
-
-      if (!response.ok) {
-        setIsLoading(false);
-        return;
-      }
-
-      window.location.href = '/';
+      await demoLogin();
     } catch {
       setIsLoading(false);
     }
