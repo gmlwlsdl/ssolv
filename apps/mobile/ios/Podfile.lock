@@ -241,8 +241,6 @@ PODS:
     - Yoga
   - ExpoSplashScreen (55.0.12):
     - ExpoModulesCore
-  - ExpoTrackingTransparency (4.0.2):
-    - ExpoModulesCore
   - ExpoWebBrowser (15.0.8):
     - ExpoModulesCore
   - EXUpdatesInterface (2.0.0):
@@ -2140,7 +2138,6 @@ DEPENDENCIES:
   - "ExpoLinking (from `../../../node_modules/.pnpm/expo-linking@8.0.8_expo@54.0.21_@babel+core@7.28.5_react-native-webview@13.16.0_react-native@_xf5wy6swogbonnhthri7fxvlve/node_modules/expo-linking/ios`)"
   - "ExpoModulesCore (from `../../../node_modules/.pnpm/expo-modules-core@3.0.23_react-native@0.81.5_@babel+core@7.28.5_@types+react@19.1.11_react@19.1.0__react@19.1.0/node_modules/expo-modules-core`)"
   - "ExpoSplashScreen (from `../../../node_modules/.pnpm/expo-splash-screen@55.0.12_expo@54.0.21_@babel+core@7.28.5_react-native-webview@13.16.0_react_kin5mpserxjsd7yswbqdjbx7wi/node_modules/expo-splash-screen/ios`)"
-  - "ExpoTrackingTransparency (from `../../../node_modules/.pnpm/expo-tracking-transparency@4.0.2_patch_hash=hs2ecrmr7lshbes3wnsv4z6c54_expo@54.0.21_@babel+co_ykkrwtbvykrewynzlgshgrmnce/node_modules/expo-tracking-transparency/ios`)"
   - "ExpoWebBrowser (from `../../../node_modules/.pnpm/expo-web-browser@15.0.8_expo@54.0.21_@babel+core@7.28.5_react-native-webview@13.16.0_react-na_pygnc4cjhbwxhilpyprg5aqlou/node_modules/expo-web-browser/ios`)"
   - "EXUpdatesInterface (from `../../../node_modules/.pnpm/expo-updates-interface@2.0.0_expo@54.0.21_@babel+core@7.28.5_react-native-webview@13.16.0_rea_wu6wrjfcwn3lamzoxkqn2rx2iy/node_modules/expo-updates-interface/ios`)"
   - "FBLazyVector (from `../../../node_modules/.pnpm/react-native@0.81.5_@babel+core@7.28.5_@types+react@19.1.11_react@19.1.0/node_modules/react-native/Libraries/FBLazyVector`)"
@@ -2269,8 +2266,6 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/.pnpm/expo-modules-core@3.0.23_react-native@0.81.5_@babel+core@7.28.5_@types+react@19.1.11_react@19.1.0__react@19.1.0/node_modules/expo-modules-core"
   ExpoSplashScreen:
     :path: "../../../node_modules/.pnpm/expo-splash-screen@55.0.12_expo@54.0.21_@babel+core@7.28.5_react-native-webview@13.16.0_react_kin5mpserxjsd7yswbqdjbx7wi/node_modules/expo-splash-screen/ios"
-  ExpoTrackingTransparency:
-    :path: "../../../node_modules/.pnpm/expo-tracking-transparency@4.0.2_patch_hash=hs2ecrmr7lshbes3wnsv4z6c54_expo@54.0.21_@babel+co_ykkrwtbvykrewynzlgshgrmnce/node_modules/expo-tracking-transparency/ios"
   ExpoWebBrowser:
     :path: "../../../node_modules/.pnpm/expo-web-browser@15.0.8_expo@54.0.21_@babel+core@7.28.5_react-native-webview@13.16.0_react-na_pygnc4cjhbwxhilpyprg5aqlou/node_modules/expo-web-browser/ios"
   EXUpdatesInterface:
@@ -2442,7 +2437,6 @@ SPEC CHECKSUMS:
   ExpoLinking: f5c171877e118e792cb9a77e5ade0b080d899b14
   ExpoModulesCore: ed46799cfdf75784ee3ca37dac982c5298683e83
   ExpoSplashScreen: bc106fb42e43d64730f02af700beb600aca7147a
-  ExpoTrackingTransparency: 005340638bbd48449066a6c1a54ee44ae65ed7b4
   ExpoWebBrowser: 51218ce6ef35ea769e33409aac87fea3df4b919d
   EXUpdatesInterface: 1436757deb0d574b84bba063bd024c315e0ec08b
   FBLazyVector: e95a291ad2dadb88e42b06e0c5fb8262de53ec12
