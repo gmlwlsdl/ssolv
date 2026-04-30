@@ -3,7 +3,7 @@
     "name": "Solv",
     "slug": "Solv",
     "scheme": "Solv",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/solv-mobile-icon.png",
     "userInterfaceStyle": "light",
@@ -15,6 +15,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.solv.app",
+      "buildNumber": "2",
       "usesAppleSignIn": true,
       "googleServicesFile": "./GoogleService-Info.plist",
       "infoPlist": {
@@ -39,7 +40,7 @@
       "favicon": "./assets/solv-mobile-icon.png"
     },
     "plugins": [
-"expo-web-browser",
+      "expo-web-browser",
       "expo-apple-authentication",
       "@react-native-firebase/app",
       "@react-native-firebase/messaging",
