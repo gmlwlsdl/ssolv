@@ -3,7 +3,6 @@ import Image from 'next/image';
 
 import LoginButton from '@/app/login/_components/LoginButton';
 import LoginErrorModal from '@/app/login/_components/LoginErrorModal';
-import ReviewLoginButton from '@/app/login/_components/ReviewLoginButton';
 
 import type { Provider } from '@/app/login/_components/LoginButton';
 
@@ -32,7 +31,6 @@ const LoginPage = async ({
       </div>
 
       <div className="flex w-full flex-col gap-3 px-5 pb-14">
-        <ReviewLoginButton />
         <LoginButton
           provider="kakao"
           redirectTo={redirectTo}
